@@ -1,0 +1,114 @@
+commit a00a50f78c2578b398f85cf7d19afaa1c21d3c5c
+Author: Aada Nwajei <aada.nwajei@gmail.com>
+Date:   Tue Mar 11 12:59:36 2025 +0200
+
+    poista file1 ja uudelleennimeä file2
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 750d052d68cc36b2c3e3552f4ecde08fd5f58f7e
+Author: Aada Nwajei <aada.nwajei@gmail.com>
+Date:   Tue Mar 11 12:57:09 2025 +0200
+
+    luo tiedostoja kansio ja filet
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit c696b64e488b37f7034c5ac8c33d6da7cd145ba7
+Author: Aada Nwajei <aada.nwajei@gmail.com>
+Date:   Tue Mar 11 12:53:43 2025 +0200
+
+    muutoksia
+
+ eka.txt    | 6 +-----
+ kolmas.txt | 4 +++-
+ 2 files changed, 4 insertions(+), 6 deletions(-)
+
+commit ab65798e5aa0c3ffe2a370a41b612f8ec7e8e479
+Author: Aada Nwajei <aada.nwajei@gmail.com>
+Date:   Tue Mar 11 12:52:22 2025 +0200
+
+    nimen muutos
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit bf48d0649b572afd1fb35393a127fcdc20ae0fec
+Author: Aada Nwajei <aada.nwajei@gmail.com>
+Date:   Tue Mar 11 12:51:36 2025 +0200
+
+    poista toinen.txt
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit b3ea0fea9345a82ee2f0731e037368003f88dbe0
+Author: Aada Nwajei <aada.nwajei@gmail.com>
+Date:   Tue Mar 11 12:49:55 2025 +0200
+
+    poista osa tekstistä ja lisää tekstiä
+
+ tiedosto.txt | 18 +++++++-----------
+ 1 file changed, 7 insertions(+), 11 deletions(-)
+
+commit ab3e77a7126f0018cce491ce193bb04d578f0854
+Author: Aada Nwajei <aada.nwajei@gmail.com>
+Date:   Tue Mar 11 12:48:45 2025 +0200
+
+    lisää paljon tekstiä
+
+ tiedosto.txt | 100 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 99 insertions(+), 1 deletion(-)
+
+commit 4331f71a355c862af2e2ea64b14a146106299539
+Author: Aada Nwajei <aada.nwajei@gmail.com>
+Date:   Tue Mar 11 12:44:28 2025 +0200
+
+    luo stuff kansio ja sinne tiedosto
+
+ stuff/tavaraa.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 62371d2c72e3ceb64c3b306dbb8a44cd6635e575
+Author: Aada Nwajei <aada.nwajei@gmail.com>
+Date:   Tue Mar 11 12:43:38 2025 +0200
+
+    muutoksia
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit c46b43f48b5ce74b0b227fb486eab53145d7365e
+Author: Aada Nwajei <aada.nwajei@gmail.com>
+Date:   Tue Mar 11 12:42:58 2025 +0200
+
+    luo kolmas.txt
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 640645f74e6f889b1137a0e77d39a7fe5bdef575
+Author: Aada Nwajei <aada.nwajei@gmail.com>
+Date:   Tue Mar 11 12:41:08 2025 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit a3a4d96a0d50da3319aee8e20c997fdaedf7c066
+Author: Aada Nwajei <aada.nwajei@gmail.com>
+Date:   Tue Mar 11 12:39:49 2025 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
