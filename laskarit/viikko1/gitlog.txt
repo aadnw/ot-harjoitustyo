@@ -112,3 +112,4 @@ Date:   Tue Mar 11 12:39:49 2025 +0200
  tiedosto.txt | 0
  1 file changed, 0 insertions(+), 0 deletions(-)
 
+Tehtävä 17 lisäys
