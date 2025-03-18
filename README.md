@@ -1,7 +1,8 @@
 # Aineopintojen harjoitustyö: Ohjelmistotekniikka
+Tämä repositorio on ohjelmistotekniikan **harjoitustyötä** varten.
 
-Tämä repositorio on ohjelmistotekniikan **harjoitustyötä** varten. \
-Kurssin edetessä kehitän ohjelman, jonka aihe tulee olemaan *jonkinlainen*. 
+## Haavemaa (harjoitustyö)
+Harjoitustyöni on *Haavemaa* sovellus. Linkit [vaatimusmäärittelyyn](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md) ja [työaikakirjanpitoon](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
 
 ## Tehtävät
 ## Viikko 1
