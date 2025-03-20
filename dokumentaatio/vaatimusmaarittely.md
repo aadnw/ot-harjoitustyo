@@ -3,8 +3,6 @@
 ## Sovelluksen idea
 Haavemaa on sovellus, jossa käyttäjä voi ideoida, tutkia ja seurata omia haaveitaan ja tavoitteitaan, sekä matkaa niitä kohti. Käyttäjä voi rekisteröityä Haavemaahan ja näin luoda omia haaveita/tavoitteita ja seurata niiden edistymistä.
 
-## Käyttöliittymäluonnos
-
 ## Perusversion toiminnallisuus
 ### Ennen kirjautumista:
 - Käyttäjä voi luoda käyttäjätunnuksen, jonka tulee olla uniikki ja 3-20 merkkiä pitkä sekä salasanan.
