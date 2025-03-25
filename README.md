@@ -2,7 +2,7 @@
 Tämä repositorio on ohjelmistotekniikan **harjoitustyötä** varten.
 
 ## Haavemaa (harjoitustyö)
-Harjoitustyöni on *Haavemaa* sovellus. Linkit [vaatimusmäärittelyyn](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md) ja [työaikakirjanpitoon](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
+Harjoitustyöni on *Haavemaa* sovellus. Linkit [vaatimusmäärittelyyn](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md), [työaikakirjanpitoon](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md) ja [Changelogiin](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/changelog.md)
 
 ## Tehtävät
 ## Viikko 1
