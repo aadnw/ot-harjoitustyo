@@ -13,3 +13,6 @@ Harjoitustyöni on *Haavemaa* sovellus. Linkit [vaatimusmäärittelyyn](https://
 [maksukortti](https://github.com/aadnw/ot-harjoitustyo/tree/master/laskarit/viikko2/maksukortti/src)
 [unicafe](https://github.com/aadnw/ot-harjoitustyo/tree/master/laskarit/viikko2/unicafe)
 [coverage report](https://github.com/aadnw/ot-harjoitustyo/blob/master/laskarit/viikko2/coverage_report.png)
+
+## Viikko 3
+[monopoli](https://github.com/aadnw/ot-harjoitustyo/blob/master/laskarit/viikko3/monopoli.md)
