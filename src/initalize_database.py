@@ -3,10 +3,8 @@ from database_connection import get_database_connection
 def remove_tables(connection):
     cursor = connection.cursor()
 
-    cursor.execute('''
-        drop table if exists users;
-        drop table if exists dreams;
-    ''')
+    cursor.execute("drop table if exists users")
+    cursor.execute("drop table if exists dreams")
 
     connection.commit()
 
@@ -18,12 +16,12 @@ def create_tables(connection):
                    id integer primary key,
                    username text,
                    password text
-        );
+        )''')
+    cursor.execute('''
         create table dreams (
                    id integer primary key,
                    content text
-        );
-    ''')
+        )''')
 
     connection.commit()
 
