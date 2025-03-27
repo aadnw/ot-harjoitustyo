@@ -1,4 +1,5 @@
-from tkinter import ttk, constants, StringVar
+from tkinter import constants, StringVar, Label
+import tkinter as tk
 from logic.dreamland_logic import dreamland_logic, InvalidCredentialsError
 
 class LoginView:
@@ -11,7 +12,7 @@ class LoginView:
         self._password_entry = None
         self._error_variable = None
         self._error_label = None
-        
+
         self._initialize()
     
     def pack(self):
@@ -36,31 +37,33 @@ class LoginView:
 
 
     def _initialize_username_field(self):
-        username_label = ttk.Label(master=self._frame, text="Käyttäjänimi")
-        self._username_entry = ttk.Entry(master=self._frame)
+        tk.Label(master=self._frame, text="Käyttäjänimi", font=("Bookman", 12), fg="#00044A", bg="#D0F1FF").grid(row=1, column=0, columnspan=2, sticky="w", pady=(5, 0))
 
-        username_label.grid(padx=5, pady=5)
-        self._username_entry.grid(row=1, column=1, sticky=(constants.E, constants.W), padx=5, pady=5)
+        self._username_entry = tk.Entry(master=self._frame, width=25, font=("Bookman", 12), bd=2, relief="solid", bg="#DFF7FF")
+        self._username_entry.grid(row=2, column=0, columnspan=2, pady=5)
 
     def _initialize_password_field(self):
-        password_label = ttk.Label(master=self._frame, text="Salasana")
-        self._password_entry = ttk.Entry(master=self._frame)
+        tk.Label(master=self._frame, text="Salasana", font=("Bookman", 12), fg="#00044A", bg="#D0F1FF").grid(row=3, column=0, columnspan=2, sticky="w", pady=(10, 0))
 
-        password_label.grid(padx=5, pady=5)        
-        self._password_entry.grid(row=2, column=1, sticky=(constants.E, constants.W), padx=5, pady=5)
+        self._password_entry = tk.Entry(master=self._frame, width=25, font=("Bookman", 12), bd=2, relief="solid", bg="#DFF7FF", show="*")
+        self._password_entry.grid(row=4, column=0, columnspan=2, pady=5)
 
     def _initialize(self):
-        self._frame = ttk.Frame(master=self._root)
+        self._frame = tk.Frame(self._root, bg="#D0F1FF", padx=20, pady=20)
+        self._frame.place(relx=0.7, rely=0.4, anchor="center")
+        Label(self._frame, text="Kirjaudu sisään", font=("Bookman", 20, "bold"), fg="#00044A", bg="#D0F1FF").grid(row=0, column=0, columnspan=2, pady=10)
+        
         self._error_variable = StringVar(self._frame)
         
-        self._error_label = ttk.Label(master=self._frame, textvariable=self._error_variable, foreground="orange")
-        self._error_label.grid(padx=5, pady=5)
+        self._error_label = tk.Label(master=self._frame, textvariable=self._error_variable, font=("Bookman", 15, "bold"), bg="#D0F1FF", fg="#FC2D7D")
+        self._error_label.grid(row=0, column=5, pady=5)
 
         self._initialize_username_field()
         self._initialize_password_field()
 
-        login_button = ttk.Button(master=self._frame, text="Kirjaudu sisään", command=self._login_handler)
-        login_button.grid(padx=5, pady=5, sticky=(constants.E, constants.W), columnspan=2)
+        login_button = tk.Button(master=self._frame, text="Kirjaudu sisään", font=("Bookman", 12), bg="#FADCD9", fg="#00044A", padx=20, pady=5, borderwidth=0, command=self._login_handler)
+        login_button.grid(row=6, column=0, columnspan=2, pady=10)
 
-        registration_button = ttk.Button(master=self._frame, text="Rekisteröidy", command=self._handle_registration_view)
-        registration_button.grid(padx=5, pady=5, sticky=(constants.E, constants.W), columnspan=3)
+        registration_button = tk.Button(master=self._frame, text="Rekisteröidy tästä", font=("Bookman", 14, "bold"), bg="#FADCD9", fg="#00044A", padx=30, pady=8, borderwidth=0, command=self._handle_registration_view)
+        registration_button.grid(row=10, column=0, columnspan=2, pady=10)
+        
