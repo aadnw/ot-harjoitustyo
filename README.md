@@ -9,26 +9,26 @@ Haavemaa -sovelluksessa toteutat suurimmatkin haaveesi ja tavoitteesi! Rekister�
 ## Sovelluksen asennusohje
 1. Kloonaa tämä repositorio omalle koneellesi ja siirry sen juurihakemistoon.
 2. Asenna riippuvuudet komennolla:
-   ´´´
+   ```
    poetry install
-   ´´´
+   ```
 3. Suorita tarvittavat alustustoimenpiteet komennolla:
-   ´´´
+   ```
    poetry run invoke setup
-   ´´´
+   ```
 4. Käynnistä sovellus komennolla:
-   ´´´
+   ```
    poetry run invoke start
-   ´´´
+   ```
 
 ## Testaaminen
 Testaaminen suoritetaan komennolla:
-´´´
+```
 poetry run invoke test
-´´´
+```
 
 ## Testikattavuus
 Testikattavuusraportin, joka aukeaa selaimeen, voi generoida komennolla:
-´´´
+```
 poetry run invoke coverage-report
-´´´
+```
