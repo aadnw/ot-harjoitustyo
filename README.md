@@ -1,15 +1,34 @@
-# Aineopintojen harjoitustyö: Ohjelmistotekniikka
-Tämä repositorio on ohjelmistotekniikan **harjoitustyötä** varten.
+# Haavemaa ☁️✨🐚
+Haavemaa -sovelluksessa toteutat suurimmatkin haaveesi ja tavoitteesi! Rekisteröitymällä käyttäjäksi voit listata haaveita ja tavoitteita näkyviin, ja näin helposti seurata niiden edistymistä ja merkitä niitä saavutetuiksi. Sovellus toimii myös ohjelmistotekniikan harjoitustyönä. 
 
-## Haavemaa (harjoitustyö)
-Harjoitustyöni on *Haavemaa* sovellus. Linkit [vaatimusmäärittelyyn](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md) ja [työaikakirjanpitoon](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
+## Dokumentaatio
+- [Vaatimusmäärittely](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
+- [Työaikakirjanpito](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
+- [Changelog](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/changelog.md)
 
-## Tehtävät
-## Viikko 1
-[gitlog.txt](https://github.com/aadnw/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
-[komentorivi.txt](https://github.com/aadnw/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
+## Sovelluksen asennusohje
+1. Kloonaa tämä repositorio omalle koneellesi ja siirry sen juurihakemistoon.
+2. Asenna riippuvuudet komennolla:
+   ```
+   poetry install
+   ```
+3. Suorita tarvittavat alustustoimenpiteet komennolla:
+   ```
+   poetry run invoke setup
+   ```
+4. Käynnistä sovellus komennolla:
+   ```
+   poetry run invoke start
+   ```
 
-## Viikko 2
-[maksukortti](https://github.com/aadnw/ot-harjoitustyo/tree/master/laskarit/viikko2/maksukortti/src)
-[unicafe](https://github.com/aadnw/ot-harjoitustyo/tree/master/laskarit/viikko2/unicafe)
-[coverage report](https://github.com/aadnw/ot-harjoitustyo/blob/master/laskarit/viikko2/coverage_report.png)
+## Testaaminen
+Testaaminen suoritetaan komennolla:
+```
+poetry run invoke test
+```
+
+## Testikattavuus
+Testikattavuusraportin, joka aukeaa selaimeen, voi generoida komennolla:
+```
+poetry run invoke coverage-report
+```
