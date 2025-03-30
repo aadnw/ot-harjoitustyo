@@ -1,4 +1,5 @@
-from tkinter import ttk, constants
+from tkinter import constants, Label
+import tkinter as tk
 from logic.dreamland_logic import dreamland_logic
 
 class HomepageView:
@@ -20,13 +21,13 @@ class HomepageView:
         self._handle_logout()
 
     def _initialize(self):
-        self._frame = ttk.Frame(master=self._root)
+        self._frame = tk.Frame(self._root, bg="#D0F1FF", padx=20, pady=20)
+        self._frame.place(relx=0.7, rely=0.4, anchor="center")
 
-        label = ttk.Label(self._frame, text="Tervetuloa Haavemaahan <3")
+        user = dreamland_logic.get_user()
+        Label(self._frame, text=f"Tervetuloa Haavemaahan {user.username} <3", font=("Bookman", 20, "bold"), fg="#00044A", bg="#D0F1FF").grid(row=0, column=0, columnspan=2, pady=10)
         
-        logout_button = ttk.Button(master=self._frame, text="Kirjaudu ulos", command=self._logout_handler)
+        logout_button = tk.Button(master=self._frame, text="Kirjaudu ulos", font=("Bookman", 12), bg="#FADCD9", fg="#00044A", padx=20, pady=5, borderwidth=0, command=self._logout_handler)
+        logout_button.grid(row=1, column=0, padx=5, pady=5)
 
         self._frame.grid_columnconfigure(1, weight=1, minsize=400)
-
-        logout_button.grid(padx=5, pady=5, sticky=constants.EW)
-        label.grid(padx=5, pady=5)
