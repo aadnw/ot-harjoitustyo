@@ -25,6 +25,9 @@ class LoginView:
         username = self._username_entry.get()
         password = self._password_entry.get()
 
+        if username == '' or password == '':
+            return self._error_message("Käyttäjätunnus ja/tai salasana puuttuu")
+
         try:
             dreamland_logic.login(username, password)
             self._handle_login()
