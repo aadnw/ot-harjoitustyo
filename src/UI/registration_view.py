@@ -1,6 +1,6 @@
 from tkinter import StringVar, constants, Label
 import tkinter as tk
-from logic.dreamland_logic import dreamland_logic, UsernameTakenError
+from logic.dreamland_logic import dreamland_logic, UsernameTakenError, InvalidCredentialsError
 
 class RegistrationView:
     def __init__(self, root, handle_registration, handle_show_login_view):
@@ -29,8 +29,14 @@ class RegistrationView:
             dreamland_logic.create_new_user(username, password)
             self._handle_registration()
         except UsernameTakenError:
-            self._error_message("Tämä käyttäjänimi on jo käytössä")
-
+            if dreamland_logic._user_repository.get_user_by_username(username):
+                self._error_message("Tämä käyttäjänimi on jo käytössä")
+        except InvalidCredentialsError:
+            if not 3 <= len(username) <= 20:
+                self._error_message("Käyttäjänimen tulee olla 3-20 merkkiä")
+            if len(password) < 5:
+                self._error_message("Salasanan tulee olla vähintään 5 merkkiä")
+    
     def _error_message(self, message):
         self._error_variable.set(message)
         self._error_label.grid()
