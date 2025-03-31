@@ -2,7 +2,7 @@
 
 | päivä | aika | mitä tein |
 | ----- | ---- | --------- |
-| viikko 3 |
+| viikko 3                 |
 | 18.3. | 1h   | Kirjoitin dokumentaatiota ja suunnittelin sovellusta |
 | 24.3. | 4h   | Tutustuin tkinterin ja sqliten käyttöön, alustin projektin käyttöliittymän ja tietokannan sekä aloitin ensimmäisten toiminnallisuuksien työstämisen|
 | 25.3. | 3h   | Viimeistelin ensimmäiset toiminnot, aloitin testaamisen ja kirjoitin changelogia |
