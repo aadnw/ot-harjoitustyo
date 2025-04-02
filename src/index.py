@@ -3,6 +3,7 @@ from UI.ui import ui
 
 
 def main():
+    """Creates the application window"""
     window = Tk()
     window.title("Haavemaa")
     window.geometry("800x500")
