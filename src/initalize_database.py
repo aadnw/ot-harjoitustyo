@@ -2,6 +2,7 @@ from database_connection import get_database_connection
 
 
 def remove_tables(connection):
+    """If tables already exist, delete them"""
     cursor = connection.cursor()
 
     cursor.execute("drop table if exists users")
@@ -11,6 +12,7 @@ def remove_tables(connection):
 
 
 def create_tables(connection):
+    """Creates the tables needed for the application"""
     cursor = connection.cursor()
 
     cursor.execute('''
@@ -21,14 +23,18 @@ def create_tables(connection):
         )''')
     cursor.execute('''
         create table dreams (
-                   id integer primary key,
-                   content text
+                   id integer primary key autoincrement,
+                   content text,
+                   user_id integer,
+                   done boolean default 0, --Default to 0 (False) if not provided,
+                   foreign key (user_id) references users (id) on delete cascade
         )''')
 
     connection.commit()
 
 
 def initialize_database():
+    """Creates the database"""
     connection = get_database_connection()
 
     remove_tables(connection)
