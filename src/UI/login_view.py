@@ -4,6 +4,8 @@ from logic.dreamland_logic import dreamland_logic, InvalidCredentialsError
 
 
 class LoginView:
+    """Class taking care of showing the login page"""
+
     def __init__(self, root, handle_login, handle_show_registration_view):
         self._root = root
         self._handle_login = handle_login
@@ -17,12 +19,15 @@ class LoginView:
         self._initialize()
 
     def pack(self):
+        """Show the window"""
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Don't show the window"""
         self._frame.destroy()
 
     def _login_handler(self):
+        """Login the user"""
         username = self._username_entry.get()
         password = self._password_entry.get()
 
@@ -36,10 +41,12 @@ class LoginView:
             self._error_message("Virheellinen käyttäjänimi tai salasana")
 
     def _error_message(self, message):
+        """Show error message"""
         self._error_variable.set(message)
         self._error_label.grid()
 
     def _initialize_username_field(self):
+        """Field to write username"""
         tk.Label(master=self._frame, text="Käyttäjänimi", font=("Bookman", 12), fg="#00044A",
                  bg="#D0F1FF").grid(row=1, column=0, columnspan=2, sticky="w", pady=(5, 0))
 
@@ -48,6 +55,7 @@ class LoginView:
         self._username_entry.grid(row=2, column=0, columnspan=2, pady=5)
 
     def _initialize_password_field(self):
+        """Field to write password"""
         tk.Label(master=self._frame, text="Salasana", font=("Bookman", 12), fg="#00044A",
                  bg="#D0F1FF").grid(row=3, column=0, columnspan=2, sticky="w", pady=(10, 0))
 
