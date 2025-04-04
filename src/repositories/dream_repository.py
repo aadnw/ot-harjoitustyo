@@ -1,71 +1,89 @@
 from entities.dream import Dream
+from pathlib import Path
 from repositories.user_repository import user_repository
-from database_connection import get_database_connection
+from config import DREAMS_FILE_PATH
 
 
 class DreamRepository:
     """Takes care of database functions related to the dreams"""
 
-    def __init__(self):
-        self._connection = get_database_connection()
+    def __init__(self, file_path):
+        self._file_path = file_path
 
     def get_all_dreams(self):
         """Returns all added dreams"""
-        cursor = self._connection.cursor()
-        cursor.execute("SELECT id, content, user_id FROM dreams")
-        rows = cursor.fetchall()
+        return self._read()
 
-        dreams = []
-        for row in rows:
-            dream_id, content, user_id = row
-            user = user_repository.get_user_by_user_id(user_id) if user_id else None
-            dreams.append(Dream(content, False, user, dream_id))
-
-        return dreams
-    
-    def find_dream_by_username(self, username):
+    def get_dreams_by_username(self, username):
         """Returns all dreams of a specific user (the current user)"""
-        cursor = self._connection.cursor()
-        cursor.execute("SELECT d.id, d.content, d.done, d.user_id FROM dreams d LEFT JOIN users u ON d.user_id = u.id WHERE u.username = ?", (username,))
-        rows = cursor.fetchall()
+        dreams = self.get_all_dreams()
 
-        dreams = []
-        for row in rows:
-            dream_id, content, done, user_id = row
-            user = user_repository.get_user_by_user_id(user_id)
-            dreams.append(Dream(content, done, user, dream_id))
-
-        return dreams
+        return list(filter(lambda dream: dream.user and dream.user.username == username, dreams))
 
     def create_new_dream(self, dream):
         """Adds the new dream to the database table"""
-        cursor = self._connection.cursor()
-        if dream.user:
-            dream_user_id = dream.user.id
-        else:
-            dream_user_id = None
-
-        cursor.execute(
-            "INSERT INTO dreams (content, user_id, done) VALUES (?, ?, ?)",
-            (dream.content, dream_user_id, dream.done)
-            )
-        self._connection.commit()
-
-        dream_id = cursor.lastrowid
-        dream.id = dream_id
-
+        dreams = self.get_all_dreams()
+        dreams.append(dream)
+        self._write(dreams)
         return dream
 
     def set_dream_achieved(self, dream_id, done=True):
         """Deletes the dream from the database table"""
-        cursor = self._connection.cursor()
-        
         dreams = self.get_all_dreams()
         for dream in dreams:
             if dream.id == dream_id:
                 dream.done = done
-                cursor.execute("UPDATE dreams SET done = ? WHERE id = ?", (True, dream_id))
                 break
-        self._connection.commit()
-   
-dream_repository = DreamRepository()
+
+        self._write(dreams)
+
+    def delete_dream(self, dream_id):
+        dreams = self.get_all_dreams()
+
+        self._write(filter(lambda dream: dream.id != dream_id, dreams))
+
+    def delete_all_dreams(self):
+        self._write([])
+
+    def _ensure_file_exists(self):
+        Path(self._file_path).touch()
+
+    def _read(self):
+        dreams = []
+        self._ensure_file_exists()
+
+        with open(self._file_path, encoding="utf-8") as file:
+            for row in file:
+                row = row.replace("\n", "")
+                parts = row.split(";")
+                dream_id = parts[0]
+                content = parts[1]
+                done = parts[2] == "1"
+                username = parts[3]
+
+                if username:
+                    user = user_repository.get_user_by_username(username)
+                else:
+                    user = None
+
+                dreams.append(Dream(content, done, user, dream_id))
+
+        return dreams
+    
+    def _write(self, dreams):
+        self._ensure_file_exists()
+
+        with open(self._file_path, "w", encoding="utf-8") as file:
+            for dream in dreams:
+                done_string = "1" if dream.done else "0"
+
+                if dream.user:
+                    username = dream.user.username
+                else:
+                    username = ""
+
+                row = f"{dream.id};{dream.content};{done_string};{username}"
+
+                file.write(row+"\n")
+                
+dream_repository = DreamRepository(DREAMS_FILE_PATH)

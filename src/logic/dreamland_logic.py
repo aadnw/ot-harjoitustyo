@@ -7,16 +7,11 @@ from repositories.user_repository import (
 from repositories.dream_repository import (
     dream_repository as default_dream_repository)
 
-
 class InvalidCredentialsError(Exception):
     """Error message about invalid credentials"""
     
-
-
 class UsernameTakenError(Exception):
     """Error message about username being already taken"""
-    
-
 
 class DreamlandLogic:
     """Sovelluslogiikasta vastaava luokka"""
@@ -54,7 +49,7 @@ class DreamlandLogic:
         if username_exists:
             raise UsernameTakenError("Tämä käyttäjänimi on jo käytetty")
 
-        user = self._user_repository.create_user(User(id, username, password))
+        user = self._user_repository.create_user(User(username, password))
 
         if not 3 <= len(user.username) <= 20:
             raise InvalidCredentialsError(
@@ -78,7 +73,7 @@ class DreamlandLogic:
         if not self._user:
             return []
 
-        dreams = self._dream_repository.get_all_dreams()
+        dreams = self._dream_repository.get_dreams_by_username(self._user.username)
 
         return list(filter(lambda dream: not dream.done, dreams))
 

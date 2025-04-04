@@ -1,8 +1,5 @@
-import os
 import sqlite3
 from config import DATABASE_FILE_PATH
-
-#dirname = os.path.dirname(__file__)
 
 def get_database_connection():
     """Returns connection to the database"""
