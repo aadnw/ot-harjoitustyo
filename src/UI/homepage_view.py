@@ -3,7 +3,7 @@ import tkinter as tk
 from logic.dreamland_logic import dreamland_logic
 
 class DreamListView:
-    """Class taking care of listing the dreams on the homepage"""
+    """Luokka, joka vastaa käyttäjän tavoitteiden näyttämisestä"""
 
     def __init__(self, root, dreams, handle_set_dream_achieved):
         self._root = root
@@ -13,36 +13,32 @@ class DreamListView:
 
         self._initialize()
 
-    def pack(self):
-        """Show the window"""
-        self._frame.pack(fill=constants.X)
-
     def destroy(self):
         """Don't show the window"""
         self._frame.destroy()
 
-    def _initialize_dream_item(self, dream):
+    def _initialize_dream_item(self, dream, row):
         """Show the dreams on the homepage"""
-        item_frame = tk.Frame(self._frame, bg="#D0F1FF")
-        label = tk.Label(item_frame, text=dream.content, font=("Bookman", 12), fg="#220066", bg="#D0F1FF")
-        label.grid(row=0, column=0, padx=5, pady=5, sticky="w")
+        label = tk.Label(self._frame, text=dream.content, font=("Bookman", 12), fg="#220066", bg="#D0F1FF")
+        label.grid(row=row, column=0, padx=5, pady=5, sticky="w")
 
-        achieved_button = tk.Button(item_frame, text="Saavutus", font=("Bookman", 10, "bold"), bg="#FADCD9", fg="#00044A", padx=10, pady=5, borderwidth=0, relief=tk.FLAT,
-                                    command=lambda d=dream: self._handle_set_dream_achieved(d.id))
-        achieved_button.grid(row=0, column=1, padx=5, pady=5, sticky="e")
-
-        item_frame.grid_columnconfigure(0, weight=1)
-        item_frame.pack(fill=constants.X)
-
+        achieved_button = tk.Button(self._frame, text="Saavutus", font=("Bookman", 10, "bold"), bg="#FADCD9", fg="#00044A", padx=10, pady=5, borderwidth=0, relief=tk.FLAT,
+                                    command=lambda dream=dream: self._handle_set_dream_achieved(dream.id))
+        achieved_button.grid(row=row, column=1, padx=10, pady=5, sticky="e")
+      
     def _initialize(self):
-        self._frame = tk.Frame(self._root)
+        """Initialize the dream list on the homepage"""
+        self._frame = tk.Frame(self._root, bg="#D0F1FF", padx=10, pady=10)
+        self._frame.grid(row=0, column=1, sticky="ne", padx=50, pady=20)
 
-        for dream in self._dreams:
-            self._initialize_dream_item(dream)
+        Label(self._frame, text="Haaveet ja tavoitteet:", font=("Bookman", 14, "bold"), fg="#220066", bg="#D0F1FF").grid(row=0, column=0, columnspan=2, sticky="w", padx=5, pady=(5, 0))
 
+        dreams = dreamland_logic.get_unachieved_dreams()
+        for r, dream in enumerate(dreams, start=1):
+            self._initialize_dream_item(dream, row=r)
 
 class HomepageView:
-    """Class taking care of showing content on the homepage"""
+    """Luokka, joka vastaa kotisivun näkymästä ja toiminnoista"""
 
     def __init__(self, root, handle_logout):
         self._root = root
@@ -54,10 +50,6 @@ class HomepageView:
         self._dream_list_view = None
 
         self._initialize()
-
-    def pack(self): 
-        """Show the window"""
-        self._frame.pack(fill=constants.X)
 
     def destroy(self):
         """Don't show the window"""
@@ -74,24 +66,14 @@ class HomepageView:
         self._initialize_dream_list()
 
     def _initialize_dream_list(self):
-        if self._dream_list_frame:
-            for widget in self._dream_list_frame.winfo_children():
-                widget.destroy()
-
-        dream_list_frame = tk.Frame(self._frame, bg="#D0F1FF")
-        dream_list_frame.grid(row=1, column=1, sticky="ne", padx=20, pady=20)
-
-        Label(dream_list_frame, text="Haaveet ja tavoitteet:", font=("Bookman", 14, "bold"), fg="#220066", bg="#D0F1FF").pack(anchor="w")
+        if self._dream_list_view:
+            self._dream_list_view.destroy()
 
         dreams = dreamland_logic.get_unachieved_dreams()
 
-        for dream in dreams:
-            dream_frame = tk.Frame(dream_list_frame, bg="#D0F1FF")
-            dream_frame.pack(fill=tk.X, pady=5)
+        self._dream_list_view = DreamListView(self._dream_list_frame, dreams, self._handle_set_dream_achieved)
 
-            tk.Label(dream_frame, text=dream.content, font=("Bookman", 12), fg="#220066", bg="#D0F1FF").pack(side="left", padx=5)
-            tk.Button(dream_frame, text="Saavutus", font=("Bookman", 10, "bold"), bg="#FADCD9", fg="#00044A", padx=10, pady=5, borderwidth=0, relief=tk.FLAT,
-                                    command=lambda d_id=dream.id: self._handle_set_dream_achieved(d_id)).pack(side="right", padx=10)
+        self._dream_list_view._frame.grid(row=1, column=0, columnspan=2, sticky="nsew", padx=20, pady=20)
 
     def _handle_add_dream(self):
         """Add a new dream and show it on the homepage"""
@@ -102,8 +84,9 @@ class HomepageView:
             self._initialize_dream_list()
 
     def _initialize(self):
+        "Initialize the homepage's ui"
         self._frame = tk.Frame(self._root, bg="#D0F1FF", padx=30, pady=30)
-        self._frame.pack(fill="both", expand=True)
+        self._frame.grid(row=0, column=0, sticky="nsew")
 
         self._dream_list_frame = tk.Frame(self._frame, bg="#D0F1FF")
         self._dream_list_frame.grid(row=1, column=1, sticky="ne", padx=20, pady=20)
@@ -115,14 +98,9 @@ class HomepageView:
 
         Label(self._dream_list_frame, text="Haaveet ja tavoitteet:",
               font=("Bookman", 14, "bold"), fg="#00044A",
-              bg="#D0F1FF").pack(anchor="w")
+              bg="#D0F1FF").grid(row=0, column=0, sticky="w")
         
         self._initialize_dream_list()
-
-        user = dreamland_logic.get_user()
-        Label(self._frame, text=f"Tervetuloa Haavemaahan {user.username} <3",
-              font=("Bookman", 20, "bold"), fg="#00044A",
-              bg="#D0F1FF").grid(row=0, column=0, sticky="w", columnspan=2, pady=10)
 
         add_dream_frame = tk.Frame(self._frame, bg="#D0F1FF")
         add_dream_frame.grid(row=2, column=0, columnspan=2, pady=20, padx=20, sticky="w")
@@ -147,3 +125,7 @@ class HomepageView:
 
         self._frame.grid_columnconfigure(0, weight=1)
         self._frame.grid_columnconfigure(1, weight=1)
+        self._frame.grid_rowconfigure(0, weight=0)
+        self._frame.grid_rowconfigure(1, weight=1)
+        self._frame.grid_rowconfigure(2, weight=0)
+        self._frame.grid_rowconfigure(3, weight=0)

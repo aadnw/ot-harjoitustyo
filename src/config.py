@@ -8,5 +8,8 @@ try:
 except FileNotFoundError:
     pass
 
+DREAMS_FILENAME = os.getenv("DREAMS_FILENAME") or "dreams.csv"
+DREAMS_FILE_PATH = os.path.join(dirname, "..", "data", DREAMS_FILENAME)
+
 DATABASE_FILENAME = os.getenv("DATABASE_FILENAME") or "database.sqlite"
 DATABASE_FILE_PATH = os.path.join(dirname, "..", "data", DATABASE_FILENAME)

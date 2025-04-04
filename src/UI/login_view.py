@@ -18,10 +18,6 @@ class LoginView:
 
         self._initialize()
 
-    def pack(self):
-        """Show the window"""
-        self._frame.pack(fill=constants.X)
-
     def destroy(self):
         """Don't show the window"""
         self._frame.destroy()

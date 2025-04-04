@@ -4,7 +4,7 @@ from UI.registration_view import RegistrationView
 
 
 class ui:
-    """Class taking care of showing all the different pages"""
+    """Luokka, joka vastaa graafisesta käyttöliittymästä"""
 
     def __init__(self, root):
         self._root = root
@@ -30,15 +30,14 @@ class ui:
             self._show_registration_view
         )
 
-        self._current_view.pack()
-
+        self._current_view._frame.grid(row=0, column=0, sticky="nsew")
     def _show_homepage_view(self):
         """Show homepage"""
         self._hide_current_view()
 
         self._current_view = HomepageView(self._root, self._show_login_view)
 
-        self._current_view.pack()
+        self._current_view._frame.grid(row=0, column=0, sticky="nsew")
 
     def _show_registration_view(self):
         """Show registration page"""
@@ -47,4 +46,4 @@ class ui:
         self._current_view = RegistrationView(
             self._root, self._show_homepage_view, self._show_login_view)
 
-        self._current_view.pack()
+        self._current_view._frame.grid(row=0, column=0, sticky="nsew")
