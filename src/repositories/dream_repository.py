@@ -2,6 +2,7 @@ from entities.dream import Dream
 from pathlib import Path
 from repositories.user_repository import user_repository
 from config import DREAMS_FILE_PATH
+from database_connection import get_database_connection
 
 
 class DreamRepository:
@@ -9,6 +10,7 @@ class DreamRepository:
 
     def __init__(self, file_path):
         self._file_path = file_path
+        self.connection = get_database_connection()
 
     def get_all_dreams(self):
         """Returns all added dreams"""
@@ -23,6 +25,7 @@ class DreamRepository:
     def create_new_dream(self, dream):
         """Adds the new dream to the database table"""
         dreams = self.get_all_dreams()
+        dream.id = max([int(dream.id) for dream in dreams], default=0) + 1
         dreams.append(dream)
         self._write(dreams)
         return dream
@@ -30,12 +33,19 @@ class DreamRepository:
     def set_dream_achieved(self, dream_id, done=True):
         """Deletes the dream from the database table"""
         dreams = self.get_all_dreams()
+        print(f"DEBUG: Marking dream as achieved - Dream ID: {dream_id}")
         for dream in dreams:
+            print(f"DEBUG: Checking dream ID {dream.id} - Content: {dream.content}")  # Debugging line
             if dream.id == dream_id:
+                print(f"DEBUG: Found matching dream, setting 'done' to {done}")  # Debugging line
                 dream.done = done
                 break
 
         self._write(dreams)
+
+        print(f"DEBUG: Updated dream {dream_id} - done = {done}")
+        updated_dreams = self.get_all_dreams()  # Read again to check if the file was updated
+        print(f"DEBUG: Current dreams after update: {[d.content + ' ✅' if d.done else ' ❌' for d in updated_dreams]}")
 
     def delete_dream(self, dream_id):
         dreams = self.get_all_dreams()
