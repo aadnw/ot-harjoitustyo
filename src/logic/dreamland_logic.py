@@ -66,7 +66,8 @@ class DreamlandLogic:
     def new_dream(self, content):
         """Creates new dream throgh the sovelluslogiikka"""
         dream = Dream(content=content, user=self._user)
-        return self._dream_repository.create_new_dream(dream)
+        self._dream_repository.create_new_dream(dream)
+        return dream
 
     def get_unachieved_dreams(self):
         """Returns all the active dreams to show on homepage"""
@@ -74,7 +75,7 @@ class DreamlandLogic:
             return []
 
         dreams = self._dream_repository.get_dreams_by_username(self._user.username)
-
+    
         return list(filter(lambda dream: not dream.done, dreams))
 
     def dream_achieved(self, dream_id):
