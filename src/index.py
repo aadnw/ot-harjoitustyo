@@ -1,12 +1,11 @@
 from tkinter import Tk, Frame, Label
 from UI.ui import ui
 
-
 def main():
     """Creates the application window"""
     window = Tk()
     window.title("Haavemaa")
-    window.geometry("800x500")
+    window.minsize(800, 500)
     window.configure(bg="#D0F1FF")
 
     header = Frame(window, bg="#FADCD9", height=80)
@@ -19,6 +18,8 @@ def main():
 
     ui_view = ui(content_frame)
     ui_view.start()
+
+    window.update_idletasks()
 
     window.mainloop()
 
