@@ -1,4 +1,4 @@
-from tkinter import constants, Label
+from tkinter import Label
 import tkinter as tk
 from logic.dreamland_logic import dreamland_logic
 
@@ -64,10 +64,14 @@ class HomepageView:
         """Mark dream as achieved and remove it from the view"""
         dreamland_logic.dream_achieved(dream_id)
         self._initialize_dream_list()
+        self._root.update_idletasks()
 
     def _initialize_dream_list(self):
         if self._dream_list_view:
             self._dream_list_view.destroy()
+
+        for widget in self._dream_list_frame.winfo_children():
+            widget.destroy()
 
         dreams = dreamland_logic.get_unachieved_dreams()
 
@@ -82,6 +86,7 @@ class HomepageView:
             dreamland_logic.new_dream(content)
             self._add_dream_entry.delete(0, tk.END)
             self._initialize_dream_list()
+            self._root.update_idletasks()
 
     def _initialize(self):
         "Initialize the homepage's ui"
@@ -95,12 +100,9 @@ class HomepageView:
         Label(self._frame, text=f"Tervetuloa Haavemaahan {user.username} <3",
               font=("Bookman", 20, "bold"), fg="#00044A",
               bg="#D0F1FF").grid(row=0, column=0, sticky="w", columnspan=2, pady=10)
-
-        Label(self._dream_list_frame, text="Haaveet ja tavoitteet:",
-              font=("Bookman", 14, "bold"), fg="#00044A",
-              bg="#D0F1FF").grid(row=0, column=0, sticky="w")
         
         self._initialize_dream_list()
+        self._root.update_idletasks()
 
         add_dream_frame = tk.Frame(self._frame, bg="#D0F1FF")
         add_dream_frame.grid(row=2, column=0, columnspan=2, pady=20, padx=20, sticky="w")
