@@ -5,7 +5,7 @@ from entities.user import User
 def get_users_by_row(row):
     """Returns all user information"""
     if row:
-        return User(row["username"], row["password"])
+        return User(row["username"], row["password"], user_id=row["id"])
     return None
 
 
@@ -27,17 +27,23 @@ class UserRepository:
         cursor = self._connection.cursor()
 
         cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
+        row = cursor.fetchone()
 
-        return get_users_by_row(cursor.fetchone())
+        if row:
+            return get_users_by_row(row)
+        return None
 
-    def create_user(self, user):
+    def create_user(self, username, password):
         """Adds a new user into the database table"""
         cursor = self._connection.cursor()
 
         cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)",
-                       (user.username, user.password))
+                       (username, password))
         self._connection.commit()
-        return user
+
+        user_id = cursor.lastrowid
+
+        return User(username, password, user_id=user_id)
 
     def delete_all_users(self):
         """Deletes all users from the database table"""
