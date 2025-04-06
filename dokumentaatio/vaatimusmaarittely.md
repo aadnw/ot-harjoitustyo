@@ -5,14 +5,14 @@ Haavemaa on sovellus, jossa käyttäjä voi ideoida, tutkia ja seurata omia haav
 
 ## Perusversion toiminnallisuus
 ### Ennen kirjautumista:
-- Käyttäjä voi luoda käyttäjätunnuksen, jonka tulee olla uniikki ja 3-20 merkkiä pitkä sekä salasanan.
-- Käyttäjä voi kirjautua sisään syöttämällä käyttäjätunnuksen ja salasanan. Jos käyttäjää ei ole olemassa tai tunnus/salasana ei täsmää, tulee siitä ilmoitus.
+- Käyttäjä voi luoda käyttäjätunnuksen, jonka tulee olla uniikki ja 3-20 merkkiä pitkä sekä salasanan. 👍Tehty
+- Käyttäjä voi kirjautua sisään syöttämällä käyttäjätunnuksen ja salasanan. Jos käyttäjää ei ole olemassa tai tunnus/salasana ei täsmää, tulee siitä ilmoitus. 👍Tehty
 ### Kirjautumisen jälkeen:
-- Käyttäjä näkee omat haaveet/tavoitteet
+- Käyttäjä näkee omat haaveet/tavoitteet 👍Tehty
 - Käyttäjä näkee etusivulla kannustavia, motivoivia ja inspiroivia tekstejä
-- Käyttäjä voi lisätä uuden haaveen/tavoitteen
-- Käyttäjä voi merkitä haaveen/tavoitteen saavutetkuksi, jolloin se häviää näkymästä
-- Käyttäjä voi kirjautua ulos
+- Käyttäjä voi lisätä uuden haaveen/tavoitteen 👍Tehty
+- Käyttäjä voi merkitä haaveen/tavoitteen saavutetkuksi, jolloin se häviää näkymästä 👍Tehty
+- Käyttäjä voi kirjautua ulos 👍Tehty
 
 ## Jatkokehitysideoita
 Toiminnallisuuksia, joita voi lisätä sovellukseen perusversion valmistumisen jälkeen, jos aika riittää:
