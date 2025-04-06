@@ -11,5 +11,7 @@
 | viikko 4 |
 | 30.3. | 1h   | Lisäsin virheilmoituksia ja muokkasin visuaalista ilmettä |
 | 31.3. | 1.5h | Luokkien ja funktioiden luomista unelmien käsittelyä varten |
-| 1.4.  | 1.5h | Graafisen käyttöliittymän korjausta ja luokkien/funktioiden kommentointia | 2.4.  | 3.5h | Unelmien lisääminen ja poistaminen -toiminnallisuuksien ohjelmointia |
+| 1.4.  | 1.5h | Graafisen käyttöliittymän korjausta ja luokkien/funktioiden kommentointia |
+| 2.4.  | 3.5h | Unelmien lisääminen ja poistaminen -toiminnallisuuksien ohjelmointia |
 | 4.4.  | 2.5h | Graafisen käyttöliittymän korjausta/debuggaamista sekä napin painamisen toimimattomuuden debuggaamista |
+| 6.4.  | 1.5h | Napin painamisen toimimattomuuden debuggaamista --> sain toimimaan |
