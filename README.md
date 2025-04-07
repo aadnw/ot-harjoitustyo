@@ -5,6 +5,7 @@ Haavemaa -sovelluksessa toteutat suurimmatkin haaveesi ja tavoitteesi! Rekister�
 - [Vaatimusmäärittely](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 - [Työaikakirjanpito](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
 - [Changelog](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/changelog.md)
+- [Arkkitehtuuri](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 
 ## Sovelluksen asennusohje
 1. Kloonaa tämä repositorio omalle koneellesi ja siirry sen juurihakemistoon.
