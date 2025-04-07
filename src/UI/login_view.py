@@ -20,6 +20,11 @@ class LoginView:
 
         self._initialize()
 
+    @property
+    def frame(self):
+        """Expose _frame via getter"""
+        return self._frame
+
     def destroy(self):
         """Don't show the window"""
         self._frame.destroy()

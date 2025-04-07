@@ -16,6 +16,11 @@ class DreamListView:
 
         self._initialize()
 
+    @property
+    def frame(self):
+        """Expose _frame via getter"""
+        return self._frame
+
     def destroy(self):
         """Don't show the window"""
         self._frame.destroy()
@@ -91,7 +96,7 @@ class HomepageView:
         self._dream_list_view = DreamListView(
             self._dream_list_frame, dreams, self._handle_set_dream_achieved)
 
-        self._dream_list_view(HomepageView.frame).grid(
+        self._dream_list_view.frame.grid(
             row=1, column=0, columnspan=2, sticky="nsew", padx=20, pady=20)
 
     def _handle_add_dream(self):

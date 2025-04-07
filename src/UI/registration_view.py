@@ -19,6 +19,11 @@ class RegistrationView:
         self._error_label = None
 
         self._initialize()
+    
+    @property
+    def frame(self):
+        """Expose _frame via getter"""
+        return self._frame
 
     def destroy(self):
         """Don't show the window"""

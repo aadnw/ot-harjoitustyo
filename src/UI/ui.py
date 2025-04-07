@@ -12,11 +12,6 @@ class UI:
         self._current_view = None
         self._frame = None
 
-    @property
-    def frame(self):
-        """Expose _frame via getter"""
-        return self._frame
-
     def start(self):
         """Show the login page when starting the application"""
         self._show_login_view()
@@ -37,7 +32,7 @@ class UI:
             self._show_registration_view
         )
 
-        self._current_view(UI.frame).grid(row=0, column=0, sticky="nsew")
+        self._current_view.frame.grid(row=0, column=0, sticky="nsew")
 
     def _show_homepage_view(self):
         """Show homepage"""
@@ -45,7 +40,7 @@ class UI:
 
         self._current_view = HomepageView(self._root, self._show_login_view)
 
-        self._current_view(UI.frame).grid(row=0, column=0, sticky="nsew")
+        self._current_view.frame.grid(row=0, column=0, sticky="nsew")
 
     def _show_registration_view(self):
         """Show registration page"""
@@ -54,4 +49,4 @@ class UI:
         self._current_view = RegistrationView(
             self._root, self._show_homepage_view, self._show_login_view)
 
-        self._current_view(UI.frame).grid(row=0, column=0, sticky="nsew")
+        self._current_view.frame.grid(row=0, column=0, sticky="nsew")
