@@ -23,7 +23,7 @@ class TestUserRepository(unittest.TestCase):
 
         self.assertEqual([result[0].username, result[1].username], [
                          'testaaja', 'kukkis'])
-        
+
     def test_get_user_by_username(self):
         """Tests if get_user_by_username-function works properly"""
         user_repository.create_user(self.user_testaaja.username, self.user_testaaja.password)

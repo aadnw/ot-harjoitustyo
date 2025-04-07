@@ -1,8 +1,8 @@
 """This module includes functions to show all the application pages"""
 
-from UI.login_view import LoginView
-from UI.homepage_view import HomepageView
-from UI.registration_view import RegistrationView
+from ui.login_view import LoginView
+from ui.homepage_view import HomepageView
+from ui.registration_view import RegistrationView
 
 
 class UI:

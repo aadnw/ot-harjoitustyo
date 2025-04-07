@@ -19,7 +19,7 @@ class RegistrationView:
         self._error_label = None
 
         self._initialize()
-    
+
     @property
     def frame(self):
         """Expose _frame via getter"""

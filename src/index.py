@@ -1,7 +1,7 @@
 """This module creates the main window for the application"""
 
 from tkinter import Tk, Frame, Label
-from UI.ui import UI
+from ui.ui import UI
 
 def main():
     """Creates the application window"""
