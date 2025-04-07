@@ -13,3 +13,11 @@
 - Lisätty RegistrationView-luokka, joka vastaa rekisteröitymissivun näkymästä
 - Lisätty UI-luokka, joka vastaa käyttöliittymästä
 
+## Viikko 4
+- Käyttäjä voi luoda uusia haaveita etusivulla
+- Käyttäjä näkee saavuttamattomat haaveensa etusivulla
+- Käyttäjä voi merkitä haaven saavutetuksi, jolloin se katoaa näkyvistä
+
+- Lisätty Dream-luokka, joka vastaa haaveiden sisällöstä
+- Lisätty DreamRepository-luokka, joka vastaa haaveiden tallentamisesta CSV-tiedostoon
+- Lisätty TestDreamRepository-luokka, joka vastaa DreamRepository-luokan testaamisesta
