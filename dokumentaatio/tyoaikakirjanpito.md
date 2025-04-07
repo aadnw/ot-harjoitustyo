@@ -14,4 +14,4 @@
 | 4.4.  | 2.5h | Graafisen käyttöliittymän korjausta/debuggaamista sekä napin painamisen toimimattomuuden debuggaamista |
 | 6.4.  | 1.5h | Napin painamisen toimimattomuuden debuggaamista --> sain toimimaan |
 | 7.4.  | 3h   | Testien kirjoittamista, testaamista, koodin siistimistä, changelogin päivitys |
-| yht.  | 24h  |
+| yht.  | 27h  |
