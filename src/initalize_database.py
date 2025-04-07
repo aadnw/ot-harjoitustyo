@@ -1,3 +1,5 @@
+"""This module creates the tables for the database"""
+
 from database_connection import get_database_connection
 
 

@@ -1,11 +1,13 @@
-from tkinter import constants, StringVar, Label
+"""This module includes functions to show the login view and handle the operations
+that can be done on the login page"""
+
+from tkinter import StringVar, Label
 import tkinter as tk
 from logic.dreamland_logic import dreamland_logic, InvalidCredentialsError
 
 
 class LoginView:
     """Class taking care of showing the login page"""
-
     def __init__(self, root, handle_login, handle_show_registration_view):
         self._root = root
         self._handle_login = handle_login
@@ -79,7 +81,8 @@ class LoginView:
                                  pady=5, borderwidth=0, command=self._login_handler)
         login_button.grid(row=6, column=0, columnspan=2, pady=10)
 
-        registration_button = tk.Button(master=self._frame, text="Rekisteröidy tästä", font=("Bookman", 14, "bold"),
+        registration_button = tk.Button(master=self._frame, text="Rekisteröidy tästä",
+                                        font=("Bookman", 14, "bold"),
                                         bg="#FADCD9", fg="#00044A", padx=30, pady=8, borderwidth=0,
                                         command=self._handle_registration_view)
         registration_button.grid(row=10, column=0, columnspan=2, pady=10)

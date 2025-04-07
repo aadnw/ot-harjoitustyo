@@ -1,3 +1,5 @@
+"""This module includes functions that are used for the application logics"""
+
 from entities.user import User
 from entities.dream import Dream
 
@@ -7,15 +9,17 @@ from repositories.user_repository import (
 from repositories.dream_repository import (
     dream_repository as default_dream_repository)
 
+
 class InvalidCredentialsError(Exception):
     """Error message about invalid credentials"""
-    
+
+
 class UsernameTakenError(Exception):
     """Error message about username being already taken"""
 
-class DreamlandLogic:
-    """Sovelluslogiikasta vastaava luokka"""
 
+class DreamlandLogic:
+    """Class taking care of the application logics"""
     def __init__(self, user_repository=default_user_repository,
                  dream_repository=default_dream_repository):
         self._user = None
@@ -64,7 +68,7 @@ class DreamlandLogic:
         return user
 
     def new_dream(self, content):
-        """Creates new dream throgh the sovelluslogiikka"""
+        """Creates new dream throgh the application logic"""
         dream = Dream(content=content, user=self._user)
         self._dream_repository.create_new_dream(dream)
         return dream
@@ -74,8 +78,9 @@ class DreamlandLogic:
         if not self._user:
             return []
 
-        dreams = self._dream_repository.get_dreams_by_username(self._user.username)
-    
+        dreams = self._dream_repository.get_dreams_by_username(
+            self._user.username)
+
         return list(filter(lambda dream: not dream.done, dreams))
 
     def dream_achieved(self, dream_id):

@@ -1,3 +1,5 @@
+"""This module makes connection with the database"""
+
 import sqlite3
 from config import DATABASE_FILE_PATH
 

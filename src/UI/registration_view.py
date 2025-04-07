@@ -1,11 +1,13 @@
-from tkinter import StringVar, constants, Label
+"""This module includes functions to show the registration view and handle the operations
+that can be done on the registration page"""
+
+from tkinter import StringVar, Label
 import tkinter as tk
 from logic.dreamland_logic import dreamland_logic, UsernameTakenError, InvalidCredentialsError
 
 
 class RegistrationView:
     """Class taking care of showing the registration page"""
-
     def __init__(self, root, handle_registration, handle_show_login_view):
         self._root = root
         self._handle_registration = handle_registration
@@ -73,19 +75,21 @@ class RegistrationView:
               fg="#00044A", bg="#D0F1FF").grid(row=0, column=0, sticky="w", padx=5, pady=5)
 
         self._error_variable = StringVar(self._frame)
-        self._error_label = tk.Label(master=self._frame, textvariable=self._error_variable, font=("Bookman", 15, "bold"),
-                                     bg="#D0F1FF", fg="#FC2D7D")
+        self._error_label = tk.Label(master=self._frame, textvariable=self._error_variable,
+                                     font=("Bookman", 15, "bold"), bg="#D0F1FF", fg="#FC2D7D")
         self._error_label.grid(row=0, column=1, pady=5)
 
         self._initialize_username_field()
         self._initialize_password_field()
 
-        create_button = tk.Button(master=self._frame, text="Luo käyttäjä", font=("Bookman", 14, "bold"),
-                                  bg="#FADCD9", fg="#00044A", padx=30, pady=8, borderwidth=0,
+        create_button = tk.Button(master=self._frame, text="Luo käyttäjä",
+                                  font=("Bookman", 14, "bold"), bg="#FADCD9",
+                                  fg="#00044A", padx=30, pady=8, borderwidth=0,
                                   command=self._registration_handler)
         create_button.grid(row=4, column=0, sticky="w", pady=10)
 
-        login_button = tk.Button(master=self._frame, text="Takaisin kirjautumissivulle", font=("Bookman", 14, "bold"),
+        login_button = tk.Button(master=self._frame, text="Takaisin kirjautumissivulle",
+                                 font=("Bookman", 14, "bold"),
                                  bg="#FADCD9", fg="#00044A", padx=20, pady=5, borderwidth=0,
                                  command=self._handle_show_login_view)
         login_button.grid(row=6, column=0, sticky="w", pady=10)

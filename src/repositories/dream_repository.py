@@ -1,5 +1,7 @@
-from entities.dream import Dream
+"""This module includes functions that are used for dream-related database operations"""
+
 from pathlib import Path
+from entities.dream import Dream
 from repositories.user_repository import user_repository
 from config import DREAMS_FILE_PATH
 from database_connection import get_database_connection
@@ -7,7 +9,6 @@ from database_connection import get_database_connection
 
 class DreamRepository:
     """Takes care of database functions related to the dreams"""
-
     def __init__(self, file_path):
         self._file_path = file_path
         self.connection = get_database_connection()
@@ -40,12 +41,8 @@ class DreamRepository:
 
         self._write(dreams)
 
-    def delete_dream(self, dream_id):
-        dreams = self.get_all_dreams()
-
-        self._write(filter(lambda dream: dream.id != dream_id, dreams))
-
     def delete_all_dreams(self):
+        """Deletes all dreams"""
         self._write([])
 
     def _ensure_file_exists(self):
@@ -72,7 +69,7 @@ class DreamRepository:
                 dreams.append(Dream(content, done, user, dream_id))
 
         return dreams
-    
+
     def _write(self, dreams):
         self._ensure_file_exists()
 
@@ -88,5 +85,6 @@ class DreamRepository:
                 row = f"{dream.id};{dream.content};{done_string};{username}"
 
                 file.write(row+"\n")
-                
+
+
 dream_repository = DreamRepository(DREAMS_FILE_PATH)
