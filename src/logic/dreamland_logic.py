@@ -53,7 +53,7 @@ class DreamlandLogic:
         if username_exists:
             raise UsernameTakenError("Tämä käyttäjänimi on jo käytetty")
 
-        user = self._user_repository.create_user(User(username, password))
+        user = self._user_repository.create_user(username, password)
 
         if not 3 <= len(user.username) <= 20:
             raise InvalidCredentialsError(
