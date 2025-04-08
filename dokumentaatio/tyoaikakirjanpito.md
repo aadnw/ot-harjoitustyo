@@ -15,4 +15,5 @@
 | 6.4.  | 1.5h | Napin painamisen toimimattomuuden debuggaamista --> sain toimimaan |
 | 7.4.  | 3h   | Testien kirjoittamista, testaamista, koodin siistimistä, changelogin päivitys |
 | 8.4.  | 1h   | Luokka-/pakkauskaavion tekeminen, releasen tekeminen, korjasin ohjelman käynnistyksessä ilmeneviä virheitä |
-| yht.  | 28h  |
+| 8.4.  | 2h   | Graafisen käyttöliittymän suunnittelua/kokeilua, lisää testien kirjoittamista |
+| yht.  | 30h  |
