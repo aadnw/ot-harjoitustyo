@@ -21,3 +21,6 @@
 - Lisätty Dream-luokka, joka vastaa haaveiden sisällöstä
 - Lisätty DreamRepository-luokka, joka vastaa haaveiden tallentamisesta CSV-tiedostoon
 - Lisätty TestDreamRepository-luokka, joka vastaa DreamRepository-luokan testaamisesta
+
+## Viikko 5
+- Lisätty TestDreamlandLogic-luokka, joka vastaa DreamlandLogic-luokan testaamisesta
