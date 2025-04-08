@@ -120,7 +120,7 @@ class HomepageView:
         user = dreamland_logic.get_user()
         Label(self._frame, text=f"Tervetuloa Haavemaahan {user.username} <3",
               font=("Bookman", 20, "bold"), fg="#00044A",
-              bg="#D0F1FF").grid(row=0, column=0, sticky="w", columnspan=2, pady=10)
+              bg="#D0F1FF").grid(row=0, column=0, sticky="ew", columnspan=2, pady=10)
 
         self._initialize_dream_list()
         self._root.update_idletasks()
