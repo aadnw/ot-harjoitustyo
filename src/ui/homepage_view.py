@@ -3,11 +3,13 @@ that can be done on the homepage"""
 
 from tkinter import Label
 import tkinter as tk
+from inspirational_quotes import quote
 from logic.dreamland_logic import dreamland_logic
 
 
 class DreamListView:
     """Class taking care of showing the users dreams"""
+
     def __init__(self, root, dreams, handle_set_dream_achieved):
         self._root = root
         self._dreams = dreams
@@ -53,10 +55,12 @@ class DreamListView:
 
 class HomepageView:
     """Class taking care of the homepage view and functionalities"""
+
     def __init__(self, root, handle_logout):
         self._root = root
         self._handle_logout = handle_logout
         self._user = dreamland_logic.get_user()
+        self.quote = quote()
         self._frame = None
         self._add_dream_entry = None
         self._dream_list_frame = None
@@ -113,44 +117,60 @@ class HomepageView:
         self._frame = tk.Frame(self._root, bg="#D0F1FF", padx=30, pady=30)
         self._frame.grid(row=0, column=0, sticky="nsew")
 
-        self._dream_list_frame = tk.Frame(self._frame, bg="#D0F1FF")
-        self._dream_list_frame.grid(
-            row=1, column=1, sticky="ne", padx=20, pady=20)
-
+        # Welcome text
         user = dreamland_logic.get_user()
         Label(self._frame, text=f"Tervetuloa Haavemaahan {user.username} <3",
               font=("Bookman", 20, "bold"), fg="#00044A",
-              bg="#D0F1FF").grid(row=0, column=0, sticky="ew", columnspan=2, pady=10)
+              bg="#D0F1FF").grid(row=0, column=0, sticky="w", columnspan=2, pady=(0, 20))
 
-        self._initialize_dream_list()
-        self._root.update_idletasks()
+        # Content frame for quote, adding new dream and logging out
+        content_frame = tk.Frame(self._frame, bg="#D0F1FF")
+        content_frame.grid(row=1, column=0, sticky="nw")
 
-        add_dream_frame = tk.Frame(self._frame, bg="#D0F1FF")
-        add_dream_frame.grid(row=2, column=0, columnspan=2,
-                             pady=20, padx=20, sticky="w")
+        # Frame for inspirational quote
+        quote_frame = tk.Frame(content_frame, bg="#D0F1FF")
+        quote_frame.grid(row=0, column=0, sticky="w")
 
+        # Inspirational quote
+        Label(quote_frame, text='"' + self.quote['quote'] + '"' + ' -' + self.quote['author'],
+              font=("Bookman", 15), fg="#00044A", bg="#D0F1FF", wraplength=400,
+              justify="left").grid(row=0, column=0, pady=(0, 40), sticky="w")
+
+        # Frame for adding a new dream
+        add_dream_frame = tk.Frame(content_frame, bg="#D0F1FF")
+        add_dream_frame.grid(row=1, column=0, sticky="w", pady=(20, 20))
+
+        # Add new dream text
         Label(add_dream_frame, text="Lisää tavoite:", font=("Bookman", 12, "bold"),
               fg="#00044A", bg="#D0F1FF").grid(row=0, column=0, padx=10, pady=10)
 
+        # Entry field for new dream text
         self._add_dream_entry = tk.Entry(
             add_dream_frame, font=("Bookman", 12), width=30, borderwidth=2, relief="solid")
         self._add_dream_entry.grid(row=0, column=1, padx=10, pady=10)
 
+        # Button for creating new dream
         create_new_dream_button = tk.Button(add_dream_frame, text="Luo",
                                             font=("Bookman", 12, "bold"), bg="#FADCD9",
                                             fg="#00044A", padx=15, pady=5, borderwidth=0,
                                             relief=tk.FLAT, command=self._handle_add_dream)
         create_new_dream_button.grid(row=0, column=2, padx=10, pady=10)
 
-        logout_button = tk.Button(master=self._frame, text="Kirjaudu ulos",
+        # Content frame for the dream list
+        self._dream_list_frame = tk.Frame(self._frame, bg="#D0F1FF")
+        self._dream_list_frame.grid(
+            row=1, column=1, sticky="n", padx=40)
+
+        self._initialize_dream_list()
+        self._root.update_idletasks()
+
+        # Button for logging out
+        logout_button = tk.Button(content_frame, text="Kirjaudu ulos",
                                   font=("Bookman", 12), bg="#FADCD9", fg="#00044A",
                                   padx=20, pady=5, borderwidth=0, relief=tk.FLAT,
                                   command=self._logout_handler)
-        logout_button.grid(row=3, column=1, padx=20, pady=15, sticky="e")
+        logout_button.grid(row=2, column=0, pady=(30, 0), sticky="w")
 
         self._frame.grid_columnconfigure(0, weight=1)
         self._frame.grid_columnconfigure(1, weight=1)
-        self._frame.grid_rowconfigure(0, weight=0)
         self._frame.grid_rowconfigure(1, weight=1)
-        self._frame.grid_rowconfigure(2, weight=0)
-        self._frame.grid_rowconfigure(3, weight=0)
