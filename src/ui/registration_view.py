@@ -8,6 +8,7 @@ from logic.dreamland_logic import dreamland_logic, UsernameTakenError, InvalidCr
 
 class RegistrationView:
     """Class taking care of showing the registration page"""
+
     def __init__(self, root, handle_registration, handle_show_login_view):
         self._root = root
         self._handle_registration = handle_registration

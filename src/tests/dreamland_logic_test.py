@@ -5,6 +5,7 @@ from entities.user import User
 from entities.dream import Dream
 from logic.dreamland_logic import InvalidCredentialsError, UsernameTakenError, DreamlandLogic
 
+
 class FakeDreamRepositoryForTesting:
     """This is a fake DreamRepository created for testing the dreamland logics"""
 
@@ -37,6 +38,7 @@ class FakeDreamRepositoryForTesting:
         """Deletes all dreams"""
         self.dreams = []
 
+
 class FakeUserRepositoryForTesting:
     """This is a fake DreamRepository created for testing the dreamland logics"""
 
@@ -49,7 +51,8 @@ class FakeUserRepositoryForTesting:
 
     def get_user_by_username(self, username):
         """Returns user with a specific username"""
-        matches = list(filter(lambda user: user.username == username, self.users))
+        matches = list(
+            filter(lambda user: user.username == username, self.users))
 
         if len(matches) > 0:
             return matches[0]
@@ -59,12 +62,13 @@ class FakeUserRepositoryForTesting:
         """Creates a new user"""
         user = User(username, password)
         self.users.append(user)
-        
+
         return user
 
     def delete_all_users(self):
         """Deletes all users"""
         self.users = []
+
 
 class TestDreamlandLogic(unittest.TestCase):
     """Class for testing the DreamlandLogic-class"""

@@ -3,6 +3,7 @@
 from tkinter import Tk, Frame, Label
 from ui.ui import UI
 
+
 def main():
     """Creates the application window"""
     window = Tk()
@@ -24,6 +25,7 @@ def main():
     window.update_idletasks()
 
     window.mainloop()
+
 
 if __name__ == "__main__":
     main()

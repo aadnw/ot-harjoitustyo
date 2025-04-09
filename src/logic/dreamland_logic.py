@@ -1,6 +1,5 @@
 """This module includes functions that are used for the application logics"""
 
-from entities.user import User
 from entities.dream import Dream
 
 from repositories.user_repository import (
@@ -20,6 +19,7 @@ class UsernameTakenError(Exception):
 
 class DreamlandLogic:
     """Class taking care of the application logics"""
+
     def __init__(self, user_repository=default_user_repository,
                  dream_repository=default_dream_repository):
         self._user = None

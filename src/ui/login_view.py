@@ -8,6 +8,7 @@ from logic.dreamland_logic import dreamland_logic, InvalidCredentialsError
 
 class LoginView:
     """Class taking care of showing the login page"""
+
     def __init__(self, root, handle_login, handle_show_registration_view):
         self._root = root
         self._handle_login = handle_login

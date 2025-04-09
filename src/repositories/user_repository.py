@@ -13,6 +13,7 @@ def get_users_by_row(row):
 
 class UserRepository:
     """Takes care of database functions related to the users"""
+
     def __init__(self, connection):
         self._connection = connection
 

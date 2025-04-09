@@ -7,6 +7,7 @@ from ui.registration_view import RegistrationView
 
 class UI:
     """Class taking care of the UI"""
+
     def __init__(self, root):
         self._root = root
         self._current_view = None

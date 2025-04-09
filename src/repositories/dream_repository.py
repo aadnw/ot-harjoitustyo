@@ -9,6 +9,7 @@ from database_connection import get_database_connection
 
 class DreamRepository:
     """Takes care of database functions related to the dreams"""
+
     def __init__(self, file_path):
         self._file_path = file_path
         self.connection = get_database_connection()

@@ -6,6 +6,7 @@ from repositories.user_repository import user_repository
 from entities.dream import Dream
 from entities.user import User
 
+
 class TestDreamRepository(unittest.TestCase):
     """Class for testing the DreamRepository-class"""
 
@@ -32,8 +33,10 @@ class TestDreamRepository(unittest.TestCase):
         """Tests that get_dreams_by_username returns the correct dreams"""
         testaaja = user_repository.create_user(self.user_testaaja.username,
                                                self.user_testaaja.password)
-        dream_repository.create_new_dream(Dream(content="Haave 1", user=testaaja))
-        result = dream_repository.get_dreams_by_username(self.user_testaaja.username)
+        dream_repository.create_new_dream(
+            Dream(content="Haave 1", user=testaaja))
+        result = dream_repository.get_dreams_by_username(
+            self.user_testaaja.username)
 
         self.assertEqual(len(result), 1)
         self.assertEqual(result[0].content, "Haave 1")
@@ -43,4 +46,3 @@ class TestDreamRepository(unittest.TestCase):
         result = dream_repository.create_new_dream(self.dream_1)
 
         self.assertEqual(result.content, "Haave 1")
-        
