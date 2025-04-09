@@ -16,4 +16,5 @@
 | 7.4.  | 3h   | Testien kirjoittamista, testaamista, koodin siistimistä, changelogin päivitys |
 | 8.4.  | 1h   | Luokka-/pakkauskaavion tekeminen, releasen tekeminen, korjasin ohjelman käynnistyksessä ilmeneviä virheitä |
 | 8.4.  | 2h   | Graafisen käyttöliittymän suunnittelua/kokeilua, lisää testien kirjoittamista |
-| yht.  | 30h  |
+| 9.4.  | 2h   | Kotisivulle lisätty inspirational quotes, kotisivun ilmeen viimeistelyä, lisää testien kirjoittamista |
+| yht.  | 32h  |
