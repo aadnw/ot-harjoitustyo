@@ -9,7 +9,7 @@ Haavemaa on sovellus, jossa käyttäjä voi ideoida, tutkia ja seurata omia haav
 - Käyttäjä voi kirjautua sisään syöttämällä käyttäjätunnuksen ja salasanan. Jos käyttäjää ei ole olemassa tai tunnus/salasana ei täsmää, tulee siitä ilmoitus. 👍Tehty
 ### Kirjautumisen jälkeen:
 - Käyttäjä näkee omat haaveet/tavoitteet 👍Tehty
-- Käyttäjä näkee etusivulla kannustavia, motivoivia ja inspiroivia tekstejä
+- Käyttäjä näkee etusivulla kannustavia, motivoivia ja inspiroivia tekstejä 👍Tehty
 - Käyttäjä voi lisätä uuden haaveen/tavoitteen 👍Tehty
 - Käyttäjä voi merkitä haaveen/tavoitteen saavutetkuksi, jolloin se häviää näkymästä 👍Tehty
 - Käyttäjä voi kirjautua ulos 👍Tehty
