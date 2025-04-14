@@ -27,7 +27,7 @@ class DreamRepository:
     def create_new_dream(self, dream):
         """Adds the new dream to the database table"""
         dreams = self.get_all_dreams()
-        dream.id = max([int(dream.id) for dream in dreams], default=0) + 1
+        dream.id = max(list(int(dream.id) for dream in dreams), default=0) + 1
         dreams.append(dream)
         self._write(dreams)
         return dream
