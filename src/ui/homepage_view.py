@@ -10,10 +10,11 @@ from logic.dreamland_logic import dreamland_logic
 class DreamListView:
     """Class taking care of showing the users dreams"""
 
-    def __init__(self, root, dreams, handle_set_dream_achieved):
+    def __init__(self, root, dreams, handle_set_dream_achieved, handle_show_dream_view):
         self._root = root
         self._dreams = dreams
         self._handle_set_dream_achieved = handle_set_dream_achieved
+        self._handle_dream_view = handle_show_dream_view
         self._frame = None
 
         self._initialize()
@@ -33,11 +34,16 @@ class DreamListView:
             "Bookman", 12), fg="#220066", bg="#D0F1FF")
         label.grid(row=row, column=0, padx=5, pady=5, sticky="w")
 
-        achieved_button = tk.Button(self._frame, text="Saavutus", font=("Bookman", 10, "bold"),
+        achieved_button = tk.Button(self._frame, text="Saavutettu", font=("Bookman", 10, "bold"),
                                     bg="#FADCD9", fg="#00044A", padx=10, pady=5, borderwidth=0,
                                     relief=tk.FLAT, command=lambda dream=dream:
                                     self._handle_set_dream_achieved(dream.id))
         achieved_button.grid(row=row, column=1, padx=10, pady=5, sticky="e")
+
+        dream_page_button = tk.Button(self._frame, text="Edistyminen", font=("Bookman", 10, "bold"),
+                                      bg="#FADCD9", fg="#00044A", padx=10, pady=5, borderwidth=0,
+                                      relief=tk.FLAT, command=lambda d=dream: self._handle_dream_view(d))
+        dream_page_button.grid(row=row, column=2, padx=10, pady=5, sticky="e")
 
     def _initialize(self):
         """Initialize the dream list on the homepage"""
@@ -56,9 +62,10 @@ class DreamListView:
 class HomepageView:
     """Class taking care of the homepage view and functionalities"""
 
-    def __init__(self, root, handle_logout):
+    def __init__(self, root, handle_logout, handle_dream_view):
         self._root = root
         self._handle_logout = handle_logout
+        self._handle_dream_view = handle_dream_view
         self._user = dreamland_logic.get_user()
         self.quote = quote()
         self._frame = None
@@ -82,6 +89,10 @@ class HomepageView:
         dreamland_logic.logout()
         self._handle_logout()
 
+    def _dream_view_handler(self, dream):
+        """Show the dream view"""
+        self._handle_dream_view(dream)
+
     def _handle_set_dream_achieved(self, dream_id):
         """Mark dream as achieved and remove it from the view"""
         dreamland_logic.dream_achieved(dream_id)
@@ -98,7 +109,8 @@ class HomepageView:
         dreams = dreamland_logic.get_unachieved_dreams()
 
         self._dream_list_view = DreamListView(
-            self._dream_list_frame, dreams, self._handle_set_dream_achieved)
+            self._dream_list_frame, dreams, self._handle_set_dream_achieved,
+            self._handle_dream_view)
 
         self._dream_list_view.frame.grid(
             row=1, column=0, columnspan=2, sticky="nsew", padx=20, pady=20)
@@ -159,7 +171,7 @@ class HomepageView:
         # Content frame for the dream list
         self._dream_list_frame = tk.Frame(self._frame, bg="#D0F1FF")
         self._dream_list_frame.grid(
-            row=1, column=1, sticky="n", padx=40)
+            row=0, column=1, sticky="n", padx=40)
 
         self._initialize_dream_list()
         self._root.update_idletasks()
