@@ -23,7 +23,7 @@
 - Lisätty TestDreamRepository-luokka, joka vastaa DreamRepository-luokan testaamisesta
 
 ## Viikko 5
--Lisätty Diary-luokka, joka vastaa haaveeseen liittyvistä päiväkirjamerkinnöistä
+- Lisätty Diary-luokka, joka vastaa haaveeseen liittyvistä päiväkirjamerkinnöistä
 Lisätty 
 - Lisätty DiaryRepository-luokka, joka vastaa päiväkirjamerkintöjen tallentamisesta tietokantaan
 - Lisätty DreamView- ja DiaryListView-luokka, jotka vastaavat haaveen yksityiskohdista ja etenemisestä vastaavasta näkymästä
