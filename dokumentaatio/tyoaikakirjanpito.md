@@ -17,4 +17,5 @@
 | 8.4.  | 1h   | Luokka-/pakkauskaavion tekeminen, releasen tekeminen, korjasin ohjelman käynnistyksessä ilmeneviä virheitä |
 | 8.4.  | 2h   | Graafisen käyttöliittymän suunnittelua/kokeilua, lisää testien kirjoittamista |
 | 9.4.  | 2h   | Kotisivulle lisätty inspirational quotes, kotisivun ilmeen viimeistelyä, lisää testien kirjoittamista |
-| yht.  | 32h  |
+| 14.4. | 5h   | Lisätty toiminto, jolla käyttäjä voi pitää kirjaa siitä, mitä hän on tehnyt haaveen tavoittamiseksi. Testien kirjoittamista, Changelogin kirjaus |
+| yht.  | 37h  |
