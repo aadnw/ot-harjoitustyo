@@ -98,7 +98,7 @@ class DreamlandLogic:
         notes = self._diary_repository.get_diary(dream_id)
 
         return list(notes)
-    
+
     def new_diary_note(self, dream_id, content):
         """Adds a new note to the dream diary"""
         dream_id = int(dream_id)
