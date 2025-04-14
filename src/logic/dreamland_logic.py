@@ -1,12 +1,16 @@
 """This module includes functions that are used for the application logics"""
 
 from entities.dream import Dream
+from entities.diary import Diary
 
 from repositories.user_repository import (
     user_repository as default_user_repository)
 
 from repositories.dream_repository import (
     dream_repository as default_dream_repository)
+
+from repositories.diary_repository import (
+    diary_repository as default_diary_repository)
 
 
 class InvalidCredentialsError(Exception):
@@ -21,10 +25,12 @@ class DreamlandLogic:
     """Class taking care of the application logics"""
 
     def __init__(self, user_repository=default_user_repository,
-                 dream_repository=default_dream_repository):
+                 dream_repository=default_dream_repository,
+                 diary_repository=default_diary_repository):
         self._user = None
         self._user_repository = user_repository
         self._dream_repository = dream_repository
+        self._diary_repository = diary_repository
 
     def login(self, username, password):
         """Handle login, print error message if login fails"""
@@ -86,6 +92,20 @@ class DreamlandLogic:
     def dream_achieved(self, dream_id):
         """Dream achieved disappears from the homepage"""
         self._dream_repository.set_dream_achieved(dream_id)
+
+    def get_dream_diary(self, dream_id):
+        """Returns all diary notes related to a dream on the dream page"""
+        notes = self._diary_repository.get_diary(dream_id)
+
+        return list(notes)
+    
+    def new_diary_note(self, dream_id, content):
+        """Adds a new note to the dream diary"""
+        dream_id = int(dream_id)
+        note = Diary(content=content)
+        self._diary_repository.add_diary_note(dream_id, note.content)
+        return note
+
 
 
 dreamland_logic = DreamlandLogic()
