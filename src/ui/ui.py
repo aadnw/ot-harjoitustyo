@@ -3,6 +3,7 @@
 from ui.login_view import LoginView
 from ui.homepage_view import HomepageView
 from ui.registration_view import RegistrationView
+from ui.dream_view import DreamView
 
 
 class UI:
@@ -39,7 +40,8 @@ class UI:
         """Show homepage"""
         self._hide_current_view()
 
-        self._current_view = HomepageView(self._root, self._show_login_view)
+        self._current_view = HomepageView(
+            self._root, self._show_login_view, self._show_dream_view)
 
         self._current_view.frame.grid(row=0, column=0, sticky="nsew")
 
@@ -49,5 +51,14 @@ class UI:
 
         self._current_view = RegistrationView(
             self._root, self._show_homepage_view, self._show_login_view)
+
+        self._current_view.frame.grid(row=0, column=0, sticky="nsew")
+
+    def _show_dream_view(self, dream):
+        """Show dream page"""
+        self._hide_current_view()
+
+        self._current_view = DreamView(
+            self._root, dream, self._show_homepage_view)
 
         self._current_view.frame.grid(row=0, column=0, sticky="nsew")
