@@ -42,7 +42,8 @@ class DreamListView:
 
         dream_page_button = tk.Button(self._frame, text="Edistyminen", font=("Bookman", 10, "bold"),
                                       bg="#FADCD9", fg="#00044A", padx=10, pady=5, borderwidth=0,
-                                      relief=tk.FLAT, command=lambda d=dream: self._handle_dream_view(d))
+                                      relief=tk.FLAT,
+                                      command=lambda d=dream: self._handle_dream_view(d))
         dream_page_button.grid(row=row, column=2, padx=10, pady=5, sticky="e")
 
     def _initialize(self):
