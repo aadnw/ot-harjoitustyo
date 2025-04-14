@@ -9,6 +9,7 @@ def remove_tables(connection):
 
     cursor.execute("drop table if exists users")
     cursor.execute("drop table if exists dreams")
+    cursor.execute("drop table if exists diary")
 
     connection.commit()
 
@@ -31,7 +32,14 @@ def create_tables(connection):
                    done boolean default 0, --Default to 0 (False) if not provided,
                    foreign key (user_id) references users (id) on delete cascade
         )''')
-
+    cursor.execute('''
+        create table diary (
+                   id integer primary key autoincrement,
+                   dream_id integer,
+                   content text,
+                   created_at timestamp default current_timestamp,
+                   foreign key (dream_id) references dreams (id) on delete cascade
+        )''')
     connection.commit()
 
 
