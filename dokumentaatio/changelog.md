@@ -27,5 +27,6 @@
 Lisätty 
 - Lisätty DiaryRepository-luokka, joka vastaa päiväkirjamerkintöjen tallentamisesta tietokantaan
 - Lisätty DreamView- ja DiaryListView-luokka, jotka vastaavat haaveen yksityiskohdista ja etenemisestä vastaavasta näkymästä
-- Lisätty TestDreamlandLogic-luokka, joka vastaa DreamlandLogic-luokan testaamisesta 
+- Lisätty TestDreamlandLogic-luokka, joka vastaa DreamlandLogic-luokan testaamisesta
+- Lisätty TestDiaryRepository-luokka, joka vastaa DiaryRepository-luokan testaamisesta
   
