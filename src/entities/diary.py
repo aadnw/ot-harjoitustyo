@@ -6,4 +6,4 @@ class Diary:
 
     def __init__(self, content, dream_id=None):
         self.content = content
-        self.id = dream_id
+        self.dream_id = dream_id
