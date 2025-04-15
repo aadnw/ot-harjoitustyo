@@ -85,7 +85,7 @@ class DreamRepository:
                     username = ""
 
                 row = f"{dream.id};{dream.content};{done_string};{username}"
-                
+
                 file.write(row+"\n")
 
 
