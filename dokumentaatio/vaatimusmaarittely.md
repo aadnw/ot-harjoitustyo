@@ -17,7 +17,7 @@ Haavemaa on sovellus, jossa käyttäjä voi ideoida, tutkia ja seurata omia haav
 ## Jatkokehitysideoita
 Toiminnallisuuksia, joita voi lisätä sovellukseen perusversion valmistumisen jälkeen, jos aika riittää:
 - Käyttäjä voi lisätä "askeleita" haaveen/tavoitteen saavuttamiseksi
-- Käyttäjä voi päiväkirjanomaisesti pitää kirjaa siitä, mitä konkreettista on tehnyt haaveen/tavoitteen saavuttamiseksi
+- Käyttäjä voi päiväkirjanomaisesti pitää kirjaa siitä, mitä konkreettista on tehnyt haaveen/tavoitteen saavuttamiseksi 👍Tehty
 - Käyttäjä voi asettaa tavoiteajan haaveelle/tavoitteelle
 - Käyttäjä voi merkitä tärkeys "pisteitä" haaveelle/tavoitteelle
 - Käyttäjä voi järjestää haaveet/tavoitteeet eri tavoin, esim. tärkeysjärjestys, tavoiteaika lähimpänä, jne
