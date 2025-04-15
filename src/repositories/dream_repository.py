@@ -27,13 +27,14 @@ class DreamRepository:
     def create_new_dream(self, dream):
         """Adds the new dream to the database table"""
         dreams = self.get_all_dreams()
-        dream.id = max(list(int(dream.id) for dream in dreams), default=0) + 1
+        ids = [int(d.id) for d in dreams if d.id is not None]
+        dream.id = max(ids, default=0) + 1
         dreams.append(dream)
         self._write(dreams)
         return dream
 
     def set_dream_achieved(self, dream_id, done=True):
-        """Deletes the dream from the database table"""
+        """Marks the dream as done"""
         dreams = self.get_all_dreams()
         for dream in dreams:
             if dream.id == dream_id:
@@ -59,7 +60,7 @@ class DreamRepository:
                 parts = row.split(";")
                 dream_id = parts[0]
                 content = parts[1]
-                done = parts[2] == "1"
+                done = parts[2].strip() == "1"
                 username = parts[3]
 
                 if username:
@@ -84,7 +85,7 @@ class DreamRepository:
                     username = ""
 
                 row = f"{dream.id};{dream.content};{done_string};{username}"
-
+                
                 file.write(row+"\n")
 
 
