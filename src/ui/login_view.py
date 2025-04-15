@@ -3,21 +3,18 @@ that can be done on the login page"""
 
 from tkinter import StringVar, Label
 import tkinter as tk
+from ui.forms import FormHandler
 from logic.dreamland_logic import dreamland_logic, InvalidCredentialsError
 
 
-class LoginView:
+class LoginView(FormHandler):
     """Class taking care of showing the login page"""
 
     def __init__(self, root, handle_login, handle_show_registration_view):
+        super().__init__()
         self._root = root
         self._handle_login = handle_login
         self._handle_registration_view = handle_show_registration_view
-        self._frame = None
-        self._username_entry = None
-        self._password_entry = None
-        self._error_variable = None
-        self._error_label = None
 
         self._initialize()
 

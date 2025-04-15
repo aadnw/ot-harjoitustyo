@@ -4,18 +4,19 @@ that can be done on the homepage"""
 from tkinter import Label
 import tkinter as tk
 from inspirational_quotes import quote
+from ui.forms import FormHandler
 from logic.dreamland_logic import dreamland_logic
 
 
-class DreamListView:
+class DreamListView(FormHandler):
     """Class taking care of showing the users dreams"""
 
     def __init__(self, root, dreams, handle_set_dream_achieved, handle_show_dream_view):
+        super().__init__()
         self._root = root
         self._dreams = dreams
         self._handle_set_dream_achieved = handle_set_dream_achieved
         self._handle_dream_view = handle_show_dream_view
-        self._frame = None
 
         self._initialize()
 
@@ -60,19 +61,17 @@ class DreamListView:
             self._initialize_dream_item(dream, row=r)
 
 
-class HomepageView:
+class HomepageView(FormHandler):
     """Class taking care of the homepage view and functionalities"""
 
     def __init__(self, root, handle_logout, handle_dream_view):
+        super().__init__()
         self._root = root
         self._handle_logout = handle_logout
         self._handle_dream_view = handle_dream_view
         self._user = dreamland_logic.get_user()
         self.quote = quote()
-        self._frame = None
         self._add_dream_entry = None
-        self._dream_list_frame = None
-        self._dream_list_view = None
 
         self._initialize()
 

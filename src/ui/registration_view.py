@@ -6,7 +6,7 @@ import tkinter as tk
 from logic.dreamland_logic import dreamland_logic, UsernameTakenError, InvalidCredentialsError
 
 
-class RegistrationView:
+class RegistrationView():
     """Class taking care of showing the registration page"""
 
     def __init__(self, root, handle_registration, handle_show_login_view):
@@ -14,10 +14,10 @@ class RegistrationView:
         self._handle_registration = handle_registration
         self._handle_show_login_view = handle_show_login_view
         self._frame = None
-        self._username_entry = None
-        self._password_entry = None
         self._error_variable = None
         self._error_label = None
+        self.username_entry = None
+        self.password_entry = None
 
         self._initialize()
 
@@ -32,8 +32,8 @@ class RegistrationView:
 
     def _registration_handler(self):
         """Create the new user"""
-        username = self._username_entry.get()
-        password = self._password_entry.get()
+        username = self.username_entry.get()
+        password = self.password_entry.get()
 
         try:
             dreamland_logic.create_new_user(username, password)
@@ -59,19 +59,19 @@ class RegistrationView:
         """Field to write username"""
         tk.Label(master=self._frame, text="Käyttäjänimi:", font=("Bookman", 12),
                  fg="#00044A", bg="#D0F1FF").grid(row=1, column=0, sticky="w", pady=5)
-        self._username_entry = tk.Entry(master=self._frame, width=25, font=(
+        self.username_entry = tk.Entry(master=self._frame, width=25, font=(
             "Bookman", 12), bd=2, relief="solid", bg="#DFF7FF")
 
-        self._username_entry.grid(row=1, column=1, pady=5, sticky="w")
+        self.username_entry.grid(row=1, column=1, pady=5, sticky="w")
 
     def _initialize_password_field(self):
         """Field to write password"""
         tk.Label(master=self._frame, text="Salasana:", font=("Bookman", 12),
                  fg="#00044A", bg="#D0F1FF").grid(row=2, column=0, sticky="w", pady=5)
-        self._password_entry = tk.Entry(master=self._frame, width=25, font=(
+        self.password_entry = tk.Entry(master=self._frame, width=25, font=(
             "Bookman", 12), bd=2, relief="solid", bg="#DFF7FF")
 
-        self._password_entry.grid(row=2, column=1, pady=5, sticky="w")
+        self.password_entry.grid(row=2, column=1, pady=5, sticky="w")
 
     def _initialize(self):
         self._frame = tk.Frame(

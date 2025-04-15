@@ -4,16 +4,17 @@ that can be done on the dream's page"""
 from tkinter import Label
 import tkinter as tk
 from datetime import datetime
+from ui.forms import FormHandler
 from logic.dreamland_logic import dreamland_logic
 
-class DiaryListView:
+class DiaryListView(FormHandler):
     """Class taking care of showing the dream's diary notes"""
 
     def __init__(self, root, dream, diary):
+        super().__init__()
         self._root = root
         self._dream = dream
         self._diary = diary
-        self._frame = None
 
         self._initialize()
 
@@ -40,14 +41,14 @@ class DiaryListView:
         for r, (content, created_at) in enumerate(diary, start=1):
             self._initialize_diary_note(content, created_at, row=r)
 
-class DreamView:
+class DreamView(FormHandler):
     """Class taking care of the dream page view and functionalities"""
 
     def __init__(self, root, dream, handle_show_homepage_view):
+        super().__init__()
         self._root = root
         self._dream = dream
         self._handle_show_homepage_view = handle_show_homepage_view
-        self._frame = None
         self._add_note_entry = None
         self._diary_list_frame = None
         self._diary_list_view = None
