@@ -18,4 +18,5 @@
 | 8.4.  | 2h   | Graafisen käyttöliittymän suunnittelua/kokeilua, lisää testien kirjoittamista |
 | 9.4.  | 2h   | Kotisivulle lisätty inspirational quotes, kotisivun ilmeen viimeistelyä, lisää testien kirjoittamista |
 | 14.4. | 5h   | Lisätty toiminto, jolla käyttäjä voi pitää kirjaa siitä, mitä hän on tehnyt haaveen tavoittamiseksi. Testien kirjoittamista, Changelogin kirjaus |
-| yht.  | 37h  |
+| 15.4. | 5.5h | Testaamista, debuggausta, pylint korjauksia, kaavioiden piirtoa, changelog kirjaus ja uusi release |
+| yht.  | 42.5h  |
