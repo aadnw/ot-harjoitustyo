@@ -8,7 +8,7 @@
 - Lisätty DreamlandLogic-luokka, joka vastaa sovelluslogiikasta
 - Lisätty UserRepository-luokka, joka vastaa käyttäjien tallentamisesta CSV-tiedostoon
 - Lisätty TestUserRepository-luokka, joka vastaa UserRepository-luokan testaamisesta
-- Lisätty HomepageView-luokka, joka vastaa kotisivun näkymästä
+- Lisätty HomepageView- ja DreamListView-luokka, jotka vastaavat kotisivun näkymästä
 - Lisätty LoginView-luokka, joka vastaa kirjautumissivun näkymästä
 - Lisätty RegistrationView-luokka, joka vastaa rekisteröitymissivun näkymästä
 - Lisätty UI-luokka, joka vastaa käyttöliittymästä
@@ -23,4 +23,9 @@
 - Lisätty TestDreamRepository-luokka, joka vastaa DreamRepository-luokan testaamisesta
 
 ## Viikko 5
-- Lisätty TestDreamlandLogic-luokka, joka vastaa DreamlandLogic-luokan testaamisesta
+- Lisätty Diary-luokka, joka vastaa haaveeseen liittyvistä päiväkirjamerkinnöistä
+Lisätty 
+- Lisätty DiaryRepository-luokka, joka vastaa päiväkirjamerkintöjen tallentamisesta tietokantaan
+- Lisätty DreamView- ja DiaryListView-luokka, jotka vastaavat haaveen yksityiskohdista ja etenemisestä vastaavasta näkymästä
+- Lisätty TestDreamlandLogic-luokka, joka vastaa DreamlandLogic-luokan testaamisesta 
+  
