@@ -3,6 +3,7 @@
 import unittest
 from entities.user import User
 from entities.dream import Dream
+from entities.diary import Diary
 from logic.dreamland_logic import InvalidCredentialsError, UsernameTakenError, DreamlandLogic
 
 
@@ -11,6 +12,7 @@ class FakeDreamRepositoryForTesting:
 
     def __init__(self, dreams=None):
         self.dreams = dreams or []
+        self._ids = 1
 
     def get_all_dreams(self):
         """Returns all dreams"""
@@ -23,6 +25,8 @@ class FakeDreamRepositoryForTesting:
 
     def create_new_dream(self, dream):
         """Creates a new dream"""
+        dream.id = self._ids
+        self._ids += 1
         self.dreams.append(dream)
 
         return dream
@@ -69,6 +73,23 @@ class FakeUserRepositoryForTesting:
         """Deletes all users"""
         self.users = []
 
+class FakeDiaryRepositoryForTesting:
+    """This is a fake DiaryRepository created for testing the dreamland logics"""
+
+    def __init__(self, diary=None):
+        self.diary = diary or []
+
+    def get_diary(self, dream_id):
+        """Returns all diary notes related to a dream"""
+        return list(note for note in self.diary if note.dream_id == dream_id)
+
+    def add_diary_note(self, dream_id, note):
+        """"Adds a new note to the diary"""
+        note = Diary(content=note, dream_id=dream_id)
+        self.diary.append(note)
+        return note
+
+
 
 class TestDreamlandLogic(unittest.TestCase):
     """Class for testing the DreamlandLogic-class"""
@@ -76,24 +97,28 @@ class TestDreamlandLogic(unittest.TestCase):
     def setUp(self):
         self.fake_dream_repository = FakeDreamRepositoryForTesting()
         self.fake_user_repository = FakeUserRepositoryForTesting()
+        self.fake_diary_repository = FakeDiaryRepositoryForTesting()
 
         self.dreamland_logic = DreamlandLogic(self.fake_user_repository,
-                                              self.fake_dream_repository)
+                                              self.fake_dream_repository,
+                                              self.fake_diary_repository)
 
         self.dream_1 = Dream("Haave 1")
         self.dream_2 = Dream("Haave 2")
         self.user_testaaja = User("testaaja", "testi123")
 
-    def login(self, user):
+    def login(self):
         """Logs in the user"""
-        self.dreamland_logic.create_new_user(user.username, user.password)
+        self.dreamland_logic.create_new_user(self.user_testaaja.username,
+                                             self.user_testaaja.password)
+        self.dreamland_logic.login(self.user_testaaja.username,
+                                   self.user_testaaja.password)
+
+        return self.user_testaaja
 
     def test_login(self):
         """Tests that logging in with valid credentials works as it should"""
-        self.dreamland_logic.create_new_user(self.user_testaaja.username,
-                                             self.user_testaaja.password)
-        result = self.dreamland_logic.login(self.user_testaaja.username,
-                                            self.user_testaaja.password)
+        result = self.login()
 
         self.assertEqual(result.username, self.user_testaaja.username)
 
@@ -104,10 +129,7 @@ class TestDreamlandLogic(unittest.TestCase):
 
     def test_get_user(self):
         """Tests that get_user function returns the current user"""
-        self.dreamland_logic.create_new_user(self.user_testaaja.username,
-                                             self.user_testaaja.password)
-        self.dreamland_logic.login(self.user_testaaja.username,
-                                   self.user_testaaja.password)
+        self.login()
 
         result = self.dreamland_logic.get_user()
 
@@ -115,19 +137,13 @@ class TestDreamlandLogic(unittest.TestCase):
 
     def test_logout(self):
         """Tests that logging out works as it should"""
-        self.dreamland_logic.create_new_user(self.user_testaaja.username,
-                                             self.user_testaaja.password)
-        self.dreamland_logic.login(self.user_testaaja.username,
-                                   self.user_testaaja.password)
+        self.login()
 
         self.assertEqual(self.dreamland_logic.logout(), None)
 
     def test_create_new_user(self):
         """Tests that creating a new user with valid credentials works as it should"""
-        self.dreamland_logic.create_new_user(self.user_testaaja.username,
-                                             self.user_testaaja.password)
-        self.dreamland_logic.login(self.user_testaaja.username,
-                                   self.user_testaaja.password)
+        self.login()
 
         result = self.dreamland_logic.get_user()
         self.assertEqual(result.username, "testaaja")
@@ -157,10 +173,7 @@ class TestDreamlandLogic(unittest.TestCase):
 
     def test_new_dream(self):
         """Tests that adding a new dream works properly"""
-        self.dreamland_logic.create_new_user(self.user_testaaja.username,
-                                             self.user_testaaja.password)
-        self.dreamland_logic.login(self.user_testaaja.username,
-                                   self.user_testaaja.password)
+        self.login()
 
         self.dreamland_logic.new_dream("Testi")
         dreams = self.dreamland_logic.get_unachieved_dreams()
@@ -171,10 +184,7 @@ class TestDreamlandLogic(unittest.TestCase):
 
     def test_get_unachieved_dreams(self):
         """Tests that the function returns the correct dreams (unachieved ones)"""
-        self.dreamland_logic.create_new_user(self.user_testaaja.username,
-                                             self.user_testaaja.password)
-        self.dreamland_logic.login(self.user_testaaja.username,
-                                   self.user_testaaja.password)
+        self.login()
 
         self.dreamland_logic.new_dream("Testi")
         result = self.dreamland_logic.get_unachieved_dreams()
@@ -191,13 +201,33 @@ class TestDreamlandLogic(unittest.TestCase):
 
     def test_dream_achieved(self):
         """Tests that marking a dream achieved works as it should"""
-        self.dreamland_logic.create_new_user(self.user_testaaja.username,
-                                             self.user_testaaja.password)
-        self.dreamland_logic.login(self.user_testaaja.username,
-                                   self.user_testaaja.password)
+        self.login()
 
         self.dreamland_logic.new_dream("Testi")
         result = self.dreamland_logic.get_unachieved_dreams()
         self.dreamland_logic.dream_achieved(result[0].id)
 
         self.assertEqual(len(self.dreamland_logic.get_unachieved_dreams()), 0)
+
+    def test_new_diary_note(self):
+        """Tests that the adding a new note to the diary works properly"""
+        self.login()
+
+        self.dreamland_logic.new_dream("Testi")
+        dream = self.dreamland_logic.get_unachieved_dreams()
+        result = self.dreamland_logic.new_diary_note(dream[0].id, "Testasin haavetta")
+
+        self.assertEqual(result.content, "Testasin haavetta")
+
+    def test_get_diary(self):
+        """Tests that the get_diary-function returns the correct diary"""
+        self.login()
+
+        self.dreamland_logic.new_dream("Testi")
+        dream = self.dreamland_logic.get_unachieved_dreams()
+        self.dreamland_logic.new_diary_note(dream[0].id, "Testasin haavetta")
+        self.dreamland_logic.new_diary_note(dream[0].id, "Toinen muistiinpano")
+        result = self.dreamland_logic.get_dream_diary(dream[0].id)
+
+        self.assertEqual(len(result), 2)
+        
