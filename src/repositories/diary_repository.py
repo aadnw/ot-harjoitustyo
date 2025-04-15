@@ -20,7 +20,13 @@ class DiaryRepository:
         cursor = self.connection.cursor()
         cursor.execute("""SELECT content, created_at FROM diary WHERE dream_id = ?
                        ORDER BY created_at""",
-                       (dream_id))
+                       (dream_id,))
         return cursor.fetchall()
+
+    def delete_all_diaries(self):
+        """Deletes all diary notes from the database table"""
+        cursor = self.connection.cursor()
+        cursor.execute("DELETE FROM diary")
+        self.connection.commit()
 
 diary_repository = DiaryRepository()
