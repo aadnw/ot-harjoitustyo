@@ -77,6 +77,7 @@ class DreamlandLogic:
         """Creates new dream throgh the application logic"""
         dream = Dream(content=content, user=self._user)
         self._dream_repository.create_new_dream(dream)
+
         return dream
 
     def get_unachieved_dreams(self):
