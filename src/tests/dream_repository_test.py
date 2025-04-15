@@ -1,11 +1,13 @@
 """This module tests the DreamRepository functions"""
 
+import os
 import unittest
 from repositories.dream_repository import dream_repository
 from repositories.user_repository import user_repository
 from entities.dream import Dream
 from entities.user import User
 
+os.environ["TESTING"] = "1"
 
 class TestDreamRepository(unittest.TestCase):
     """Class for testing the DreamRepository-class"""
