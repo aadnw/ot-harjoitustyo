@@ -4,5 +4,4 @@ __pycache__
 htmlcov
 __pycache__/
 .venv
-data/database.sqlite
-data/dreams.csv
+data/
