@@ -1,13 +1,10 @@
 """This module tests the DiaryRepository functions"""
 
-import os
 import unittest
 from repositories.dream_repository import dream_repository
 from repositories.diary_repository import diary_repository
 from entities.dream import Dream
 from entities.diary import Diary
-
-os.environ["TESTING"] = "1"
 
 class TestDiaryRepository(unittest.TestCase):
     """Class for testing the DiaryRepository-class"""

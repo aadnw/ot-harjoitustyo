@@ -1,13 +1,10 @@
 """This module tests the DreamRepository functions"""
 
-import os
 import unittest
 from repositories.dream_repository import dream_repository
 from repositories.user_repository import user_repository
 from entities.dream import Dream
 from entities.user import User
-
-os.environ["TESTING"] = "1"
 
 class TestDreamRepository(unittest.TestCase):
     """Class for testing the DreamRepository-class"""
@@ -48,3 +45,14 @@ class TestDreamRepository(unittest.TestCase):
         result = dream_repository.create_new_dream(self.dream_1)
 
         self.assertEqual(result.content, "Haave 1")
+
+    def test_set_dream_achieved(self):
+        """Tests that setting a dream as achieved works as it should"""
+        dream = dream_repository.create_new_dream(self.dream_2)
+
+        self.assertEqual(dream.done, False)
+
+        achieved = dream_repository.set_dream_achieved(dream.id)
+
+        self.assertEqual(achieved.done, True)
+

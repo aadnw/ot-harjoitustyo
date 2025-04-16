@@ -1,13 +1,10 @@
 """This module tests the DreamlandLogic functions"""
 
-import os
 import unittest
 from entities.user import User
 from entities.dream import Dream
 from entities.diary import Diary
 from logic.dreamland_logic import InvalidCredentialsError, UsernameTakenError, DreamlandLogic
-
-os.environ["TESTING"] = "1"
 
 class FakeDreamRepositoryForTesting:
     """This is a fake DreamRepository created for testing the dreamland logics"""

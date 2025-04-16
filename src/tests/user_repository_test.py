@@ -1,11 +1,8 @@
 """This module tests the UserRepository functions"""
 
-import os
 import unittest
 from repositories.user_repository import user_repository, get_users_by_row
 from entities.user import User
-
-os.environ["TESTING"] = "1"
 
 class TestUserRepository(unittest.TestCase):
     """Class for testing the UserRepository-class"""
