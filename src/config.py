@@ -13,9 +13,5 @@ except FileNotFoundError:
 DREAMS_FILENAME = os.getenv("DREAMS_FILENAME") or "dreams.csv"
 DREAMS_FILE_PATH = os.path.join(dirname, "..", "data", DREAMS_FILENAME)
 
-if os.getenv("TESTING") == "1":
-    DATABASE_FILENAME = os.getenv("DATABASE_FILENAME") or "test_database.sqlite"
-else:
-    DATABASE_FILENAME = os.getenv("DATABASE_FILENAME") or "database.sqlite"
-
+DATABASE_FILENAME = os.getenv("DATABASE_FILENAME") or "database.sqlite"
 DATABASE_FILE_PATH = os.path.join(dirname, "..", "data", DATABASE_FILENAME)
