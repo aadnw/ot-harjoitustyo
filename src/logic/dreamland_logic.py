@@ -94,6 +94,10 @@ class DreamlandLogic:
         """Dream achieved disappears from the homepage"""
         self._dream_repository.set_dream_achieved(dream_id)
 
+    def delete_dream(self, dream_id):
+        """Dream gets deleted and disappears from the homepage"""
+        self._dream_repository.delete_this_dream(dream_id)
+
     def get_dream_diary(self, dream_id):
         """Returns all diary notes related to a dream on the dream page"""
         notes = self._diary_repository.get_diary(dream_id)

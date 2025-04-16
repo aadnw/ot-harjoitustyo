@@ -46,6 +46,14 @@ class DreamRepository:
         self._write(dreams)
         return achieved_dream
 
+    def delete_this_dream(self, dream_id):
+        """Deletes dream with a chosen id"""
+        dreams = self.get_all_dreams()
+
+        dream_deleted = filter(lambda dream: dream.id != dream_id, dreams)
+
+        self._write(dream_deleted)
+
     def delete_all_dreams(self):
         """Deletes all dreams"""
         self._write([])

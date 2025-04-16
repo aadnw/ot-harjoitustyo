@@ -91,6 +91,10 @@ class DreamView(FormHandler):
             self._initialize_diary_list()
             self._root.update_idletasks()
 
+    def _delete_handler(self):
+        dreamland_logic.delete_dream(self._dream.id)
+        self._handle_show_homepage_view()
+
     def _initialize(self):
         self._frame = tk.Frame(self._root, bg="#D0F1FF", padx=20, pady=20)
         self._frame.place(relx=0.5, rely=0.5, anchor="center")
@@ -129,3 +133,9 @@ class DreamView(FormHandler):
                                     command=self._homepage_handler)
 
         homepage_button.grid(row=1, column=1, sticky="se", padx=10, pady=(30, 0))
+
+        delete_button = tk.Button(self._frame, text="Poista haave", font=("Bookman", 14, "bold"),
+                                  bg="#FADCD9", fg="#00044A", padx=20, pady=5, borderwidth=0,
+                                  command=self._delete_handler)
+
+        delete_button.grid(row=2, column=1, sticky="se", padx=10, pady=(30, 0))
