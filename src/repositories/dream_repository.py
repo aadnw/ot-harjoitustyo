@@ -36,12 +36,15 @@ class DreamRepository:
     def set_dream_achieved(self, dream_id, done=True):
         """Marks the dream as done"""
         dreams = self.get_all_dreams()
+        achieved_dream = None
         for dream in dreams:
             if dream.id == dream_id:
                 dream.done = done
-                break
+                achieved_dream = dream
+
 
         self._write(dreams)
+        return achieved_dream
 
     def delete_all_dreams(self):
         """Deletes all dreams"""
@@ -58,7 +61,7 @@ class DreamRepository:
             for row in file:
                 row = row.replace("\n", "")
                 parts = row.split(";")
-                dream_id = parts[0]
+                dream_id = int(parts[0])
                 content = parts[1]
                 done = parts[2].strip() == "1"
                 username = parts[3]
