@@ -8,40 +8,42 @@ from ui.forms import FormHandler
 from logic.dreamland_logic import dreamland_logic
 
 
-class DreamListView(FormHandler):
+class DreamListView():
     """Class taking care of showing the users dreams"""
 
     def __init__(self, root, dreams, handle_set_dream_achieved, handle_show_dream_view):
-        super().__init__()
         self._root = root
         self._dreams = dreams
         self._handle_set_dream_achieved = handle_set_dream_achieved
         self._handle_dream_view = handle_show_dream_view
+        self.form_handler = FormHandler()
 
         self._initialize()
 
     @property
     def frame(self):
         """Expose _frame via getter"""
-        return self._frame
+        return self.form_handler.show_frame()
 
     def destroy(self):
         """Don't show the window"""
-        self._frame.destroy()
+        self.form_handler.frame.destroy()
 
     def _initialize_dream_item(self, dream, row):
         """Show the dreams on the homepage"""
-        label = tk.Label(self._frame, text=dream.content, font=(
+        label = tk.Label(self.form_handler.frame, text=dream.content, font=(
             "Bookman", 12), fg="#220066", bg="#D0F1FF")
         label.grid(row=row, column=0, padx=5, pady=5, sticky="w")
 
-        achieved_button = tk.Button(self._frame, text="Saavutettu", font=("Bookman", 10, "bold"),
+        achieved_button = tk.Button(self.form_handler.frame, text="Saavutettu",
+                                    font=("Bookman", 10, "bold"),
                                     bg="#FADCD9", fg="#00044A", padx=10, pady=5, borderwidth=0,
                                     relief=tk.FLAT, command=lambda dream=dream:
                                     self._handle_set_dream_achieved(dream.id))
         achieved_button.grid(row=row, column=1, padx=10, pady=5, sticky="e")
 
-        dream_page_button = tk.Button(self._frame, text="Edistyminen", font=("Bookman", 10, "bold"),
+        dream_page_button = tk.Button(self.form_handler.frame, text="Edistyminen",
+                                      font=("Bookman", 10, "bold"),
                                       bg="#FADCD9", fg="#00044A", padx=10, pady=5, borderwidth=0,
                                       relief=tk.FLAT,
                                       command=lambda d=dream: self._handle_dream_view(d))
@@ -49,10 +51,10 @@ class DreamListView(FormHandler):
 
     def _initialize(self):
         """Initialize the dream list on the homepage"""
-        self._frame = tk.Frame(self._root, bg="#D0F1FF", padx=10, pady=10)
-        self._frame.grid(row=0, column=1, sticky="ne", padx=50, pady=20)
+        self.form_handler.frame = tk.Frame(self._root, bg="#D0F1FF", padx=10, pady=10)
+        self.form_handler.frame.grid(row=0, column=1, sticky="ne", padx=50, pady=20)
 
-        Label(self._frame, text="Haaveet ja tavoitteet:", font=("Bookman", 14, "bold"),
+        Label(self.form_handler.frame, text="Haaveet ja tavoitteet:", font=("Bookman", 14, "bold"),
               fg="#220066", bg="#D0F1FF").grid(row=0, column=0, columnspan=2, sticky="w",
                                                padx=5, pady=(5, 0))
 
@@ -61,28 +63,26 @@ class DreamListView(FormHandler):
             self._initialize_dream_item(dream, row=r)
 
 
-class HomepageView(FormHandler):
+class HomepageView():
     """Class taking care of the homepage view and functionalities"""
 
     def __init__(self, root, handle_logout, handle_dream_view):
-        super().__init__()
         self._root = root
         self._handle_logout = handle_logout
         self._handle_dream_view = handle_dream_view
-        self._user = dreamland_logic.get_user()
-        self.quote = quote()
         self._add_dream_entry = None
+        self.form_handler = FormHandler()
 
         self._initialize()
 
     @property
     def frame(self):
         """Expose _frame via getter"""
-        return self._frame
+        return self.form_handler.show_frame()
 
     def destroy(self):
         """Don't show the window"""
-        self._frame.destroy()
+        self.form_handler.frame.destroy()
 
     def _logout_handler(self):
         """Log out the user"""
@@ -100,19 +100,19 @@ class HomepageView(FormHandler):
         self._root.update_idletasks()
 
     def _initialize_dream_list(self):
-        if self._dream_list_view:
-            self._dream_list_view.destroy()
+        if self.form_handler.dream_list_view:
+            self.form_handler.dream_list_view.destroy()
 
-        for widget in self._dream_list_frame.winfo_children():
+        for widget in self.form_handler.dream_list_frame.winfo_children():
             widget.destroy()
 
         dreams = dreamland_logic.get_unachieved_dreams()
 
-        self._dream_list_view = DreamListView(
-            self._dream_list_frame, dreams, self._handle_set_dream_achieved,
+        self.form_handler.dream_list_view = DreamListView(
+            self.form_handler.dream_list_frame, dreams, self._handle_set_dream_achieved,
             self._handle_dream_view)
 
-        self._dream_list_view.frame.grid(
+        self.form_handler.dream_list_view.frame.grid(
             row=1, column=0, columnspan=2, sticky="nsew", padx=20, pady=20)
 
     def _handle_add_dream(self):
@@ -126,17 +126,17 @@ class HomepageView(FormHandler):
 
     def _initialize(self):
         "Initialize the homepage's ui"
-        self._frame = tk.Frame(self._root, bg="#D0F1FF", padx=30, pady=30)
-        self._frame.grid(row=0, column=0, sticky="nsew")
+        self.form_handler.frame = tk.Frame(self._root, bg="#D0F1FF", padx=30, pady=30)
+        self.form_handler.frame.place(relx=0.5, rely=0.5, anchor="center")
 
         # Welcome text
         user = dreamland_logic.get_user()
-        Label(self._frame, text=f"Tervetuloa Haavemaahan {user.username} <3",
+        Label(self.form_handler.frame, text=f"Tervetuloa Haavemaahan {user.username} <3",
               font=("Bookman", 20, "bold"), fg="#00044A",
               bg="#D0F1FF").grid(row=0, column=0, sticky="w", columnspan=2, pady=(0, 20))
 
         # Content frame for quote, adding new dream and logging out
-        content_frame = tk.Frame(self._frame, bg="#D0F1FF")
+        content_frame = tk.Frame(self.form_handler.frame, bg="#D0F1FF")
         content_frame.grid(row=1, column=0, sticky="nw")
 
         # Frame for inspirational quote
@@ -144,6 +144,7 @@ class HomepageView(FormHandler):
         quote_frame.grid(row=0, column=0, sticky="w")
 
         # Inspirational quote
+        self.quote = quote()
         Label(quote_frame, text='"' + self.quote['quote'] + '"' + ' -' + self.quote['author'],
               font=("Bookman", 15), fg="#00044A", bg="#D0F1FF", wraplength=400,
               justify="left").grid(row=0, column=0, pady=(0, 40), sticky="w")
@@ -169,8 +170,8 @@ class HomepageView(FormHandler):
         create_new_dream_button.grid(row=0, column=2, padx=10, pady=10)
 
         # Content frame for the dream list
-        self._dream_list_frame = tk.Frame(self._frame, bg="#D0F1FF")
-        self._dream_list_frame.grid(
+        self.form_handler.dream_list_frame = tk.Frame(self.form_handler.frame, bg="#D0F1FF")
+        self.form_handler.dream_list_frame.grid(
             row=0, column=1, sticky="n", padx=40)
 
         self._initialize_dream_list()
@@ -183,6 +184,6 @@ class HomepageView(FormHandler):
                                   command=self._logout_handler)
         logout_button.grid(row=2, column=0, pady=(30, 0), sticky="w")
 
-        self._frame.grid_columnconfigure(0, weight=1)
-        self._frame.grid_columnconfigure(1, weight=1)
-        self._frame.grid_rowconfigure(1, weight=1)
+        self.form_handler.frame.grid_columnconfigure(0, weight=1)
+        self.form_handler.frame.grid_columnconfigure(1, weight=1)
+        self.form_handler.frame.grid_rowconfigure(1, weight=1)
