@@ -55,4 +55,3 @@ class TestDreamRepository(unittest.TestCase):
         achieved = dream_repository.set_dream_achieved(dream.id)
 
         self.assertEqual(achieved.done, True)
-
