@@ -46,6 +46,16 @@ class DreamRepository:
         self._write(dreams)
         return achieved_dream
 
+    def set_dream_star(self, dream_id, set_star):
+        """Updates the star rating of a dream"""
+        dreams = self.get_all_dreams()
+        for dream in dreams:
+            if dream.id == dream_id:
+                dream.star = set_star
+
+        self._write(dreams)
+
+
     def delete_this_dream(self, dream_id):
         """Deletes dream with a chosen id"""
         dreams = self.get_all_dreams()
@@ -73,13 +83,14 @@ class DreamRepository:
                 content = parts[1]
                 done = parts[2].strip() == "1"
                 username = parts[3]
+                star = f"{parts[4]}/5"
 
                 if username:
                     user = user_repository.get_user_by_username(username)
                 else:
                     user = None
 
-                dreams.append(Dream(content, done, user, dream_id))
+                dreams.append(Dream(content, done, user, dream_id, star))
 
         return dreams
 
@@ -95,7 +106,7 @@ class DreamRepository:
                 else:
                     username = ""
 
-                row = f"{dream.id};{dream.content};{done_string};{username}"
+                row = f"{dream.id};{dream.content};{done_string};{username};{dream.star}"
 
                 file.write(row+"\n")
 
