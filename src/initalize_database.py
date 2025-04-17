@@ -30,6 +30,7 @@ def create_tables(connection):
                    content text,
                    user_id integer,
                    done boolean default 0, --Default to 0 (False) if not provided,
+                   star integer,
                    foreign key (user_id) references users (id) on delete cascade
         )''')
     cursor.execute('''
