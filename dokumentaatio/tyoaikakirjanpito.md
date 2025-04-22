@@ -21,4 +21,5 @@
 | 15.4. | 5.5h | Testaamista, debuggausta, pylint korjauksia, kaavioiden piirtoa, changelog kirjaus ja uusi release |
 | 16.4. | 4.5h | Uusia ominaisuus poista haave, visuaalisen ilmeen suunnittelua, testitietokannan toimimattomuuden debuggausta ohjaajan kanssa |
 | 17.4. | 2h   | Pylint virheiden fixausta |
-| yht.  | 49h  |
+| 22.4. | 1h   | Korjasin diary-sivun näkymää enemmän oikeanlaiseksi |
+| yht.  | 50h  |
