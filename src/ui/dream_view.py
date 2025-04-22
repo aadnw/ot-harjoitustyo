@@ -106,10 +106,10 @@ class DreamView():
 
     def _initialize(self):
         self.form_handler.frame = tk.Frame(self._root, bg="#D0F1FF", padx=20, pady=20)
-        self.form_handler.frame.place(relx=0.5, rely=0.5, anchor="center")
+        self.form_handler.frame.grid(row=0, column=0, sticky="nsew")
 
         diary_frame = tk.Frame(self.form_handler.frame, bg="#D0F1FF")
-        diary_frame.grid(row=0, column=0, sticky="nw")
+        diary_frame.grid(row=0, column=0, sticky="n", padx=30)
 
         self.combo_var = tk.StringVar(value=str(self._star_value))
 
@@ -120,36 +120,34 @@ class DreamView():
         self.combo.grid(row=3, column=1, sticky="se", padx=10, pady=(30, 0))
 
         Label(diary_frame, text=self._dream.content, font=("Bookman", 16, "bold"),
-                         fg="#220066", bg="#D0F1FF").grid(
-                             row=0, column=0, padx=10, pady=10, sticky="w")
+                         fg="#220066", bg="#D0F1FF").pack(anchor="w", pady=(0, 20))
 
         self._diary_list_frame = tk.Frame(diary_frame, bg="#D0F1FF")
-        self._diary_list_frame.grid(row=1, column=0, sticky="nw", padx=10)
+        self._diary_list_frame.pack(anchor="w")
 
         self._initialize_diary_list()
         self._root.update_idletasks()
 
         add_note_frame = tk.Frame(self.form_handler.frame, bg="#D0F1FF")
-        add_note_frame.grid(row=0, column=1, sticky="ne", padx=(40, 0), pady=(10, 0))
+        add_note_frame.grid(row=0, column=1, sticky="ne", padx=30)
 
         Label(add_note_frame, text="Mitä tein päästäkseni lähemmäs tavoitettani?",
               font=("Bookman", 12, "bold"),
-              fg="#00044A", bg="#D0F1FF").grid(row=0, column=0, padx=10, pady=10, sticky="w")
+              fg="#00044A", bg="#D0F1FF").pack(anchor="w", pady=(0, 5))
 
         self.add_note_entry = tk.Entry(add_note_frame, font=("Bookman", 12), width=30,
                                         borderwidth=2, relief="solid")
-        self.add_note_entry.grid(row=1, column=0, padx=10, pady=10, sticky="w")
+        self.add_note_entry.pack(anchor="w", pady=(0, 5))
 
         add_note_button = tk.Button(add_note_frame, text="Lisää", font=("Bookman", 12, "bold"),
                                     bg="#FADCD9", fg="#00044A", padx=15, pady=5, borderwidth=0,
                                     relief=tk.FLAT, command=self._handle_add_note)
-        add_note_button.grid(row=2, column=0, padx=10, pady=10, sticky="w")
+        add_note_button.pack(anchor="w", pady=(0, 30))
 
-        self._star_label = Label(self.form_handler.frame, text=f"Tärkeys: {self._star_value}/5",
+        self._star_label = Label(add_note_frame, text=f"Tärkeys: {self._star_value}",
                                  font=("Bookman", 14, "bold"),
-                                 bg="#D0F1FF", fg="#00044A", padx=20, pady=5)
-
-        self._star_label.grid(row=0, column=1, sticky="e")
+                                 bg="#D0F1FF", fg="#00044A")
+        self._star_label.pack(anchor="e", pady=(0, 10))
 
         homepage_button = tk.Button(self.form_handler.frame, text="Kotisivulle",
                                     font=("Bookman", 14, "bold"),
@@ -164,3 +162,6 @@ class DreamView():
                                   command=self._delete_handler)
 
         delete_button.grid(row=2, column=1, sticky="se", padx=10, pady=(30, 0))
+
+        self._root.grid_rowconfigure(0, weight=1)
+        self._root.grid_columnconfigure(0, weight=1)
