@@ -20,4 +20,5 @@
 | 14.4. | 5h   | Lisätty toiminto, jolla käyttäjä voi pitää kirjaa siitä, mitä hän on tehnyt haaveen tavoittamiseksi. Testien kirjoittamista, Changelogin kirjaus |
 | 15.4. | 5.5h | Testaamista, debuggausta, pylint korjauksia, kaavioiden piirtoa, changelog kirjaus ja uusi release |
 | 16.4. | 4.5h | Uusia ominaisuus poista haave, visuaalisen ilmeen suunnittelua, testitietokannan toimimattomuuden debuggausta ohjaajan kanssa |
-| yht.  | 47h  |
+| 17.4. | 2h   | Pylint virheiden fixausta |
+| yht.  | 49h  |
