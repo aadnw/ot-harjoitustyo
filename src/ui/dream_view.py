@@ -3,6 +3,7 @@ that can be done on the dream's page"""
 
 from tkinter import Label
 import tkinter as tk
+import emoji
 from datetime import datetime
 from ui.forms import FormHandler
 from logic.dreamland_logic import dreamland_logic
@@ -51,7 +52,7 @@ class DreamView():
         self._diary_list_frame = None
         self._diary_list_view = None
         self._star_label = None
-        self._star_value = self._dream.star
+        self._star_value = int(str(self._dream.star).split('/', maxsplit=1)[0])
 
         self.form_handler = FormHandler()
 
@@ -100,7 +101,7 @@ class DreamView():
     def _star_selection(self, value):
         set_star = int(value)
         self._star_value = set_star
-        self._star_label.config(text=f"Tärkeys: {set_star}/5")
+        self._star_label.config(text=f"Tärkeys: {emoji.emojize('⭐') * set_star}/5")
 
         dreamland_logic.dream_star(self._dream.id, set_star)
 
@@ -144,8 +145,8 @@ class DreamView():
                                     relief=tk.FLAT, command=self._handle_add_note)
         add_note_button.pack(anchor="w", pady=(0, 30))
 
-        self._star_label = Label(add_note_frame, text=f"Tärkeys: {self._star_value}",
-                                 font=("Bookman", 14, "bold"),
+        self._star_label = Label(add_note_frame, text=f"Tärkeys: {emoji.emojize('⭐') * int(self._star_value)}/5",
+                                 font=("Noto Sans", 14, "bold"),
                                  bg="#D0F1FF", fg="#00044A")
         self._star_label.pack(anchor="e", pady=(0, 10))
 
