@@ -3,7 +3,6 @@ that can be done on the dream's page"""
 
 from tkinter import Label
 import tkinter as tk
-import emoji
 from datetime import datetime
 from ui.forms import FormHandler
 from logic.dreamland_logic import dreamland_logic
@@ -101,7 +100,7 @@ class DreamView():
     def _star_selection(self, value):
         set_star = int(value)
         self._star_value = set_star
-        self._star_label.config(text=f"Tärkeys: {emoji.emojize('⭐') * set_star}/5")
+        self._star_label.config(text=f"Tärkeys: {'★' * set_star}/5")
 
         dreamland_logic.dream_star(self._dream.id, set_star)
 
@@ -118,6 +117,9 @@ class DreamView():
                                   "1", "2", "3", "4", "5", command=self._star_selection)
 
         self.combo.config(font=("Bookman", 14, "bold"), bg="#FADCD9", fg="#00044A", padx=10, pady=5)
+        menu = self.combo["menu"]
+        menu.config(bg="#FADCD9", fg="#00044A", activebackground="#D0F1FF",
+                    activeforeground="#00044A")
         self.combo.grid(row=3, column=1, sticky="se", padx=10, pady=(30, 0))
 
         Label(diary_frame, text=self._dream.content, font=("Bookman", 16, "bold"),
@@ -145,8 +147,8 @@ class DreamView():
                                     relief=tk.FLAT, command=self._handle_add_note)
         add_note_button.pack(anchor="w", pady=(0, 30))
 
-        self._star_label = Label(add_note_frame, text=f"Tärkeys: {emoji.emojize('⭐') * int(self._star_value)}/5",
-                                 font=("Noto Sans", 14, "bold"),
+        self._star_label = Label(add_note_frame, text=f"Tärkeys: {'★' * int(self._star_value)}/5",
+                                 font=("Bookman", 14, "bold"),
                                  bg="#D0F1FF", fg="#00044A")
         self._star_label.pack(anchor="e", pady=(0, 10))
 
