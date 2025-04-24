@@ -73,7 +73,7 @@ class TestDreamRepository(unittest.TestCase):
         dream_repository.set_dream_star(dream.id, 4)
         dream = dream_repository.get_dream_by_id(dream.id)
 
-        self.assertEqual(dream.star, "4/5")
+        self.assertEqual(dream.star, 4)
 
     def test_delete_this_dream(self):
         """Tests that deleting the given dream actually deletes it"""
