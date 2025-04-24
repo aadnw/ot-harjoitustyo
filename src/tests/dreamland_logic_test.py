@@ -40,6 +40,20 @@ class FakeDreamRepositoryForTesting:
         """Deletes all dreams"""
         self.dreams = []
 
+    def delete_this_dream(self, dream_id):
+        """Deletes a certain dream"""
+        dream_deleted = filter(lambda dream: dream.id != dream_id, self.dreams)
+        self.dreams = dream_deleted
+
+
+    def set_dream_star(self, dream_id, set_star):
+        """Sets the star value for a dream"""
+        for dream in self.dreams:
+            if dream.id == dream_id:
+                dream.star = set_star
+                break
+
+
 
 class FakeUserRepositoryForTesting:
     """This is a fake DreamRepository created for testing the dreamland logics"""
@@ -228,4 +242,34 @@ class TestDreamlandLogic(unittest.TestCase):
         result = self.dreamland_logic.get_dream_diary(dream[0].id)
 
         self.assertEqual(len(result), 2)
-        
+
+    def test_dream_star(self):
+        """Tests that the dream stars are set correctly"""
+        self.login()
+
+        self.dreamland_logic.new_dream("Testi")
+
+        result = self.dreamland_logic.get_unachieved_dreams()
+        self.dreamland_logic.dream_star(result[0].id, 4)
+
+        result = self.dreamland_logic.get_unachieved_dreams()
+
+        self.assertEqual(result[0].star, 4)
+
+    def test_delete_dream(self):
+        """Tests that deleting a dream actually deletes it"""
+        self.login()
+
+        self.dreamland_logic.new_dream("Testi 1")
+        self.dreamland_logic.new_dream("Testi 2")
+
+        result = self.dreamland_logic.get_unachieved_dreams()
+
+        self.assertEqual(len(result), 2)
+
+        self.dreamland_logic.delete_dream(result[0].id)
+
+        result = self.dreamland_logic.get_unachieved_dreams()
+
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0].content, "Testi 2")

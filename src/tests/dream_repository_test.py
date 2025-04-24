@@ -28,6 +28,14 @@ class TestDreamRepository(unittest.TestCase):
         self.assertEqual(result[0].content, self.dream_1.content)
         self.assertEqual(result[1].content, self.dream_2.content)
 
+    def test_get_dream_by_id(self):
+        """Tests that get_dream_by_id-function returns the correct dream"""
+        dream = dream_repository.create_new_dream(self.dream_1)
+
+        result = dream_repository.get_dream_by_id(dream.id)
+
+        self.assertEqual(result.content, "Haave 1")
+
     def test_get_dreams_by_username(self):
         """Tests that get_dreams_by_username returns the correct dreams"""
         testaaja = user_repository.create_user(self.user_testaaja.username,
@@ -55,3 +63,27 @@ class TestDreamRepository(unittest.TestCase):
         achieved = dream_repository.set_dream_achieved(dream.id)
 
         self.assertEqual(achieved.done, True)
+
+    def test_set_dream_star(self):
+        """Tests that changing the star rating of a dream works properly"""
+        dream = dream_repository.create_new_dream(self.dream_1)
+
+        self.assertEqual(dream.star, 1)
+
+        dream_repository.set_dream_star(dream.id, 4)
+        dream = dream_repository.get_dream_by_id(dream.id)
+
+        self.assertEqual(dream.star, "4/5")
+
+    def test_delete_this_dream(self):
+        """Tests that deleting the given dream actually deletes it"""
+        dream_1 = dream_repository.create_new_dream(self.dream_1)
+        dream_repository.create_new_dream(self.dream_2)
+        result = dream_repository.get_all_dreams()
+
+        self.assertEqual(len(result), 2)
+
+        dream_repository.delete_this_dream(dream_1.id)
+        result = dream_repository.get_all_dreams()
+
+        self.assertEqual(len(result), 1)
