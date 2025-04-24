@@ -18,6 +18,15 @@ class DreamRepository:
         """Returns all added dreams"""
         return self._read()
 
+    def get_dream_by_id(self, dream_id):
+        """Returns dream with the given id"""
+        dreams = self.get_all_dreams()
+
+        for dream in dreams:
+            if dream.id == dream_id:
+                return dream
+        return None
+
     def get_dreams_by_username(self, username):
         """Returns all dreams of a specific user (the current user)"""
         dreams = self.get_all_dreams()
