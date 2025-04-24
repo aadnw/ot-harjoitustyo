@@ -7,10 +7,24 @@ from datetime import datetime
 from ui.forms import FormHandler
 from logic.dreamland_logic import dreamland_logic
 
-class DiaryListView():
-    """Class taking care of showing the dream's diary notes"""
+class DiaryListView:
+    """Class taking care of showing the dream's diary notes
+    
+    Attributes:
+        root: TKinter element inside of which the view will be initialized
+        dream: Dream-object of which the view is created
+        diary: list of Diary-objects related to the dream
+    """
 
     def __init__(self, root, dream, diary):
+        """Class constructor
+        
+        Args:
+            root: TKinter element inside of which the view will be initialized
+            dream: Dream-object of which the view is created
+            diary: list of Diary-objects related to the dream
+        """
+
         self._root = root
         self._dream = dream
         self._diary = diary
@@ -28,12 +42,21 @@ class DiaryListView():
         return self.form_handler.frame
 
     def _initialize_diary_note(self, content, created_at, row):
+        """Initializes the diary note that will be shown on the Dream-page
+        
+        Args:
+            content: string that describes the content of the note
+            created_at: timestamp of the time the note was created at
+            row: row number of the note where it will be placed
+        """
+
         date = datetime.strptime(created_at, "%Y-%m-%d %H:%M:%S")
         date_format = date.strftime("%d-%m-%Y")
         Label(self.form_handler.frame, text=f"{date_format}: {content}", font=("Bookman", 12),
               fg="#220066", bg="#D0F1FF").grid(row=row, column=0, padx=5, pady=5, sticky="w")
 
     def _initialize(self):
+        """Initializes the view for the diary list"""
         self.form_handler.frame = tk.Frame(self._root, bg="#D0F1FF", padx=10, pady=10)
         self.form_handler.frame.grid(row=0, column=1, sticky="w", padx=50, pady=50)
 
@@ -41,10 +64,24 @@ class DiaryListView():
         for r, (content, created_at) in enumerate(diary, start=1):
             self._initialize_diary_note(content, created_at, row=r)
 
-class DreamView():
-    """Class taking care of the dream page view and functionalities"""
+class DreamView:
+    """Class taking care of the dream page view and functionalities
+    
+    Attributes:
+        root: TKinter element inside of which the view will be initialized
+        dream: Dream-object of which the view is created
+        handle_show_homepage_view: value that is called when moving to homepage
+    """
 
     def __init__(self, root, dream, handle_show_homepage_view):
+        """Class constructor
+    
+        Args:
+            root: TKinter element inside of which the view will be initialized
+            dream: Dream-object of which the view is created
+            handle_show_homepage_view: value that is called when moving to homepage
+        """
+
         self._root = root
         self._dream = dream
         self._handle_show_homepage_view = handle_show_homepage_view
@@ -71,6 +108,7 @@ class DreamView():
         self._handle_show_homepage_view()
 
     def _initialize_diary_list(self):
+        """Initializes the view to show the diary list"""
         if self._diary_list_view:
             self._diary_list_view.destroy()
 
@@ -85,7 +123,7 @@ class DreamView():
                                          padx=20, pady=20)
 
     def _handle_add_note(self):
-        """Add a new note to the diary"""
+        """Adds a new note to the diary"""
         content = self.add_note_entry.get().strip()
         if content:
             dreamland_logic.new_diary_note(self._dream.id, content)
@@ -94,10 +132,17 @@ class DreamView():
             self._root.update_idletasks()
 
     def _delete_handler(self):
+        """Deletes a dream from the dream list and database"""
         dreamland_logic.delete_dream(self._dream.id)
         self._handle_show_homepage_view()
 
     def _star_selection(self, value):
+        """Sets the new star value for the chosen dream
+        
+        Args:
+            value: integer that describes the new star value of the dream
+        """
+
         set_star = int(value)
         self._star_value = set_star
         self._star_label.config(text=f"Tärkeys: {'★' * set_star}/5")
@@ -105,6 +150,7 @@ class DreamView():
         dreamland_logic.dream_star(self._dream.id, set_star)
 
     def _initialize(self):
+        """Initializes the dream page's ui"""
         self.form_handler.frame = tk.Frame(self._root, bg="#D0F1FF", padx=20, pady=20)
         self.form_handler.frame.grid(row=0, column=0, sticky="nsew")
 

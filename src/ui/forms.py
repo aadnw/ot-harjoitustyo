@@ -4,6 +4,7 @@ to avoid too many instance attributes and similar lines"""
 class FormHandler:
     """Class for handling form elements"""
     def __init__(self):
+        """Class constructor"""
         self.frame = None
         self.dream_list_frame = None
         self.dream_list_view = None

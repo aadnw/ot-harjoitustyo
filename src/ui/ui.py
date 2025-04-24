@@ -7,9 +7,19 @@ from ui.dream_view import DreamView
 
 
 class UI:
-    """Class taking care of the UI"""
+    """Class taking care of the UI
+    
+    Attributes:
+        root: TKinter element inside of which the view will be initialized
+    """
 
     def __init__(self, root):
+        """Class constructor
+    
+        Args:
+            root: TKinter element inside of which the view will be initialized
+        """
+
         self._root = root
         self._current_view = None
         self._frame = None

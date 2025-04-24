@@ -6,7 +6,7 @@ from config import DATA_FOLDER
 
 
 def build():
-    """Create the database"""
+    """Creates the database"""
     if not os.path.isdir(DATA_FOLDER):
         os.mkdir(DATA_FOLDER)
     initialize_database()

@@ -8,18 +8,40 @@ from database_connection import get_database_connection
 
 
 class DreamRepository:
-    """Takes care of database functions related to the dreams"""
-
+    """Takes care of database functions related to the dreams
+    
+    Attributes:
+        file_path: Path to the file where all the dreams are stored
+    """
     def __init__(self, file_path):
+        """Class constructor
+        
+        Args:
+            file_path: Path to the file where all the dreams are stored
+            connection: Connection-object of the database connection
+        """
+
         self._file_path = file_path
         self.connection = get_database_connection()
 
     def get_all_dreams(self):
-        """Returns all added dreams"""
+        """Returns all added dreams
+        
+        Returns:
+            List of Dream-objects
+        """
+
         return self._read()
 
     def get_dream_by_id(self, dream_id):
-        """Returns dream with the given id"""
+        """Returns dream with the given id
+        
+        Args:
+            dream_id: integer that describes the dream id
+        Returns:
+            Dream-object with the given id
+        """
+
         dreams = self.get_all_dreams()
 
         for dream in dreams:
@@ -28,13 +50,27 @@ class DreamRepository:
         return None
 
     def get_dreams_by_username(self, username):
-        """Returns all dreams of a specific user (the current user)"""
+        """Returns all dreams of a specific user (the current user)
+        
+        Args:
+            username: string that describes the user of which dreams will be returned
+        Returns:
+            List of Dream-objects that belong tho the given user
+        """
+
         dreams = self.get_all_dreams()
 
         return list(filter(lambda dream: dream.user and dream.user.username == username, dreams))
 
     def create_new_dream(self, dream):
-        """Adds the new dream to the database table"""
+        """Adds a new dream to the database table
+
+        Args:
+            dream: Dream-object that is the new dream
+        Returns:
+            Returns the new dream as a Dream-object
+        """
+
         dreams = self.get_all_dreams()
         ids = [int(d.id) for d in dreams if d.id is not None]
         dream.id = max(ids, default=0) + 1
@@ -43,7 +79,17 @@ class DreamRepository:
         return dream
 
     def set_dream_achieved(self, dream_id, done=True):
-        """Marks the dream as done"""
+        """Marks the dream as done (sets the done value to False)
+        
+        Args:
+            dream_id: integer that describes the id of the dream that will be marked as achieved
+            done: boolean value that is assumed to be True, will be set as False when dream is
+            marked as achieved
+        
+        Returns:
+            Returns the achieved dream as Dream-object
+        """
+
         dreams = self.get_all_dreams()
         achieved_dream = None
         for dream in dreams:
@@ -56,7 +102,14 @@ class DreamRepository:
         return achieved_dream
 
     def set_dream_star(self, dream_id, set_star):
-        """Updates the star rating of a dream"""
+        """Updates the star rating of a dream
+        
+        Args:
+            dream_id: integer that describes the id of the dream of which star rating will be
+            changed
+            set_star: integer that describes the new star value
+        """
+
         dreams = self.get_all_dreams()
         for dream in dreams:
             if dream.id == dream_id:
@@ -66,7 +119,12 @@ class DreamRepository:
 
 
     def delete_this_dream(self, dream_id):
-        """Deletes dream with a chosen id"""
+        """Deletes dream with a chosen id
+        
+        Args:
+            dream_id: integer that describes the id of the dream that will be deleted
+        """
+
         dreams = self.get_all_dreams()
 
         dream_deleted = filter(lambda dream: dream.id != dream_id, dreams)
@@ -78,9 +136,15 @@ class DreamRepository:
         self._write([])
 
     def _ensure_file_exists(self):
+        """Creates a file if it doesn't exist, to store data"""
         Path(self._file_path).touch()
 
     def _read(self):
+        """Reads data from the csv file
+        
+        Returns:
+            content in the csv file
+        """
         dreams = []
         self._ensure_file_exists()
 
@@ -104,6 +168,7 @@ class DreamRepository:
         return dreams
 
     def _write(self, dreams):
+        """Updates/writes data in the csv file"""
         self._ensure_file_exists()
 
         with open(self._file_path, "w", encoding="utf-8") as file:
