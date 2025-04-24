@@ -22,4 +22,5 @@
 | 16.4. | 4.5h | Uusia ominaisuus poista haave, visuaalisen ilmeen suunnittelua, testitietokannan toimimattomuuden debuggausta ohjaajan kanssa |
 | 17.4. | 2h   | Pylint virheiden fixausta |
 | 22.4. | 1h   | Korjasin diary-sivun näkymää enemmän oikeanlaiseksi |
-| yht.  | 50h  |
+| 24.4. | 5h   | Docstringien lisäystä, testien kirjoittamista, star rating näkyviin dream-pagelle, alustavan dokumentaation kirjoittaminen |
+| yht.  | 55h  |
