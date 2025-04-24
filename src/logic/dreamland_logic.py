@@ -96,7 +96,7 @@ class DreamlandLogic:
 
     def dream_star(self, dream_id, set_star):
         """Dream star is set"""
-        return self._dream_repository.set_dream_star(dream_id, set_star)
+        self._dream_repository.set_dream_star(dream_id, set_star)
 
     def delete_dream(self, dream_id):
         """Dream gets deleted and disappears from the homepage"""
