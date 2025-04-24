@@ -156,7 +156,7 @@ class DreamRepository:
                 content = parts[1]
                 done = parts[2].strip() == "1"
                 username = parts[3]
-                star = f"{parts[4]}/5"
+                star = int(parts[4])
 
                 if username:
                     user = user_repository.get_user_by_username(username)
