@@ -1,8 +1,67 @@
-Pakkausrakenne:
+# Arkkitehtuurikuvaus
+## Rakenne
+Sovelluksen rakenne noudattaa kolmitasoista kerrosarkkitehtuuria. Alla olevassa kuvassa näkyy ohjelman pakkausrakenne:
 ![pakkausrakenne](https://github.com/user-attachments/assets/13a25ae5-055c-4cad-a697-4402c6c7aa21)
+__Ui__ pakkaus sisältää käyttöliittymän koodin, __logic__ pakkaus sisältää sovelluslogiikan koodin, __repositories__ pakkaus sisältää tietojen tallennukseen liittyvän koodin ja __entities__ pakkaus sisältää sovelluksen tarvitsemia tietoja kuvaavia luokkia.
 
-Luokka-/pakkauskaavio:
+## Käyttöliittymä
+Käyttöliittymä on eristetty sovelluslogiikasta.
+Käyttöliittymässä on neljä eri näkymää:
+- Kirjautumissivu (login page)
+- Rekisteröitymissivu (registration page)
+- Kotisivu (homepage)
+- Unelmasivu (dream page)
+
+Sivujen näyttämisestä vastaa UI-luokka ja vain yksi sivu on näkyvissä kerrallaan.
+
+## Sovelluslogiikka
+Luokat __User__, __Dream__ ja __Diary__ kuvaavat käyttäjiä, heidän haaveitaan sekä haaveisiin liittyviä päiväkirjamerkintöjä, jotka muodostavat sovelluksen loogisen tietomallin.
+
+```mermaid
+ classDiagram
+      Diary "*" --> "1" Dream
+      Dream "*" --> "1" User
+      class User{
+          username
+          password
+          user_id
+      }
+      class Dream{
+          content
+          done
+          user
+          id
+          star
+      }
+      class Diary{
+          content
+          dream_id
+      }
+```
+
+Toiminnallisuudesta vastaa luokka __DreamlandLogic__, joka sisältää metodit kaikille käyttöliittymän toiminnoille. Pakkauksessa __repositories__ sijaitsee tietojen tallennuksesta vastaavat luokat __UserRepository__, __DreamRepository__ ja __DiaryRepository__, joiden kautta __DreamlandLogic__ pääsee käsiksi käyttäjiin ja haaveisiin ja päiväkirjamerkintöihin. Nämä __repositories__ pakkauksen luokat injektoidaan sovelluslogiikkaan konstruktorissa. 
+Alla on kuva __DreamlandLogic__ luokan ja sovelluksen muiden osien suhdetta kuvaavasta luokka-/pakkauskaaviosta:
 ![pakkauskaavio](https://github.com/user-attachments/assets/7a935a68-b423-4252-9318-23337b69b91c)
 
-Sisäänkirjautuminen sekvenssikaaviona:
+## Tietojen pysyväistallennus
+Pakkauksen __repositories__ luokat vastaavat siis tietojen pysyväistallennuksesta. Luokka __DreamRepository__ tallentaa tiedot CSV-tiedostoon ja luokat __UserRepository__ ja __DiaryRepository__ tallentavat tiedot SQLite-tietokantaan. 
+
+### Tiedostot
+Sovellus tallentaa käytättäjien, haaveiden ja päiväkirjamerkintöjen tiedot erillisiin tiedostoihin, jotka on määritelty sovelluksen juuressa __.env__-tiedostossa.
+Sovellus tallentaa haaveet CSV-tieodostoon seruaavalla tavalla:
+```
+1; Juo 3l vettä päivittäin; 0; testaaja; 1
+2; Nuku vähintään 8h joka yö; 1; testaaja; 5
+```
+Eli tavoitteen/haaveen id, tavoite/haave, saavutettu (0 = ei, 1 = kyllä), käyttäjänimi, tähdet (1 = ei tärkeä, 5 = ykkös prioriteetti). Kenttien arvot erotetaan puolipisteellä ;
+
+Sovellus tallentaa käyttäjät ja päiväkirjamerkinnät SQLite-tietokantatauluihin __users__ ja __diary__ , jotka alustetaan __initialize_database.py__-tiedostossa.
+
+## Sovelluksen päätoiminnallisuudet
+Alla kuvataan sovelluksen kannalta oleellisimpia toiminnallisuuksia sekvenssikaavioina:
+
+### Sisäänkirjautuminen:
+Kun kirjautumissivun kenttiin kirjoitetaan käyttäjänimi ja salasana, jonka jälkeen painetaan "Kirjaud sisään" nappia, etenee sovellus alla olevan kuvan tavalla:
 ![login](https://github.com/user-attachments/assets/c8ba098d-7180-41e1-aab9-974dcf7e71d1)
+
+Tapahtumakäsittelijä kutsuu sovelluslogiikan metodia __login__, antaen sille parametriksi käyttäjänimen ja salasanan. Sovelluslogiikka selvittää __UserRepository__:n avulla onnistuuko kirjautuminen. Kirjautuminen epäonnistuu jos käyttäjää ei ole olemassa tai tunnukset eivät täsmää olemassaolevaan käyttäjään. Kirjautumisen onnistuessa käyttöliittymä vaihtaa näkymäksi kotisivun, jossa näkyy kirjautuneen käyttäjän haaveet.
