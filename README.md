@@ -7,7 +7,7 @@ Haavemaa -sovelluksessa toteutat suurimmatkin haaveesi ja tavoitteesi! Rekister�
 - [Changelog](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/changelog.md)
 - [Arkkitehtuuri](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 - [Käyttöohje](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
-- [Uusin release](https://github.com/aadnw/ot-harjoitustyo/releases/tag/viikko5)
+- [Vko 5 Release](https://github.com/aadnw/ot-harjoitustyo/releases/tag/viikko5)
 
 ## Sovelluksen asennusohje
 1. Kloonaa tämä repositorio omalle koneellesi ja siirry sen juurihakemistoon.
@@ -34,4 +34,10 @@ poetry run invoke test
 Testikattavuusraportin, joka aukeaa selaimeen, voi generoida komennolla:
 ```
 poetry run invoke coverage-report
+```
+
+## Pylint-tarkistus
+Pylint-tarkistuksen voi suorittaa komennolla:
+```
+poetry run invoke lint
 ```
