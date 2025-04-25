@@ -3,7 +3,9 @@ that can be done on the homepage"""
 
 from tkinter import Label
 import tkinter as tk
+from datetime import datetime
 from inspirational_quotes import quote
+from tkcalendar import DateEntry
 from ui.forms import FormHandler
 from logic.dreamland_logic import dreamland_logic
 
@@ -76,10 +78,10 @@ class DreamListView:
     def _initialize(self):
         """Initializes the dream list to be shown on the homepage"""
         self.form_handler.frame = tk.Frame(self._root, bg="#D0F1FF", padx=10, pady=10)
-        self.form_handler.frame.grid(row=0, column=1, sticky="ne", padx=50, pady=20)
+        self.form_handler.frame.grid(row=0, column=1, sticky="n", padx=50, pady=20)
 
         Label(self.form_handler.frame, text="Haaveet ja tavoitteet:", font=("Bookman", 14, "bold"),
-              fg="#220066", bg="#D0F1FF").grid(row=0, column=0, columnspan=2, sticky="w",
+              fg="#00044A", bg="#D0F1FF").grid(row=0, column=0, columnspan=2, sticky="nw",
                                                padx=5, pady=(5, 0))
 
         dreams = dreamland_logic.get_unachieved_dreams()
@@ -165,9 +167,12 @@ class HomepageView:
     def _handle_add_dream(self):
         """Adds a new dream and shows it on the homepage"""
         content = self._add_dream_entry.get().strip()
+        due_date = self._add_due_date_entry.get_date().strftime("%d.%m.%Y")
+
         if content:
-            dreamland_logic.new_dream(content)
+            dreamland_logic.new_dream(content, due_date)
             self._add_dream_entry.delete(0, tk.END)
+            self._add_due_date_entry.set_date(datetime.today())
             self._initialize_dream_list()
             self._root.update_idletasks()
 
@@ -176,37 +181,51 @@ class HomepageView:
         self.form_handler.frame = tk.Frame(self._root, bg="#D0F1FF", padx=30, pady=30)
         self.form_handler.frame.place(relx=0.5, rely=0.5, anchor="center")
 
-        user = dreamland_logic.get_user()
-        Label(self.form_handler.frame, text=f"Tervetuloa Haavemaahan {user.username} <3",
-              font=("Bookman", 20, "bold"), fg="#00044A",
-              bg="#D0F1FF").grid(row=0, column=0, sticky="w", columnspan=2, pady=(0, 20))
-
         content_frame = tk.Frame(self.form_handler.frame, bg="#D0F1FF")
-        content_frame.grid(row=1, column=0, sticky="nw")
+        content_frame.grid(row=0, column=0, sticky="nw")
+
+        user = dreamland_logic.get_user()
+        Label(content_frame, text=f"Tervetuloa Haavemaahan {user.username} <3",
+              font=("Bookman", 20, "bold"), fg="#00044A",
+              bg="#D0F1FF").grid(row=0, column=0, sticky="nw", columnspan=2, pady=(0, 20))
 
         quote_frame = tk.Frame(content_frame, bg="#D0F1FF")
-        quote_frame.grid(row=0, column=0, sticky="w")
+        quote_frame.grid(row=1, column=0, sticky="nw")
 
         self.quote = quote()
         Label(quote_frame, text='"' + self.quote['quote'] + '"' + ' -' + self.quote['author'],
               font=("Bookman", 15), fg="#00044A", bg="#D0F1FF", wraplength=400,
-              justify="left").grid(row=0, column=0, pady=(0, 40), sticky="w")
+              justify="left").grid(row=0, column=0, pady=(0, 40), sticky="nw")
 
         add_dream_frame = tk.Frame(content_frame, bg="#D0F1FF")
-        add_dream_frame.grid(row=1, column=0, sticky="w", pady=(20, 20))
+        add_dream_frame.grid(row=2, column=0, sticky="w", pady=(20, 20))
 
         Label(add_dream_frame, text="Lisää tavoite:", font=("Bookman", 12, "bold"),
-              fg="#00044A", bg="#D0F1FF").grid(row=0, column=0, padx=10, pady=10)
+              fg="#00044A", bg="#D0F1FF").grid(row=0, column=0, padx=10, pady=10, sticky="w")
 
         self._add_dream_entry = tk.Entry(
             add_dream_frame, font=("Bookman", 12), width=30, borderwidth=2, relief="solid")
-        self._add_dream_entry.grid(row=0, column=1, padx=10, pady=10)
+        self._add_dream_entry.grid(row=0, column=1, padx=10, pady=10, sticky="w")
+
+        Label(add_dream_frame, text="Aseta tavoiteaika:", font=("Bookman", 12, "bold"),
+              fg="#00044A", bg="#D0F1FF").grid(row=1, column=0, padx=10, pady=10, sticky="w")
+
+        self._add_due_date_entry = DateEntry(add_dream_frame, font=("Bookman", 12), width=10,
+                                             date_pattern="dd.mm.yyyy", mindate=datetime.today(),
+                                             background="#D0F1FF", foreground="#00044A",
+                                             selectbackground="#FC2D7D", selectforeground="00044A",
+                                             bordercolor="#FC2D7D", headersbackground="#D0F1FF", headersforeground="#00044A",
+                                             normalbackground="#FADCD9", normalforeground="#00044A",
+                                             weekendbackground="#EC838C", weekendforeground="#00044A",
+                                             othermonthbackground="#D0F1FF", othermonthforeground="#00044A"
+                                             )
+        self._add_due_date_entry.grid(row=1, column=1, padx=10, pady=10, sticky="w")
 
         create_new_dream_button = tk.Button(add_dream_frame, text="Luo",
                                             font=("Bookman", 12, "bold"), bg="#FADCD9",
                                             fg="#00044A", padx=15, pady=5, borderwidth=0,
                                             relief=tk.FLAT, command=self._handle_add_dream)
-        create_new_dream_button.grid(row=0, column=2, padx=10, pady=10)
+        create_new_dream_button.grid(row=1, column=2, padx=10, pady=10, sticky="w")
 
         self.form_handler.dream_list_frame = tk.Frame(self.form_handler.frame, bg="#D0F1FF")
         self.form_handler.dream_list_frame.grid(
@@ -219,7 +238,7 @@ class HomepageView:
                                   font=("Bookman", 12), bg="#FADCD9", fg="#00044A",
                                   padx=20, pady=5, borderwidth=0, relief=tk.FLAT,
                                   command=self._logout_handler)
-        logout_button.grid(row=2, column=0, pady=(30, 0), sticky="w")
+        logout_button.grid(row=3, column=0, pady=(30, 0), sticky="w")
 
         self.form_handler.frame.grid_columnconfigure(0, weight=1)
         self.form_handler.frame.grid_columnconfigure(1, weight=1)
