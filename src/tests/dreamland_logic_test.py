@@ -187,18 +187,19 @@ class TestDreamlandLogic(unittest.TestCase):
         """Tests that adding a new dream works properly"""
         self.login()
 
-        self.dreamland_logic.new_dream("Testi")
+        self.dreamland_logic.new_dream("Testi", "25.04.2025")
         dreams = self.dreamland_logic.get_unachieved_dreams()
 
         self.assertEqual(len(dreams), 1)
         self.assertEqual(dreams[0].content, "Testi")
+        self.assertEqual(dreams[0].due_date, "25.04.2025")
         self.assertEqual(dreams[0].user.username, self.user_testaaja.username)
 
     def test_get_unachieved_dreams(self):
         """Tests that the function returns the correct dreams (unachieved ones)"""
         self.login()
 
-        self.dreamland_logic.new_dream("Testi")
+        self.dreamland_logic.new_dream("Testi", "25.04.2025")
         result = self.dreamland_logic.get_unachieved_dreams()
 
         self.assertEqual(len(result), 1)
@@ -206,7 +207,7 @@ class TestDreamlandLogic(unittest.TestCase):
 
     def test_if_user_not_logged_in_no_dreams_are_returned(self):
         """Tests that get_unachieved_dreams -function doesn't work if user's not logged in"""
-        self.dreamland_logic.new_dream("Testi")
+        self.dreamland_logic.new_dream("Testi", "25.04.2025")
         result = self.dreamland_logic.get_unachieved_dreams()
 
         self.assertEqual(result, [])
@@ -215,7 +216,7 @@ class TestDreamlandLogic(unittest.TestCase):
         """Tests that marking a dream achieved works as it should"""
         self.login()
 
-        self.dreamland_logic.new_dream("Testi")
+        self.dreamland_logic.new_dream("Testi", "25.04.2025")
         result = self.dreamland_logic.get_unachieved_dreams()
         self.dreamland_logic.dream_achieved(result[0].id)
 
@@ -225,7 +226,7 @@ class TestDreamlandLogic(unittest.TestCase):
         """Tests that the adding a new note to the diary works properly"""
         self.login()
 
-        self.dreamland_logic.new_dream("Testi")
+        self.dreamland_logic.new_dream("Testi", "25.04.2025")
         dream = self.dreamland_logic.get_unachieved_dreams()
         result = self.dreamland_logic.new_diary_note(dream[0].id, "Testasin haavetta")
 
@@ -235,7 +236,7 @@ class TestDreamlandLogic(unittest.TestCase):
         """Tests that the get_diary-function returns the correct diary"""
         self.login()
 
-        self.dreamland_logic.new_dream("Testi")
+        self.dreamland_logic.new_dream("Testi", "25.04.2025")
         dream = self.dreamland_logic.get_unachieved_dreams()
         self.dreamland_logic.new_diary_note(dream[0].id, "Testasin haavetta")
         self.dreamland_logic.new_diary_note(dream[0].id, "Toinen muistiinpano")
@@ -247,7 +248,7 @@ class TestDreamlandLogic(unittest.TestCase):
         """Tests that the dream stars are set correctly"""
         self.login()
 
-        self.dreamland_logic.new_dream("Testi")
+        self.dreamland_logic.new_dream("Testi", "25.04.2025")
 
         result = self.dreamland_logic.get_unachieved_dreams()
         self.dreamland_logic.dream_star(result[0].id, 4)
@@ -260,8 +261,8 @@ class TestDreamlandLogic(unittest.TestCase):
         """Tests that deleting a dream actually deletes it"""
         self.login()
 
-        self.dreamland_logic.new_dream("Testi 1")
-        self.dreamland_logic.new_dream("Testi 2")
+        self.dreamland_logic.new_dream("Testi 1", "25.04.2025")
+        self.dreamland_logic.new_dream("Testi 2", "26.04.2025")
 
         result = self.dreamland_logic.get_unachieved_dreams()
 
