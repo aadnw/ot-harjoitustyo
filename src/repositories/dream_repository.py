@@ -157,13 +157,14 @@ class DreamRepository:
                 done = parts[2].strip() == "1"
                 username = parts[3]
                 star = int(parts[4])
+                due_date = parts[5]
 
                 if username:
                     user = user_repository.get_user_by_username(username)
                 else:
                     user = None
 
-                dreams.append(Dream(content, done, user, dream_id, star))
+                dreams.append(Dream(content, done, user, dream_id, star, due_date))
 
         return dreams
 
@@ -180,7 +181,7 @@ class DreamRepository:
                 else:
                     username = ""
 
-                row = f"{dream.id};{dream.content};{done_string};{username};{dream.star}"
+                row = f"{dream.id};{dream.content};{done_string};{username};{dream.star};{dream.due_date}"
 
                 file.write(row+"\n")
 

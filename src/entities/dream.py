@@ -11,9 +11,11 @@ class Dream:
         user: string that describes who is the user that created the dream
         id: integer that describes the id of the dream
         star: integer that describes the importancy of the dream (star rating)
+        due_date: string that describes the due date of the dream
     """
     content: str
     done: bool = False
     user: str = None
     id: int = None
     star: int = 1
+    due_date: str = None

@@ -126,16 +126,17 @@ class DreamlandLogic:
             self._user = user
         return user
 
-    def new_dream(self, content):
+    def new_dream(self, content, due_date):
         """Creates a new dream
         
         Args: 
             content: string that describes the content of the dream to be created
+            due_date: string that describes the due date of the dream to be created
         Returns:
             Created dream as Dream-object
         """
 
-        dream = Dream(content=content, user=self._user)
+        dream = Dream(content=content, user=self._user, due_date=due_date)
         self._dream_repository.create_new_dream(dream)
 
         return dream
