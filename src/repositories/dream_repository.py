@@ -181,7 +181,8 @@ class DreamRepository:
                 else:
                     username = ""
 
-                row = f"{dream.id};{dream.content};{done_string};{username};{dream.star};{dream.due_date}"
+                row = f"""{dream.id};{dream.content};{done_string};{username};
+                          {dream.star};{dream.due_date}"""
 
                 file.write(row+"\n")
 
