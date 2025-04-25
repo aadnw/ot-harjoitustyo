@@ -23,4 +23,5 @@
 | 17.4. | 2h   | Pylint virheiden fixausta |
 | 22.4. | 1h   | Korjasin diary-sivun näkymää enemmän oikeanlaiseksi |
 | 24.4. | 5h   | Docstringien lisäystä, testien kirjoittamista, star rating näkyviin dream-pagelle, alustavan dokumentaation kirjoittaminen |
-| yht.  | 55h  |
+| 25.4. | 3h   | Alustavan käyttöohjeen kirjoittaminen, viikon 6 release, uusien toiminnallisuuksien koodaamista/suunnittelua |
+| yht.  | 58h  |
