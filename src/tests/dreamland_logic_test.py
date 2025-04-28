@@ -53,8 +53,6 @@ class FakeDreamRepositoryForTesting:
                 dream.star = set_star
                 break
 
-
-
 class FakeUserRepositoryForTesting:
     """This is a fake DreamRepository created for testing the dreamland logics"""
 
@@ -84,6 +82,10 @@ class FakeUserRepositoryForTesting:
     def delete_all_users(self):
         """Deletes all users"""
         self.users = []
+
+    def delete_this_user(self, user_id):
+        """Deletes the current user that is logged in"""
+        self.users = list(filter(lambda user: user.user_id != user_id, self.users))
 
 class FakeDiaryRepositoryForTesting:
     """This is a fake DiaryRepository created for testing the dreamland logics"""
@@ -182,6 +184,19 @@ class TestDreamlandLogic(unittest.TestCase):
         """Tests that user can't register with a too short password"""
         self.assertRaises(InvalidCredentialsError,
                           lambda: self.dreamland_logic.create_new_user("testaaja", "sala"))
+
+    def test_delete_user(self):
+        """Tests that deleting a user actually deletes it"""
+        self.login()
+
+        result = self.fake_user_repository.get_all_users()
+
+        self.assertEqual(len(result), 1)
+
+        self.dreamland_logic.delete_user(result[0].user_id)
+        result = self.fake_user_repository.get_all_users()
+
+        self.assertEqual(len(result), 0)
 
     def test_new_dream(self):
         """Tests that adding a new dream works properly"""

@@ -43,3 +43,18 @@ class TestUserRepository(unittest.TestCase):
         result = get_users_by_row(None)
 
         self.assertEqual(result, None)
+
+    def test_delete_this_user(self):
+        """Tests that delete_this_user-function deletes the correct user"""
+        user = user_repository.create_user(self.user_testaaja.username,
+                                    self.user_testaaja.password)
+
+        result = user_repository.get_all_users()
+
+        self.assertEqual(len(result), 1)
+
+        user_repository.delete_this_user(user.user_id)
+
+        result = user_repository.get_all_users()
+
+        self.assertEqual(len(result), 0)
