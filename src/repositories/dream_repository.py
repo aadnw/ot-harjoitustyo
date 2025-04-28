@@ -47,7 +47,6 @@ class DreamRepository:
         for dream in dreams:
             if dream.id == dream_id:
                 return dream
-        return None
 
     def get_dreams_by_username(self, username):
         """Returns all dreams of a specific user (the current user)
