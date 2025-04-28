@@ -35,7 +35,7 @@ class DreamListView:
         self._root = root
         self._dreams = dreams
         self._handle_set_dream_achieved = handle_set_dream_achieved
-        self._handle_dream_view = handle_show_dream_view
+        self._handle_show_dream_view = handle_show_dream_view
         self.form_handler = FormHandler()
 
         self._initialize()
@@ -72,7 +72,7 @@ class DreamListView:
                                       font=("Bookman", 10, "bold"),
                                       bg="#FADCD9", fg="#00044A", padx=10, pady=5, borderwidth=0,
                                       relief=tk.FLAT,
-                                      command=lambda d=dream: self._handle_dream_view(d))
+                                      command=lambda d=dream: self._handle_show_dream_view(d))
         dream_page_button.grid(row=row, column=2, padx=10, pady=5, sticky="e")
 
     def _initialize(self):
@@ -95,20 +95,20 @@ class HomepageView:
     Attributes:
         root: TKinter element inside of which the view will be initialized
         handle_loogut: value that is called when logging out the user
-        handle_dream_view: value that is called when moving to the dream-page
+        handle_show_dream_view: value that is called when moving to the dream-page
     """
 
-    def __init__(self, root, handle_logout, handle_dream_view):
+    def __init__(self, root, handle_logout, handle_show_dream_view):
         """Class taking care of the homepage view and functionalities
     
         Args:
             root: TKinter element inside of which the view will be initialized
             handle_loogut: value that is called when logging out the user
-            handle_dream_view: value that is called when moving to the dream-page
+            handle_show_dream_view: value that is called when moving to the dream-page
         """
         self._root = root
         self._handle_logout = handle_logout
-        self._handle_dream_view = handle_dream_view
+        self._handle_show_dream_view = handle_show_dream_view
         self._add_dream_entry = None
         self.form_handler = FormHandler()
 
@@ -128,13 +128,49 @@ class HomepageView:
         dreamland_logic.logout()
         self._handle_logout()
 
+    def _delete_user_handler(self):
+        """Deletes the current user from the database,
+        asks for confirmation with a popup window first"""
+        popup = tk.Toplevel(self._root, bg="#D0F1FF")
+        popup.title("")
+        popup.geometry("400x150")
+        popup.transient(self._root)
+        popup.grab_set()
+
+        Label(popup, text="Oletko varma, että haluat poistaa käyttäjäsi?", font=("Bookman"),
+              bg="#D0F1FF", fg="#00044A", pady=20).pack()
+
+        def _yes():
+            """Function that is called when user confirms to delete their user credentials,
+            moves user back to login page after"""
+            user = dreamland_logic.get_user()
+            dreamland_logic.delete_user(user.user_id)
+            self._logout_handler()
+            popup.destroy()
+
+        def _no():
+            """Function that is called when user doesn't confirm to delete their user credentials,
+            removes the popup window from the view and doesn't delete the user's credentials"""
+            popup.destroy()
+
+        button_frame = tk.Frame(popup, bg="#D0F1FF")
+        button_frame.pack(pady=10)
+
+        yes_button = tk.Button(button_frame, text="Kyllä", font=("Bookman"),
+                               bg="#FADCD9", fg="#00044A", width=10, command=_yes)
+        yes_button.grid(row=0, column=0, padx=5)
+
+        no_button = tk.Button(button_frame, text="Ei", font=("Bookman"),
+                              bg="#FADCD9", fg="#00044A", width=10, command=_no)
+        no_button.grid(row=0, column=1, padx=5)
+
     def _dream_view_handler(self, dream):
         """Shows the dream page
         Args:
             dream: Dream-object that tells which dream's page should be opened
         """
 
-        self._handle_dream_view(dream)
+        self._handle_show_dream_view(dream)
 
     def _handle_set_dream_achieved(self, dream_id):
         """Marks dream as achieved and removes it from the view
@@ -159,7 +195,7 @@ class HomepageView:
 
         self.form_handler.dream_list_view = DreamListView(
             self.form_handler.dream_list_frame, dreams, self._handle_set_dream_achieved,
-            self._handle_dream_view)
+            self._handle_show_dream_view)
 
         self.form_handler.dream_list_view.frame.grid(
             row=1, column=0, columnspan=2, sticky="nsew", padx=20, pady=20)
@@ -237,11 +273,20 @@ class HomepageView:
         self._initialize_dream_list()
         self._root.update_idletasks()
 
-        logout_button = tk.Button(content_frame, text="Kirjaudu ulos",
-                                  font=("Bookman", 12), bg="#FADCD9", fg="#00044A",
+        button_frame = tk.Frame(content_frame, bg="#D0F1FF")
+        button_frame.grid(row=3, column=0, columnspan=2, pady=10, sticky="w")
+
+        logout_button = tk.Button(button_frame, text="Kirjaudu ulos",
+                                  font=("Bookman", 12, "bold"), bg="#FADCD9", fg="#00044A",
                                   padx=20, pady=5, borderwidth=0, relief=tk.FLAT,
                                   command=self._logout_handler)
-        logout_button.grid(row=3, column=0, pady=(30, 0), sticky="w")
+        logout_button.pack(side="left", padx=(0, 10))
+
+        delete_user_button = tk.Button(button_frame, text="Poista käyttäjä",
+                                       font=("Bookman", 12, "bold"), bg="#FADCD9", fg="#00044A",
+                                       padx=20, pady=5, borderwidth=0, relief=tk.FLAT,
+                                       command=self._delete_user_handler)
+        delete_user_button.pack(side="left")
 
         self.form_handler.frame.grid_columnconfigure(0, weight=1)
         self.form_handler.frame.grid_columnconfigure(1, weight=1)
