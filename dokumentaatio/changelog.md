@@ -32,4 +32,4 @@ Lisätty
 ## Viikko 6
 - Käyttäjä voi asettaa tähtiä haaveelle merkitsemään sen tärkeyttä
 - Käyttäjä voi poistaa haaveen
-- Lisätty FormHandler-luokka, jonka kautta View-luokat saavat käyttöönsä attribuutteja ja argumentteja 
+- Lisätty FormHandler-luokka, jonka kautta View-luokat saavat käyttöönsä attribuutteja ja argumentteja
