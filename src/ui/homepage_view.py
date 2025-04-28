@@ -214,10 +214,13 @@ class HomepageView:
                                              date_pattern="dd.mm.yyyy", mindate=datetime.today(),
                                              background="#D0F1FF", foreground="#00044A",
                                              selectbackground="#FC2D7D", selectforeground="00044A",
-                                             bordercolor="#FC2D7D", headersbackground="#D0F1FF", headersforeground="#00044A",
+                                             bordercolor="#FC2D7D", headersbackground="#D0F1FF",
+                                             headersforeground="#00044A",
                                              normalbackground="#FADCD9", normalforeground="#00044A",
-                                             weekendbackground="#EC838C", weekendforeground="#00044A",
-                                             othermonthbackground="#D0F1FF", othermonthforeground="#00044A"
+                                             weekendbackground="#EC838C",
+                                             weekendforeground="#00044A",
+                                             othermonthbackground="#D0F1FF",
+                                             othermonthforeground="#00044A"
                                              )
         self._add_due_date_entry.grid(row=1, column=1, padx=10, pady=10, sticky="w")
 
