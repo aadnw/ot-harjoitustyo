@@ -126,6 +126,15 @@ class DreamlandLogic:
             self._user = user
         return user
 
+    def delete_user(self, user_id):
+        """Deletes the user that is logged in
+        
+        Args:
+            user_id: integer that describes the id of the user that is to be deleted
+        """
+
+        self._user_repository.delete_this_user(user_id)
+
     def new_dream(self, content, due_date):
         """Creates a new dream
         

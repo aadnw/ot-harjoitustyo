@@ -78,6 +78,17 @@ class UserRepository:
 
         return User(username, password, user_id=user_id)
 
+    def delete_this_user(self, user_id):
+        """Deletes a user from the database
+        
+        Args:
+            user_id: integer that describes the id of the user that is to be deleted
+        """
+
+        cursor = self._connection.cursor()
+        cursor.execute("DELETE FROM users WHERE id = ?", (user_id,))
+        self._connection.commit()
+
     def delete_all_users(self):
         """Deletes all users from the database table"""
         cursor = self._connection.cursor()
