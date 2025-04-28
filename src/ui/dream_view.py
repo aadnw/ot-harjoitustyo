@@ -137,7 +137,8 @@ class DreamView:
             self._root.update_idletasks()
 
     def _delete_handler(self):
-        """Deletes a dream from the dream list and database"""
+        """Deletes a dream from the dream list and database,
+        asks for confirmation first with a popup window"""
         popup = tk.Toplevel(self._root, bg="#D0F1FF")
         popup.title("")
         popup.geometry("400x150")
@@ -148,11 +149,15 @@ class DreamView:
               bg="#D0F1FF", fg="#00044A", pady=20).pack()
 
         def _yes():
+            """Function that is called when user confirms to delete a dream,
+            moves user back to homepage after"""
             dreamland_logic.delete_dream(self._dream.id)
             self._handle_show_homepage_view()
             popup.destroy()
 
         def _no():
+            """Function that is called when user doesn't confirm to delete a dream,
+            removes the popup window from the view and doesn't delete the dream"""
             popup.destroy()
 
         button_frame = tk.Frame(popup, bg="#D0F1FF")
