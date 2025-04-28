@@ -30,6 +30,7 @@ class TestDreamRepository(unittest.TestCase):
 
     def test_get_dream_by_id(self):
         """Tests that get_dream_by_id-function returns the correct dream"""
+        dream_repository.create_new_dream(self.dream_2)
         dream = dream_repository.create_new_dream(self.dream_1)
 
         result = dream_repository.get_dream_by_id(dream.id)
@@ -56,7 +57,8 @@ class TestDreamRepository(unittest.TestCase):
 
     def test_set_dream_achieved(self):
         """Tests that setting a dream as achieved works as it should"""
-        dream = dream_repository.create_new_dream(self.dream_2)
+        dream = dream_repository.create_new_dream(self.dream_1)
+        dream_repository.create_new_dream(self.dream_2)
 
         self.assertEqual(dream.done, False)
 
@@ -67,6 +69,7 @@ class TestDreamRepository(unittest.TestCase):
     def test_set_dream_star(self):
         """Tests that changing the star rating of a dream works properly"""
         dream = dream_repository.create_new_dream(self.dream_1)
+        dream_repository.create_new_dream(self.dream_2)
 
         self.assertEqual(dream.star, 1)
 
