@@ -94,7 +94,7 @@ class DreamlandLogic:
             username: string that describes the new username
             password: string that describes the new password
             login: optional boolean value that is assumed as True, tells whether the registration
-            succeeded or not (does the new user get logged in or not)
+            succeeded (True) or not (False), (does the new user get logged in or not)
 
         Raises:
             UsernameTakenError: error that occurs when the username is already in use by another
@@ -110,13 +110,16 @@ class DreamlandLogic:
         username_exists = self._user_repository.get_user_by_username(username)
 
         if username_exists:
+            login = False
             raise UsernameTakenError("Tämä käyttäjänimi on jo käytetty")
 
         if len(username) < 3 or len(username) > 20:
+            login = False
             raise InvalidCredentialsError(
                 "Käyttäjänimen tulee olla 3-20 merkkiä")
 
         if len(password) < 5:
+            login = False
             raise InvalidCredentialsError(
                 "Salasanan tulee olla vähintään 5 merkkiä")
 
