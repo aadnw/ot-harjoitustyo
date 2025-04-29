@@ -57,6 +57,24 @@ class UserRepository:
             return get_users_by_row(row)
         return None
 
+    def get_user_by_id(self, user_id):
+        """Returns a specific user (current user)
+        
+        Args:
+            user_id: integer that describes the wanted user's id
+        Returns:
+            User-object if it exists in the database. Otherwise None
+        """
+
+        cursor = self._connection.cursor()
+
+        cursor.execute("SELECT * FROM users WHERE id = ?", (user_id,))
+        row = cursor.fetchone()
+
+        if row:
+            return get_users_by_row(row)
+        return None
+
     def create_user(self, username, password):
         """Adds a new user into the database table
         
