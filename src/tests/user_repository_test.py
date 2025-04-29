@@ -73,4 +73,3 @@ class TestUserRepository(unittest.TestCase):
         result = user_repository.get_all_users()
 
         self.assertEqual(len(result), 0)
-

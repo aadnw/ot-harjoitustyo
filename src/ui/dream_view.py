@@ -260,14 +260,8 @@ class DreamView:
                                   command=self._delete_handler)
         delete_button.grid(row=2, column=2, sticky="e", padx=10)
 
-        self._root.grid_rowconfigure(0, weight=1)
-        self._root.grid_columnconfigure(0, weight=1)
-
         self.form_handler.frame.grid_columnconfigure(0, weight=1)
         self.form_handler.frame.grid_columnconfigure(1, weight=1)
-
-        top_frame.grid_columnconfigure(0, weight=1)
-        top_frame.grid_columnconfigure(1, weight=1)
 
         diary_frame.grid_rowconfigure(1, weight=1)
         diary_frame.grid_columnconfigure(0, weight=1)

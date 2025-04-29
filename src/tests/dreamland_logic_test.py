@@ -47,7 +47,8 @@ class FakeDreamRepositoryForTesting:
 
     def delete_all_users_dreams(self, username):
         """Deletes all user's dreams"""
-        deleted_dreams = filter(lambda dream: dream.user and dream.user.username != username, self.dreams)
+        deleted_dreams = filter(lambda dream: dream.user and dream.user.username != username,
+                                self.dreams)
         self.dreams = deleted_dreams
 
     def set_dream_star(self, dream_id, set_star):
@@ -75,7 +76,7 @@ class FakeUserRepositoryForTesting:
         if len(matches) > 0:
             return matches[0]
         return None
-    
+
     def get_user_by_id(self, user_id):
         """Returns user with a specific id"""
         matches = list(

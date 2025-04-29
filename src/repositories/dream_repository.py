@@ -139,7 +139,7 @@ class DreamRepository:
         """
 
         dreams = self.get_all_dreams()
-        delete_users_dreams = list(filter(lambda dream: dream.user and 
+        delete_users_dreams = list(filter(lambda dream: dream.user and
                                           dream.user.username != username, dreams))
         self._write(delete_users_dreams)
 
