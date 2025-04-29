@@ -31,5 +31,8 @@ Lisätty
 
 ## Viikko 6
 - Käyttäjä voi asettaa tähtiä haaveelle merkitsemään sen tärkeyttä
-- Käyttäjä voi poistaa haaveen
+- Käyttäjä voi poistaa haaveen, jolloin haave ja siihen liittyvä päiväkirja poistuu kokonaan
+- Käyttäjä voi poistaa käyttäjätunnuksensa, jolloin käyttäjä, sen haaveet sekä niihin liittyvät päiväkirjat poistuvat kokonaan
+- Käyttäjä voi järjestää haaveensa etusivulla seuraavilla tavoilla: tärkein ensin, aikaraja ensin, uusin ensin, vanhin ensin
+- Käyttäjän tulee vahvistaa käyttäjätunnusten tai haaveen poistaminen uudesta ikkunasta
 - Lisätty FormHandler-luokka, jonka kautta View-luokat saavat käyttöönsä attribuutteja ja argumentteja
