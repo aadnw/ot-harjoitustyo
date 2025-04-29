@@ -8,7 +8,6 @@ Haavemaa -sovelluksessa toteutat suurimmatkin haaveesi ja tavoitteesi! Rekister�
 - [Arkkitehtuuri](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 - [Käyttöohje](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
 - [Vko 5 Release](https://github.com/aadnw/ot-harjoitustyo/releases/tag/viikko5)
-- [Vko 6 Release](https://github.com/aadnw/ot-harjoitustyo/releases/tag/viikko6)
 
 ## Sovelluksen asennusohje
 1. Kloonaa tämä repositorio omalle koneellesi ja siirry sen juurihakemistoon.
