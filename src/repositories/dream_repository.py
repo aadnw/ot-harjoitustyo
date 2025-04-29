@@ -131,6 +131,18 @@ class DreamRepository:
 
         self._write(dream_deleted)
 
+    def delete_all_users_dreams(self, username):
+        """Deletes all dreams of the given user (done when user deletes their user credentials)
+        
+        Args:
+            username: string that describes the user whose dreams are to be deleted
+        """
+
+        dreams = self.get_all_dreams()
+        delete_users_dreams = list(filter(lambda dream: dream.user and 
+                                          dream.user.username != username, dreams))
+        self._write(delete_users_dreams)
+
     def delete_all_dreams(self):
         """Deletes all dreams"""
         self._write([])
