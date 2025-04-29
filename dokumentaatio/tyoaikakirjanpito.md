@@ -25,4 +25,5 @@
 | 24.4. | 5h   | Docstringien lisäystä, testien kirjoittamista, star rating näkyviin dream-pagelle, alustavan dokumentaation kirjoittaminen |
 | 25.4. | 3h   | Alustavan käyttöohjeen kirjoittaminen, viikon 6 release, uusien toiminnallisuuksien koodaamista/suunnittelua |
 | 28.4. | 5h   | Issuessa mainittujen kehityskohtien toteutus, Ui siistimmäksi, uusien toiminnallisuuksien koodaaminen ja testaaminen: haaveen poiston varmistus, käyttäjätunnuksien poistaminen |
-| yht.  | 63h  |
+| 29.4. | 6h   | Uusien toiminnallisuuksien koodaamista ja testaamista, Ui parannuksia, alustavan käyttöohjeen uusiminen, releasen uusiminen |
+| yht.  | 69h  |
