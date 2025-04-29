@@ -140,6 +140,7 @@ class DreamlandLogic:
 
         if user:
             self._dream_repository.delete_all_users_dreams(user.username)
+            self._diary_repository.delete_users_diary(user_id)
             self._user_repository.delete_this_user(user_id)
 
     def new_dream(self, content, due_date):
@@ -193,12 +194,13 @@ class DreamlandLogic:
         self._dream_repository.set_dream_star(dream_id, set_star)
 
     def delete_dream(self, dream_id):
-        """Deletes a certain dream
+        """Deletes a certain dream and the diary related to it
         
         Args:
             dream_id: integer that describes the id of the dream to be deleted
         """
 
+        self._diary_repository.delete_dream_diary(dream_id)
         self._dream_repository.delete_this_dream(dream_id)
 
     def get_dream_diary(self, dream_id):
@@ -227,7 +229,8 @@ class DreamlandLogic:
 
         dream_id = int(dream_id)
         note = Diary(content=content)
-        self._diary_repository.add_diary_note(dream_id, note.content)
+        user = self.get_user()
+        self._diary_repository.add_diary_note(dream_id, user.user_id, note.content)
         return note
 
 
