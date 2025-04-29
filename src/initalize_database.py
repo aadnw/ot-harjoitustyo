@@ -27,9 +27,11 @@ def create_tables(connection):
         create table diary (
                    id integer primary key autoincrement,
                    dream_id integer,
+                   user_id integer,
                    content text,
                    created_at timestamp default current_timestamp,
-                   foreign key (dream_id) references dreams (id) on delete cascade
+                   foreign key (dream_id) references dreams (id) on delete cascade,
+                   foreign key (user_id) references users (id) on delete cascade
         )''')
     connection.commit()
 
