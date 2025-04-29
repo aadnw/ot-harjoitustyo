@@ -99,3 +99,21 @@ class TestDreamRepository(unittest.TestCase):
         result = dream_repository.get_all_dreams()
 
         self.assertEqual(len(result), 1)
+
+    def test_delete_all_users_dreams(self):
+        """Tests that deleting all given user's dreams get deleted properly"""
+        testaaja = user_repository.create_user(self.user_testaaja.username,
+                                               self.user_testaaja.password)
+        kukka = user_repository.create_user(self.user_kukka.username,
+                                               self.user_kukka.password)
+        dream_repository.create_new_dream(
+            Dream(content="Haave 1", user=testaaja))
+        dream_repository.create_new_dream(
+            Dream(content="Haave 2", user=kukka))
+
+        dream_repository.delete_all_users_dreams(testaaja.username)
+
+        result = dream_repository.get_all_dreams()
+
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0].content, "Haave 2")

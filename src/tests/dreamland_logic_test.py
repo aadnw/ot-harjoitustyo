@@ -45,6 +45,10 @@ class FakeDreamRepositoryForTesting:
         dream_deleted = filter(lambda dream: dream.id != dream_id, self.dreams)
         self.dreams = dream_deleted
 
+    def delete_all_users_dreams(self, username):
+        """Deletes all user's dreams"""
+        deleted_dreams = filter(lambda dream: dream.user and dream.user.username != username, self.dreams)
+        self.dreams = deleted_dreams
 
     def set_dream_star(self, dream_id, set_star):
         """Sets the star value for a dream"""
@@ -67,6 +71,15 @@ class FakeUserRepositoryForTesting:
         """Returns user with a specific username"""
         matches = list(
             filter(lambda user: user.username == username, self.users))
+
+        if len(matches) > 0:
+            return matches[0]
+        return None
+    
+    def get_user_by_id(self, user_id):
+        """Returns user with a specific id"""
+        matches = list(
+            filter(lambda user: user.user_id == user_id, self.users))
 
         if len(matches) > 0:
             return matches[0]
@@ -97,12 +110,23 @@ class FakeDiaryRepositoryForTesting:
         """Returns all diary notes related to a dream"""
         return list(note for note in self.diary if note.dream_id == dream_id)
 
-    def add_diary_note(self, dream_id, note):
+    def add_diary_note(self, dream_id, user_id, note):
         """"Adds a new note to the diary"""
-        note = Diary(content=note, dream_id=dream_id)
+        note = Diary(dream_id=dream_id, user_id=user_id, content=note)
         self.diary.append(note)
         return note
 
+    def delete_users_diary(self, user_id):
+        """Deletes the given user's diary notes"""
+        for note in self.diary:
+            if note.user_id != user_id:
+                self.diary.append(note)
+
+    def delete_dream_diary(self, dream_id):
+        """Deletes a dream's diary"""
+        for note in self.diary:
+            if note.dream_id != dream_id:
+                self.diary.append(note)
 
 
 class TestDreamlandLogic(unittest.TestCase):
