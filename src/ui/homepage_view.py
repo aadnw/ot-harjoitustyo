@@ -61,19 +61,44 @@ class DreamListView:
             "Bookman", 12), fg="#220066", bg="#D0F1FF")
         label.grid(row=row, column=0, padx=5, pady=5, sticky="w")
 
-        achieved_button = tk.Button(self.form_handler.frame, text="Saavutettu",
-                                    font=("Bookman", 10, "bold"),
-                                    bg="#FADCD9", fg="#00044A", padx=10, pady=5, borderwidth=0,
-                                    relief=tk.FLAT, command=lambda dream=dream:
-                                    self._handle_set_dream_achieved(dream.id))
-        achieved_button.grid(row=row, column=1, padx=10, pady=5, sticky="e")
-
         dream_page_button = tk.Button(self.form_handler.frame, text="Edistyminen",
                                       font=("Bookman", 10, "bold"),
-                                      bg="#FADCD9", fg="#00044A", padx=10, pady=5, borderwidth=0,
+                                      bg="#FBBFCA", fg="#00044A", padx=10, pady=5, borderwidth=0,
                                       relief=tk.FLAT,
                                       command=lambda d=dream: self._handle_show_dream_view(d))
-        dream_page_button.grid(row=row, column=2, padx=10, pady=5, sticky="e")
+        dream_page_button.grid(row=row, column=1, padx=10, pady=5, sticky="e")
+
+        achieved_button = tk.Button(self.form_handler.frame, text="Saavutettu",
+                                    font=("Bookman", 10, "bold"),
+                                    bg="#E2F89C", fg="#00044A", padx=10, pady=5, borderwidth=0,
+                                    relief=tk.FLAT, command=lambda dream=dream:
+                                    self._handle_set_dream_achieved(dream.id))
+        achieved_button.grid(row=row, column=2, padx=10, pady=5, sticky="e")
+
+    def _dream_order(self, order):
+        """Function that puts the dreams into the given order
+        
+        Args:
+            order: string that describes the order for the dreams
+        """
+
+        if order == "Tärkeimmät ensin":
+            self._dreams.sort(key=lambda d: d.star, reverse=True)
+        if order == "Tavoiteaika ensin":
+            self._dreams.sort(key=lambda d: datetime.strptime(d.due_date, "%d.%m.%Y"))
+        if order == "Uusin ensin":
+            self._dreams.sort(key=lambda d: d.id, reverse=True)
+        if order == "Vanhin ensin":
+            self._dreams.sort(key=lambda d: d.id)
+
+        for widget in self.form_handler.frame.winfo_children():
+            info = widget.grid_info()
+            if info.get("row") != 0:
+                widget.destroy()
+
+        for r, dream in enumerate(self._dreams, start=1):
+            self._initialize_dream_item(dream, row=r)
+
 
     def _initialize(self):
         """Initializes the dream list to be shown on the homepage"""
@@ -83,6 +108,18 @@ class DreamListView:
         Label(self.form_handler.frame, text="Haaveet ja tavoitteet:", font=("Bookman", 14, "bold"),
               fg="#00044A", bg="#D0F1FF").grid(row=0, column=0, columnspan=2, sticky="nw",
                                                padx=5, pady=(5, 0))
+
+        self.combo_var = tk.StringVar(value="Järjestä")
+
+        self.combo = tk.OptionMenu(self.form_handler.frame, self.combo_var,
+                                  "Tärkeimmät ensin", "Tavoiteaika ensin", "Uusin ensin",
+                                  "Vanhin ensin", command=self._dream_order)
+
+        self.combo.config(font=("Bookman", 10), bg="#FADCD9", fg="#00044A", padx=10, pady=5)
+        menu = self.combo["menu"]
+        menu.config(bg="#FADCD9", fg="#00044A", activebackground="#D0F1FF",
+                    activeforeground="#00044A")
+        self.combo.grid(row=0, column=2, sticky="ne", padx=5, pady=(5, 0))
 
         dreams = dreamland_logic.get_unachieved_dreams()
         for r, dream in enumerate(dreams, start=1):
