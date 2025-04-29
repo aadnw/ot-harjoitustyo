@@ -8,6 +8,8 @@ class Diary:
     Attributes:
         content: string that describes the diary note
         dream_id: integer that is the dream id the diary note is related to
+        user_id: integer that is the user's id who created the diary note
     """
     content: str
     dream_id: int = None
+    user_id: int = None
