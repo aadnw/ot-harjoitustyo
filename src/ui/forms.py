@@ -19,7 +19,7 @@ class FormHandler:
             self.frame.destroy()
 
     def show_frame(self):
-        """Expose _frame via getter"""
+        """Expose frame"""
         return self.frame
 
     def set_buttons_for_confirmation(self, tk, popup, _yes, _no):
