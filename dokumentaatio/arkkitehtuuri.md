@@ -32,10 +32,12 @@ Luokat __User__, __Dream__ ja __Diary__ kuvaavat käyttäjiä, heidän haaveitaa
           user
           id
           star
+          due_date
       }
       class Diary{
           content
           dream_id
+          user_id
       }
 ```
 
@@ -50,10 +52,10 @@ Pakkauksen __repositories__ luokat vastaavat siis tietojen pysyväistallennukses
 Sovellus tallentaa käytättäjien, haaveiden ja päiväkirjamerkintöjen tiedot erillisiin tiedostoihin, jotka on määritelty sovelluksen juuressa __.env__-tiedostossa.
 Sovellus tallentaa haaveet CSV-tieodostoon seruaavalla tavalla:
 ```
-1; Juo 3l vettä päivittäin; 0; testaaja; 1
-2; Nuku vähintään 8h joka yö; 1; testaaja; 5
+1; Juo 3l vettä päivittäin; 0; testaaja; 1; 30.06.2025
+2; Nuku vähintään 8h joka yö; 1; testaaja; 5; 31.12.2025
 ```
-Eli tavoitteen/haaveen id, tavoite/haave, saavutettu (0 = ei, 1 = kyllä), käyttäjänimi, tähdet (1 = ei tärkeä, 5 = ykkös prioriteetti). Kenttien arvot erotetaan puolipisteellä ;
+Eli tavoitteen/haaveen id, tavoite/haave, saavutettu (0 = ei, 1 = kyllä), käyttäjänimi, tähdet (1 = ei tärkeä, 5 = ykkös prioriteetti), aikaraja haaveen tavoittamiselle. Kenttien arvot erotetaan puolipisteellä ;
 
 Sovellus tallentaa käyttäjät ja päiväkirjamerkinnät SQLite-tietokantatauluihin __users__ ja __diary__ , jotka alustetaan __initialize_database.py__-tiedostossa.
 
@@ -61,7 +63,7 @@ Sovellus tallentaa käyttäjät ja päiväkirjamerkinnät SQLite-tietokantataulu
 Alla kuvataan sovelluksen kannalta oleellisimpia toiminnallisuuksia sekvenssikaavioina:
 
 ### Sisäänkirjautuminen:
-Kun kirjautumissivun kenttiin kirjoitetaan käyttäjänimi ja salasana, jonka jälkeen painetaan "Kirjaud sisään" nappia, etenee sovellus alla olevan kuvan tavalla:
+Kun kirjautumissivun kenttiin kirjoitetaan käyttäjänimi ja salasana, jonka jälkeen painetaan "Kirjaudu sisään" nappia, etenee sovellus alla olevan kuvan tavalla:
 ![login](https://github.com/user-attachments/assets/c8ba098d-7180-41e1-aab9-974dcf7e71d1)
 
 Tapahtumakäsittelijä kutsuu sovelluslogiikan metodia __login__, antaen sille parametriksi käyttäjänimen ja salasanan. Sovelluslogiikka selvittää __UserRepository__:n avulla onnistuuko kirjautuminen. Kirjautuminen epäonnistuu jos käyttäjää ei ole olemassa tai tunnukset eivät täsmää olemassaolevaan käyttäjään. Kirjautumisen onnistuessa käyttöliittymä vaihtaa näkymäksi kotisivun, jossa näkyy kirjautuneen käyttäjän haaveet.
