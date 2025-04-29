@@ -190,10 +190,10 @@ class DreamView:
         diary_frame.grid(row=0, column=0, sticky="nsew", padx=30, pady=10)
 
         Label(diary_frame, text=self._dream.content, font=("Bookman", 20, "bold"),
-                         fg="#220066", bg="#D0F1FF").pack(anchor="w", pady=(0, 20))
+                         fg="#220066", bg="#D0F1FF").grid(row=0, column=0, sticky="w", pady=(0, 20))
 
         self._diary_list_frame = tk.Frame(diary_frame, bg="#D0F1FF")
-        self._diary_list_frame.pack(anchor="w")
+        self._diary_list_frame.grid(row=1, column=0, sticky="nsew")
 
         self._initialize_diary_list()
         self._root.update_idletasks()
@@ -204,7 +204,7 @@ class DreamView:
         days_left = (datetime.strptime(self._dream.due_date, "%d.%m.%Y") - datetime.today()).days
 
         days_frame = tk.Frame(info_frame, bg="#D0F1FF")
-        days_frame.pack(pady=(10, 10))
+        days_frame.grid(row=0, column=0, pady=(10, 10), sticky="e")
 
         if days_left < 0:
             due_date_text_label = Label(days_frame, text="Tavoiteaika on ylittynyt",
@@ -222,7 +222,7 @@ class DreamView:
         self._star_label = Label(info_frame, text=f"Tärkeys: {'★' * int(self._star_value)}/5",
                                  font=("Bookman", 14, "bold"),
                                  bg="#D0F1FF", fg="#00044A")
-        self._star_label.pack(pady=(0, 10))
+        self._star_label.grid(row=1, column=0, pady=(0, 10), sticky="e")
 
         self.combo_var = tk.StringVar(value=str(self._star_value))
 
@@ -233,7 +233,7 @@ class DreamView:
         menu = self.combo["menu"]
         menu.config(bg="#FADCD9", fg="#00044A", activebackground="#D0F1FF",
                     activeforeground="#00044A")
-        self.combo.pack()
+        self.combo.grid(row=2, column=0, sticky="e")
 
         Label(bottom_frame, text="Mitä tein päästäkseni lähemmäs tavoitettani?",
               font=("Bookman", 12, "bold"),
@@ -265,3 +265,11 @@ class DreamView:
 
         self.form_handler.frame.grid_columnconfigure(0, weight=1)
         self.form_handler.frame.grid_columnconfigure(1, weight=1)
+
+        top_frame.grid_columnconfigure(0, weight=1)
+        top_frame.grid_columnconfigure(1, weight=1)
+
+        diary_frame.grid_rowconfigure(1, weight=1)
+        diary_frame.grid_columnconfigure(0, weight=1)
+
+        info_frame.grid_columnconfigure(0, weight=1)
