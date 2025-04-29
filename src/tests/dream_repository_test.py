@@ -37,6 +37,15 @@ class TestDreamRepository(unittest.TestCase):
 
         self.assertEqual(result.content, "Haave 1")
 
+    def test_get_dream_by_id_returns_none_if_id_doesnt_match_a_dream(self):
+        """Tests that get_dream_by_id-function returns None if there's no matches"""
+        dream_repository.create_new_dream(self.dream_1)
+        dream_repository.create_new_dream(self.dream_2)
+
+        result = dream_repository.get_dream_by_id(5)
+
+        self.assertEqual(result, None)
+
     def test_get_dreams_by_username(self):
         """Tests that get_dreams_by_username returns the correct dreams"""
         testaaja = user_repository.create_user(self.user_testaaja.username,
