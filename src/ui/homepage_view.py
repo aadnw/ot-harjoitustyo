@@ -169,7 +169,7 @@ class HomepageView:
         """Deletes the current user from the database,
         asks for confirmation with a popup window first"""
         popup = tk.Toplevel(self._root, bg="#D0F1FF")
-        popup.title("")
+        popup.title("Poista käyttäjätunnukset")
         popup.geometry("400x150")
         popup.transient(self._root)
         popup.grab_set()
@@ -190,16 +190,7 @@ class HomepageView:
             removes the popup window from the view and doesn't delete the user's credentials"""
             popup.destroy()
 
-        button_frame = tk.Frame(popup, bg="#D0F1FF")
-        button_frame.pack(pady=10)
-
-        yes_button = tk.Button(button_frame, text="Kyllä", font=("Bookman"),
-                               bg="#FADCD9", fg="#00044A", width=10, command=_yes)
-        yes_button.grid(row=0, column=0, padx=5)
-
-        no_button = tk.Button(button_frame, text="Ei", font=("Bookman"),
-                              bg="#FADCD9", fg="#00044A", width=10, command=_no)
-        no_button.grid(row=0, column=1, padx=5)
+        self.form_handler.set_buttons_for_confirmation(tk, popup, _yes, _no)
 
     def _dream_view_handler(self, dream):
         """Shows the dream page
