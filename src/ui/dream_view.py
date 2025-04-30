@@ -208,7 +208,7 @@ class DreamView:
 
         if days_left < 0:
             due_date_text_label = Label(days_frame, text="Tavoiteaika on ylittynyt",
-                               font=("Bookman", 18, "bold"), bg="#D0F1FF", fg="#00044A")
+                               font=("Bookman", 18, "bold"), bg="#D0F1FF", fg="#7077FF")
             due_date_text_label.pack(side="left")
         else:
             due_date_number_label = Label(days_frame, text=f"{days_left}",
