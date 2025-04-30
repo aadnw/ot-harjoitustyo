@@ -15,7 +15,7 @@
 
 ## Kirjautuminen
 Sovelluksen käynnistyessä avautuu kirjautumissivu. Kirjaudu sisään syöttämällä tekstikenttiin olemassaoleva käyttäjätunnus ja salasana, sekä painamalla sen jälkeen "Kirjaudu sisään" -nappia.
-![Kirjautumissivu](https://github.com/user-attachments/assets/a10f0988-d2a9-4cbb-bb56-b1ea806871ed)
+![Kotisivu](https://github.com/user-attachments/assets/fd4fa633-b548-4d14-ae01-3c9f42cc3eff)
 
 ## Uuden käyttäjän luominen/rekisteröityminen
 Painamalla kirjautumissivulla olevaa "Rekisteröidy tästä" -nappia akueaa rekisteröitymissivu, jossa voi luoda uuden käyttäjätunnuksen syöttämällä tekstikenttiin uniikki 3-20 merkkiä pitkä käyttäjänimi sekä vähintään 5 merkkiä pitkä salasana.
