@@ -63,7 +63,58 @@ Sovellus tallentaa käyttäjät ja päiväkirjamerkinnät SQLite-tietokantataulu
 Alla kuvataan sovelluksen kannalta oleellisimpia toiminnallisuuksia sekvenssikaavioina:
 
 ### Sisäänkirjautuminen:
-Kun kirjautumissivun kenttiin kirjoitetaan käyttäjänimi ja salasana, jonka jälkeen painetaan "Kirjaudu sisään" nappia, etenee sovellus alla olevan kuvan tavalla:
-![login](https://github.com/user-attachments/assets/c8ba098d-7180-41e1-aab9-974dcf7e71d1)
-
+Kun kirjautumissivun kenttiin kirjoitetaan käyttäjänimi ja salasana, jonka jälkeen painetaan "Kirjaudu sisään" -nappia, etenee sovellus alla olevan kuvan tavalla:
+```mermaid
+sequenceDiagram
+    actor User
+    participant UI
+    participant DreamlandLogic
+    participant UserRepository
+    User->>UI: click "Kirjaudu sisään" button
+    UI->>DreamlandLogic: login("testaaja", "testi123")
+    DreamlandLogic->>UserRepository: get_user_by_username("testaaja")
+    UserRepository-->>DreamlandLogic: user
+    DreamlandLogic-->>UI: user
+    UI->UI: show_homepage_view()
+```
 Tapahtumakäsittelijä kutsuu sovelluslogiikan metodia __login__, antaen sille parametriksi käyttäjänimen ja salasanan. Sovelluslogiikka selvittää __UserRepository__:n avulla onnistuuko kirjautuminen. Kirjautuminen epäonnistuu jos käyttäjää ei ole olemassa tai tunnukset eivät täsmää olemassaolevaan käyttäjään. Kirjautumisen onnistuessa käyttöliittymä vaihtaa näkymäksi kotisivun, jossa näkyy kirjautuneen käyttäjän haaveet.
+
+## Rekisteröityminen
+Kun rekisteröitymissivun kenttiin kirjoitetaan uniikki ja 3-20 merkkiä pitkä käyttäjänimi sekä vähintään 5 merkkiä pitkä salasana, jonka jälkeen painetaan "Luo käyttäjä" -nappia, etenee sovellus alla olevan kuvan tavalla:
+```mermaid
+sequenceDiagram
+    actor User
+    participant UI
+    participant DreamlandLogic
+    participant UserRepository
+    participant kayttaja
+    User->>UI: click "Luo käyttäjä" button
+    UI->>DreamlandLogic: create_new_user("kayttaja", "kayttis1")
+    DreamlandLogic->>UserRepository: get_user_by_username("kayttaja")
+    UserRepository-->>DreamlandLogic: None
+    DreamlandLogic->>UserRepository: create_user("kayttaja", "kayttis")
+    UserRepository->>kayttaja: User("kayttaja", "kayttis", 2)
+    UserRepository-->>DreamlandLogic: user
+    DreamlandLogic-->>UI: user
+    UI->UI: show_homepage_view()
+```
+Tapahtumakäsittelijä kutsuu sovelluslogiikan metodia __create_new_user__, antaen sille parametriksi käyttäjänimen ja salasanan. Sovelluslogiikka selvittää __UserRepository__:n avulla, onko käyttäjänimi jo käytössä. Jos on, tulee siitä virheilmoitus. Kun käyttäjä on valinnut käyttäjänimen, joka ei ole vielä käytössä, sovelluslogiikka kutsuu __UserRepository__:n metodia __create_user__ antaen sille parametsiksi uudet käyttäjätunnukset, joka puolestaan luo uuden User-olion ja tallentaa sen tietokantaan. Onnistuneesta rekisteröitymisestä seuraa, että uusi käyttäjä kirjataan sisään ja näkymä vaihtuu kotisivuksi.
+    
+## Haaveen lisääminen
+Kun kotisivun kenttään "Lisää tavoite" kirjoitetaan uusi tavoite/haave, sekä asetetaan tavoiteaika valitsemalla päivämäärä dropdown-valikossa aukeavasta kalenterista, sekä painetaan "Luo" -nappia, etenee sovellus alla olevan kuvan tavalla:
+```mermaid
+sequenceDiagram
+    actor User
+    participant UI
+    participant DreamlandLogic
+    participant DreamRepository
+    participant dream
+    User->>UI: click "Luo" button
+    UI->>DreamlandLogic: new_dream("Juo 3l vettä päivässä", 31.12.2025)
+    DreamlandLogic->>dream: Dream("Juo 3l vettä päivässä", testaaja, 31.12.2025)
+    DreamlandLogic->>DreamRepository: create_new_dream(dream)
+    DreamRepository-->>DreamlandLogic: dream
+    DreamlandLogic-->>UI: dream
+    UI->UI: initialize_dream_list()
+```
+Tapahtumakäsittelijä kutsuu sovelluslogiikan metodia __new_dream__ antaen sille parametriksi haaveen sisällön ja tavoiteajan. Sovelluslogiikka luo uuden Dream-olion ja kutsuu __DreamRepository__:n metodia __create_new_dream__, jolloin haave tallentuu. Tämän jälkeen käyttöliittymän näkymä kotisivulla päivitetään kutsumalla sen omaa metodia __initialize_dream_list__, jolloin uusi haave/tavoite tulee kotisivulle näkyviin.
