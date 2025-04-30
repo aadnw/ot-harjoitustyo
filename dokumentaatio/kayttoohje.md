@@ -1,4 +1,14 @@
 # Sovelluksen käyttöohje
+Lataa projektin viimeisimmän [releasen](https://github.com/aadnw/ot-harjoitustyo/releases/tag/viikko6) lähdekoodi Assets-osion alta kohdasta source code.
+
+## Konfigurointi
+Halutessasi voit konfiguroida tallennukseen käytettävät tiedostot haluamallasi tavalla juurihakemiston .env-tiedostossa. Jos näitä tiedostoja ei ole vielä olemassa luodaan ne automaattisesti data-hakemistoon. .env-tiedoston sisältö on seuraava, muuta siis täällä tiedostojen nimet jos haluat:
+```
+DREAMS_FILENAME=dreams.csv
+DATABASE_FILENAME=database.sqlite
+```
+
+## Ohjelman käynnistys
 
 1. Ennen ohjelman käynnistystä asenna riippuvuudet komennolla:
    ```
@@ -39,13 +49,13 @@ Uudella haavella on pienin mahdollinen prioriteetti (1/5), mutta sen voi muuttaa
 ![Tähtien asettaminen](https://github.com/user-attachments/assets/0a2b1cb4-b35c-4219-933b-b860c558b814)
 
 ## Haaveen poistaminen
-Haaveen voi poistaa painamalla "Poista haave" -nappia, jolloin sivulle aukeaa vahvistusikkuna. Painamalla "Kyllä" haave ja siihen liittyvät päiväkirjamerkinnät poistuvat pysyvästi ja palaat kotisivulle. 
+Haaveen voi poistaa painamalla "Poista haave" -nappia, jolloin sivulle aukeaa vahvistusikkuna. Painamalla "Kyllä", haave ja siihen liittyvät päiväkirjamerkinnät poistuvat pysyvästi ja palaat kotisivulle. 
 ![Haaveen poistaminen](https://github.com/user-attachments/assets/33d924a2-3ce4-41d3-9f08-c94021e39574)
 
 ## Haaveiden järjestäminen
-Kotisivulla haaveita voi järjestää eri tavoin painamalla "Järjestä" -nappia, ja valitsemalla mieluisan järjestyksen, joita ovat tärkeimmät ensin, tavoiteaika ensin, uusin ensin ja vanhin ensin.
+Kotisivulla haaveita voi järjestää eri tavoin painamalla "Järjestä" -nappia, ja valitsemalla mieluisan järjestyksen, joita ovat: tärkeimmät ensin, tavoiteaika ensin, uusin ensin ja vanhin ensin.
 ![Järjestä haaveet](https://github.com/user-attachments/assets/9caaf320-55d5-4abc-880c-079b2fc05e77)
 
 ## Käyttäjätunnusten poistaminen
-Jos haluat poistaa käyttäjäsi järjestelmästä, voit tehdä sen painamalla "Poista käyttäjä" -nappia. Tällöin sivulle aukeaa vahvistusikkuna. Painamalla "Kyllä" käyttäjätunnuksesi, haaveesi sekä niihin liittyvät päiväkirjamerkinnät poistuvat pysyvästi, ja sinut palautetaan kotisivulle. Voit halutessasi luoda uuden käyttäjätunnuksen rekisteröitymällä aikaisemman ohjeen mukaan.
+Jos haluat poistaa käyttäjätunnuksesi järjestelmästä, voit tehdä sen painamalla "Poista käyttäjä" -nappia. Tällöin sivulle aukeaa vahvistusikkuna. Painamalla "Kyllä" käyttäjätunnuksesi, haaveesi sekä niihin liittyvät päiväkirjamerkinnät poistuvat pysyvästi, ja sinut palautetaan kotisivulle. Voit halutessasi luoda uuden käyttäjätunnuksen rekisteröitymällä aikaisemman ohjeen mukaan.
 ![Käyttäjätunnusten poistaminen](https://github.com/user-attachments/assets/e72a5d63-3e7e-44b6-b46b-b8254266dc76)
