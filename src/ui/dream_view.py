@@ -199,7 +199,7 @@ class DreamView:
         self._root.update_idletasks()
 
         info_frame = tk.Frame(top_frame, bg="#D0F1FF")
-        info_frame.grid(row=0, column=1, sticky="nsew", padx=30, pady=10)
+        info_frame.grid(row=0, column=1, sticky="ne", padx=30, pady=10)
 
         days_left = (datetime.strptime(self._dream.due_date, "%d.%m.%Y") - datetime.today()).days
 
@@ -266,4 +266,5 @@ class DreamView:
         diary_frame.grid_rowconfigure(1, weight=1)
         diary_frame.grid_columnconfigure(0, weight=1)
 
-        info_frame.grid_columnconfigure(0, weight=1)
+        top_frame.grid_columnconfigure(0, weight=1)
+        top_frame.grid_columnconfigure(1, weight=0)
