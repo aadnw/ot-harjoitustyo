@@ -12,7 +12,8 @@ dependencies = [
     "python-dotenv (>=1.0.1,<2.0.0)",
     "inspirational-quotes (>=0.0.16,<0.0.17)",
     "tkcalendar (>=1.6.1,<2.0.0)",
-    "pycodestyle (>=2.13.0,<3.0.0)"
+    "pycodestyle (>=2.13.0,<3.0.0)",
+    "pillow (>=11.2.1,<12.0.0)"
 ]
 
 
