@@ -12,10 +12,10 @@ Käyttöliittymässä on neljä eri näkymää:
 - Kotisivu (homepage)
 - Unelmasivu (dream page)
 
-Sivujen näyttämisestä vastaa UI-luokka ja vain yksi sivu on näkyvissä kerrallaan.
+Sivujen näyttämisestä vastaa [UI](https://github.com/aadnw/ot-harjoitustyo/blob/master/src/ui/ui.py)-luokka ja vain yksi sivu on näkyvissä kerrallaan.
 
 ## Sovelluslogiikka
-Luokat __User__, __Dream__ ja __Diary__ kuvaavat käyttäjiä, heidän haaveitaan sekä haaveisiin liittyviä päiväkirjamerkintöjä, jotka muodostavat sovelluksen loogisen tietomallin.
+Luokat [User](https://github.com/aadnw/ot-harjoitustyo/blob/master/src/entities/user.py), [Dream](https://github.com/aadnw/ot-harjoitustyo/blob/master/src/entities/dream.py) ja [Diary](https://github.com/aadnw/ot-harjoitustyo/blob/master/src/entities/diary.py) kuvaavat käyttäjiä, heidän haaveitaan sekä haaveisiin liittyviä päiväkirjamerkintöjä, jotka muodostavat sovelluksen loogisen tietomallin.
 
 ```mermaid
  classDiagram
@@ -41,7 +41,7 @@ Luokat __User__, __Dream__ ja __Diary__ kuvaavat käyttäjiä, heidän haaveitaa
       }
 ```
 
-Toiminnallisuudesta vastaa luokka __DreamlandLogic__, joka sisältää metodit kaikille käyttöliittymän toiminnoille. Pakkauksessa __repositories__ sijaitsee tietojen tallennuksesta vastaavat luokat __UserRepository__, __DreamRepository__ ja __DiaryRepository__, joiden kautta __DreamlandLogic__ pääsee käsiksi käyttäjiin ja haaveisiin ja päiväkirjamerkintöihin. Nämä __repositories__ pakkauksen luokat injektoidaan sovelluslogiikkaan konstruktorissa. 
+Toiminnallisuudesta vastaa luokka [DreamlandLogic](https://github.com/aadnw/ot-harjoitustyo/blob/master/src/logic/dreamland_logic.py), joka sisältää metodit kaikille käyttöliittymän toiminnoille. Pakkauksessa __repositories__ sijaitsee tietojen tallennuksesta vastaavat luokat [UserRepository](https://github.com/aadnw/ot-harjoitustyo/blob/master/src/repositories/user_repository.py), [DreamRepository](https://github.com/aadnw/ot-harjoitustyo/blob/master/src/repositories/dream_repository.py) ja [DiaryRepository](https://github.com/aadnw/ot-harjoitustyo/blob/master/src/repositories/diary_repository.py), joiden kautta __DreamlandLogic__ pääsee käsiksi käyttäjiin ja haaveisiin ja päiväkirjamerkintöihin. Nämä __repositories__ pakkauksen luokat injektoidaan sovelluslogiikkaan konstruktorissa. 
 Alla on kuva __DreamlandLogic__ luokan ja sovelluksen muiden osien suhdetta kuvaavasta luokka-/pakkauskaaviosta:
 ![pakkauskaavio](https://github.com/user-attachments/assets/7a935a68-b423-4252-9318-23337b69b91c)
 
@@ -57,7 +57,7 @@ Sovellus tallentaa haaveet CSV-tieodostoon seruaavalla tavalla:
 ```
 Eli tavoitteen/haaveen id, tavoite/haave, saavutettu (0 = ei, 1 = kyllä), käyttäjänimi, tähdet (1 = ei tärkeä, 5 = ykkös prioriteetti), aikaraja haaveen tavoittamiselle. Kenttien arvot erotetaan puolipisteellä ;
 
-Sovellus tallentaa käyttäjät ja päiväkirjamerkinnät SQLite-tietokantatauluihin __users__ ja __diary__ , jotka alustetaan __initialize_database.py__-tiedostossa.
+Sovellus tallentaa käyttäjät ja päiväkirjamerkinnät SQLite-tietokantatauluihin __users__ ja __diary__ , jotka alustetaan [initialize_database.py](https://github.com/aadnw/ot-harjoitustyo/blob/master/src/initalize_database.py)-tiedostossa.
 
 ## Sovelluksen päätoiminnallisuudet
 Alla kuvataan sovelluksen kannalta oleellisimpia toiminnallisuuksia sekvenssikaavioina:
@@ -77,7 +77,7 @@ sequenceDiagram
     DreamlandLogic-->>UI: user
     UI->UI: show_homepage_view()
 ```
-Tapahtumakäsittelijä kutsuu sovelluslogiikan metodia __login__, antaen sille parametriksi käyttäjänimen ja salasanan. Sovelluslogiikka selvittää __UserRepository__:n avulla onnistuuko kirjautuminen. Kirjautuminen epäonnistuu jos käyttäjää ei ole olemassa tai tunnukset eivät täsmää olemassaolevaan käyttäjään. Kirjautumisen onnistuessa käyttöliittymä vaihtaa näkymäksi kotisivun, jossa näkyy kirjautuneen käyttäjän haaveet.
+Tapahtumakäsittelijä kutsuu sovelluslogiikan metodia `login`, antaen sille parametriksi käyttäjänimen ja salasanan. Sovelluslogiikka selvittää `UserRepository`:n avulla onnistuuko kirjautuminen. Kirjautuminen epäonnistuu jos käyttäjää ei ole olemassa tai tunnukset eivät täsmää olemassaolevaan käyttäjään. Kirjautumisen onnistuessa käyttöliittymä vaihtaa näkymäksi kotisivun, jossa näkyy kirjautuneen käyttäjän haaveet.
 
 ## Rekisteröityminen
 Kun rekisteröitymissivun kenttiin kirjoitetaan uniikki ja 3-20 merkkiä pitkä käyttäjänimi sekä vähintään 5 merkkiä pitkä salasana, jonka jälkeen painetaan "Luo käyttäjä" -nappia, etenee sovellus alla olevan kuvan tavalla:
@@ -98,7 +98,7 @@ sequenceDiagram
     DreamlandLogic-->>UI: user
     UI->UI: show_homepage_view()
 ```
-Tapahtumakäsittelijä kutsuu sovelluslogiikan metodia __create_new_user__, antaen sille parametriksi käyttäjänimen ja salasanan. Sovelluslogiikka selvittää __UserRepository__:n avulla, onko käyttäjänimi jo käytössä. Jos on, tulee siitä virheilmoitus. Kun käyttäjä on valinnut käyttäjänimen, joka ei ole vielä käytössä, sovelluslogiikka kutsuu __UserRepository__:n metodia __create_user__ antaen sille parametsiksi uudet käyttäjätunnukset, joka puolestaan luo uuden User-olion ja tallentaa sen tietokantaan. Onnistuneesta rekisteröitymisestä seuraa, että uusi käyttäjä kirjataan sisään ja näkymä vaihtuu kotisivuksi.
+Tapahtumakäsittelijä kutsuu sovelluslogiikan metodia `create_new_user`, antaen sille parametriksi käyttäjänimen ja salasanan. Sovelluslogiikka selvittää `UserRepository`:n avulla, onko käyttäjänimi jo käytössä. Jos on, tulee siitä virheilmoitus. Kun käyttäjä on valinnut käyttäjänimen, joka ei ole vielä käytössä, sovelluslogiikka kutsuu `UserRepository`:n metodia `create_user` antaen sille parametsiksi uudet käyttäjätunnukset, joka puolestaan luo uuden User-olion ja tallentaa sen tietokantaan. Onnistuneesta rekisteröitymisestä seuraa, että uusi käyttäjä kirjataan sisään ja näkymä vaihtuu kotisivuksi.
     
 ## Haaveen lisääminen
 Kun kotisivun kenttään "Lisää tavoite" kirjoitetaan uusi tavoite/haave, sekä asetetaan tavoiteaika valitsemalla päivämäärä dropdown-valikossa aukeavasta kalenterista, sekä painetaan "Luo" -nappia, etenee sovellus alla olevan kuvan tavalla:
@@ -117,7 +117,7 @@ sequenceDiagram
     DreamlandLogic-->>UI: dream
     UI->UI: initialize_dream_list()
 ```
-Tapahtumakäsittelijä kutsuu sovelluslogiikan metodia __new_dream__ antaen sille parametriksi haaveen sisällön ja tavoiteajan. Sovelluslogiikka luo uuden Dream-olion ja kutsuu __DreamRepository__:n metodia __create_new_dream__, jolloin haave tallentuu csv-tiedostoon. Tämän jälkeen käyttöliittymän näkymä kotisivulla päivitetään kutsumalla sen omaa metodia __initialize_dream_list__, jolloin uusi haave/tavoite tulee kotisivulle näkyviin.
+Tapahtumakäsittelijä kutsuu sovelluslogiikan metodia `new_dream` antaen sille parametriksi haaveen sisällön ja tavoiteajan. Sovelluslogiikka luo uuden Dream-olion ja kutsuu `DreamRepository`:n metodia `create_new_dream`, jolloin haave tallentuu csv-tiedostoon. Tämän jälkeen käyttöliittymän näkymä kotisivulla päivitetään kutsumalla sen omaa metodia `initialize_dream_list`, jolloin uusi haave/tavoite tulee kotisivulle näkyviin.
 
 ## Päiväkirjamerkinnän lisääminen
 Kun haavesivun kenttään "Mitä tein päästäkseni lähemmäs tavoitettani?" kirjoitetaan uusi päiväkirjamerkintä ja painetaan "Lisää" -nappia, etenee sovellus alla olevan kuvan tavalla:
@@ -135,4 +135,4 @@ sequenceDiagram
     DreamlandLogic-->>UI: note
     UI->UI: initialize_diary_list()
 ```
-Tapahtumakäsittelijä kutsuu sovelluslogiikan metodia __new_diary_note__ antaen sille parametriksi sen haaveen id:n, johon merkintä liittyy sekä päiväkirjamerkinnän sisällön. Sovelluslogiikka luo uuden Diary-olion ja kutsuu __DiaryRepository__:n metodia __add_diary_note__, antaen sille parametriksi haaveen id:n, käyttäjän id:n sekä merkinnän sisällön, jolloin päiväkirjamerkintä tallentuu tietokantaan. Tämän jälkeen käyttöliittymän näkymä haavesivulla päivitetään kutsumalla sen omaa metodia __initialize_diary_list__, jolloin uusi päiväkirjamerkintä tulee sivulle näkyviin.
+Tapahtumakäsittelijä kutsuu sovelluslogiikan metodia `new_diary_note` antaen sille parametriksi sen haaveen id:n, johon merkintä liittyy sekä päiväkirjamerkinnän sisällön. Sovelluslogiikka luo uuden Diary-olion ja kutsuu `DiaryRepository`:n metodia `add_diary_note`, antaen sille parametriksi haaveen id:n, käyttäjän id:n sekä merkinnän sisällön, jolloin päiväkirjamerkintä tallentuu tietokantaan. Tämän jälkeen käyttöliittymän näkymä haavesivulla päivitetään kutsumalla sen omaa metodia `initialize_diary_list`, jolloin uusi päiväkirjamerkintä tulee sivulle näkyviin.
