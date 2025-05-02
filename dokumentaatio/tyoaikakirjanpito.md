@@ -27,4 +27,5 @@
 | 28.4. | 5h   | Issuessa mainittujen kehityskohtien toteutus, Ui siistimmäksi, uusien toiminnallisuuksien koodaaminen ja testaaminen: haaveen poiston varmistus, käyttäjätunnuksien poistaminen |
 | 29.4. | 6h   | Uusien toiminnallisuuksien koodaamista ja testaamista, Ui parannuksia, alustavan käyttöohjeen uusiminen, releasen uusiminen |
 | 30.4. | 4h   | Logon suunnittelu, lisääminen ja asettelu kotisivulle, käyttöohjeen päivitys, vaatimusmäärittelyn päivitys, sekvenssikaavioiden tekemistä.
-| yht.  | 73h  |
+| 2.5.  | 3.75h| Sekvenssikaavion laatiminen, dokumentaation päivitystä ja kirjoittamista, järjestelmätason testausta, arvosteluperusteiden ja koodin latuvaatimusten läpikäyntiä |
+| yht.  | 76.75h  |
