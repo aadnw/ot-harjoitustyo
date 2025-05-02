@@ -117,4 +117,22 @@ sequenceDiagram
     DreamlandLogic-->>UI: dream
     UI->UI: initialize_dream_list()
 ```
-Tapahtumakäsittelijä kutsuu sovelluslogiikan metodia __new_dream__ antaen sille parametriksi haaveen sisällön ja tavoiteajan. Sovelluslogiikka luo uuden Dream-olion ja kutsuu __DreamRepository__:n metodia __create_new_dream__, jolloin haave tallentuu. Tämän jälkeen käyttöliittymän näkymä kotisivulla päivitetään kutsumalla sen omaa metodia __initialize_dream_list__, jolloin uusi haave/tavoite tulee kotisivulle näkyviin.
+Tapahtumakäsittelijä kutsuu sovelluslogiikan metodia __new_dream__ antaen sille parametriksi haaveen sisällön ja tavoiteajan. Sovelluslogiikka luo uuden Dream-olion ja kutsuu __DreamRepository__:n metodia __create_new_dream__, jolloin haave tallentuu csv-tiedostoon. Tämän jälkeen käyttöliittymän näkymä kotisivulla päivitetään kutsumalla sen omaa metodia __initialize_dream_list__, jolloin uusi haave/tavoite tulee kotisivulle näkyviin.
+
+## Päiväkirjamerkinnän lisääminen
+Kun haavesivun kenttään "Mitä tein päästäkseni lähemmäs tavoitettani?" kirjoitetaan uusi päiväkirjamerkintä ja painetaan "Lisää" -nappia, etenee sovellus alla olevan kuvan tavalla:
+```mermaid
+sequenceDiagram
+    actor User
+    participant UI
+    participant DreamlandLogic
+    participant DiaryRepository
+    participant diary
+    User->>UI: click "Lisää" button
+    UI->>DreamlandLogic: new_diary_note(1, "Ostin isomman juomapullon")
+    DreamlandLogic->>diary: Diary("Ostin isomman juomapullon")
+    DreamlandLogic->>DiaryRepository: add_diary_note(1, 1, "Ostin isomman juomapullon")
+    DreamlandLogic-->>UI: note
+    UI->UI: initialize_diary_list()
+```
+Tapahtumakäsittelijä kutsuu sovelluslogiikan metodia __new_diary_note__ antaen sille parametriksi sen haaveen id:n, johon merkintä liittyy sekä päiväkirjamerkinnän sisällön. Sovelluslogiikka luo uuden Diary-olion ja kutsuu __DiaryRepository__:n metodia __add_diary_note__, antaen sille parametriksi haaveen id:n, käyttäjän id:n sekä merkinnän sisällön, jolloin päiväkirjamerkintä tallentuu tietokantaan. Tämän jälkeen käyttöliittymän näkymä haavesivulla päivitetään kutsumalla sen omaa metodia __initialize_diary_list__, jolloin uusi päiväkirjamerkintä tulee sivulle näkyviin.

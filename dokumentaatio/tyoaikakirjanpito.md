@@ -26,4 +26,5 @@
 | 25.4. | 3h   | Alustavan käyttöohjeen kirjoittaminen, viikon 6 release, uusien toiminnallisuuksien koodaamista/suunnittelua |
 | 28.4. | 5h   | Issuessa mainittujen kehityskohtien toteutus, Ui siistimmäksi, uusien toiminnallisuuksien koodaaminen ja testaaminen: haaveen poiston varmistus, käyttäjätunnuksien poistaminen |
 | 29.4. | 6h   | Uusien toiminnallisuuksien koodaamista ja testaamista, Ui parannuksia, alustavan käyttöohjeen uusiminen, releasen uusiminen |
-| yht.  | 69h  |
+| 30.4. | 4h   | Logon suunnittelu, lisääminen ja asettelu kotisivulle, käyttöohjeen päivitys, vaatimusmäärittelyn päivitys, sekvenssikaavioiden tekemistä.
+| yht.  | 73h  |
