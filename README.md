@@ -7,11 +7,12 @@ Haavemaa -sovelluksessa toteutat suurimmatkin haaveesi ja tavoitteesi! Rekister�
 - [Changelog](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/changelog.md)
 - [Arkkitehtuuri](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 - [Käyttöohje](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
+- [Testausdokumentti](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/testaus.md)
 - [Vko 5 Release](https://github.com/aadnw/ot-harjoitustyo/releases/tag/viikko5)
 - [Vko 6 Release](https://github.com/aadnw/ot-harjoitustyo/releases/tag/viikko6)
 
 ## Sovelluksen asennusohje
-1. Kloonaa tämä repositorio omalle koneellesi ja siirry sen juurihakemistoon.
+1. Kloonaa tämä repositorio tai lataa viimeisimmän [releasen](https://github.com/aadnw/ot-harjoitustyo/releases/tag/viikko6) lähdekoodi omalle koneellesi ja siirry sen juurihakemistoon.
 2. Asenna riippuvuudet komennolla:
    ```
    poetry install
@@ -25,7 +26,15 @@ Haavemaa -sovelluksessa toteutat suurimmatkin haaveesi ja tavoitteesi! Rekister�
    poetry run invoke start
    ```
 
-## Testaaminen
+## Komentorivitoiminnot
+
+### Ohjelman käynnistäminen
+Ohjelma käynnistyy komennolla:
+```
+poetry run invoke start
+```
+
+### Testaaminen
 Testaaminen suoritetaan komennolla:
 ```
 poetry run invoke test
