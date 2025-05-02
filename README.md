@@ -40,13 +40,13 @@ Testaaminen suoritetaan komennolla:
 poetry run invoke test
 ```
 
-## Testikattavuus
+### Testikattavuus
 Testikattavuusraportin, joka aukeaa selaimeen, voi generoida komennolla:
 ```
 poetry run invoke coverage-report
 ```
 
-## Pylint-tarkistus
+### Pylint-tarkistus
 Pylint-tarkistuksen voi suorittaa komennolla:
 ```
 poetry run invoke lint
