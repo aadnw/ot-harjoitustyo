@@ -49,7 +49,7 @@ Alla on kuva __DreamlandLogic__ luokan ja sovelluksen muiden osien suhdetta kuva
 Pakkauksen __repositories__ luokat vastaavat siis tietojen pysyväistallennuksesta. Luokka __DreamRepository__ tallentaa tiedot CSV-tiedostoon ja luokat __UserRepository__ ja __DiaryRepository__ tallentavat tiedot SQLite-tietokantaan. 
 
 ### Tiedostot
-Sovellus tallentaa käytättäjien, haaveiden ja päiväkirjamerkintöjen tiedot erillisiin tiedostoihin, jotka on määritelty sovelluksen juuressa __.env__-tiedostossa.
+Sovellus tallentaa käytättäjien, haaveiden ja päiväkirjamerkintöjen tiedot erillisiin tiedostoihin, jotka on määritelty sovelluksen juuressa [.env](https://github.com/aadnw/ot-harjoitustyo/blob/master/.env)-tiedostossa.
 Sovellus tallentaa haaveet CSV-tieodostoon seruaavalla tavalla:
 ```
 1; Juo 3l vettä päivittäin; 0; testaaja; 1; 30.06.2025
