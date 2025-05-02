@@ -25,7 +25,6 @@ class DreamlandLogic:
     """Class taking care of the application logics
     
     Attributes:
-        user: describes who is the user
         user_repository: UserRepository object that has the same methods as the UserRepository-class
         dream_repository: DreamRepository object that has the same methods as the
         DreamRepository-class
@@ -88,7 +87,7 @@ class DreamlandLogic:
 
     def create_new_user(self, username, password, login=True):
         """Creates a new user that includes a unique username that is 3-20 characters long and
-        a password that needs to be at least 5 characters long; if not, prints error messag
+        a password that needs to be at least 5 characters long; if not, prints error message
         
         Args:
             username: string that describes the new username
@@ -147,7 +146,7 @@ class DreamlandLogic:
             content: string that describes the content of the dream to be created
             due_date: string that describes the due date of the dream to be created
         Returns:
-            Created dream as Dream-object
+            Created dream as a Dream-object
         """
 
         dream = Dream(content=content, user=self._user, due_date=due_date)

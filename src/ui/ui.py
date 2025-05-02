@@ -29,13 +29,11 @@ class UI:
         self._show_login_view()
 
     def _hide_current_view(self):
-        """Hide the current page to show the next page"""
         if self._current_view:
             self._current_view.destroy()
         self._current_view = None
 
     def _show_login_view(self):
-        """Show login page"""
         self._hide_current_view()
 
         self._current_view = LoginView(
@@ -47,7 +45,6 @@ class UI:
         self._current_view.frame.grid(row=0, column=0, sticky="nsew")
 
     def _show_homepage_view(self):
-        """Show homepage"""
         self._hide_current_view()
 
         self._current_view = HomepageView(
@@ -56,7 +53,6 @@ class UI:
         self._current_view.frame.grid(row=0, column=0, sticky="nsew")
 
     def _show_registration_view(self):
-        """Show registration page"""
         self._hide_current_view()
 
         self._current_view = RegistrationView(
@@ -65,7 +61,6 @@ class UI:
         self._current_view.frame.grid(row=0, column=0, sticky="nsew")
 
     def _show_dream_view(self, dream):
-        """Show dream page"""
         self._hide_current_view()
 
         self._current_view = DreamView(

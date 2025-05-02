@@ -44,7 +44,6 @@ class LoginView:
         self.form_handler.frame.destroy()
 
     def _login_handler(self):
-        """Logs in the user"""
         username = self.form_handler.username_entry.get()
         password = self.form_handler.password_entry.get()
 
@@ -58,16 +57,9 @@ class LoginView:
             self._error_message("Virheellinen käyttäjänimi tai salasana")
 
     def _error_message(self, message):
-        """Shows the given error message on the page
-        
-        Args:
-            message: string that describes the error message to be shown on the page
-        """
-
         self.form_handler.error_variable.set(message)
 
     def _initialize_username_field(self):
-        """Initializes the field where the user can write their username"""
         tk.Label(self.left_frame, text="Käyttäjänimi", font=("Bookman", 12), fg="#00044A",
                  bg="#D0F1FF").grid(row=1, column=0, columnspan=2, sticky="w", pady=(5, 0))
 
@@ -76,7 +68,6 @@ class LoginView:
         self.form_handler.username_entry.grid(row=2, column=0, columnspan=2, pady=5)
 
     def _initialize_password_field(self):
-        """Initializes the field where the user can write their password"""
         tk.Label(self.left_frame, text="Salasana", font=("Bookman", 12),
                  fg="#00044A", bg="#D0F1FF").grid(row=3, column=0,
                                                   columnspan=2, sticky="w", pady=(10, 0))
@@ -86,7 +77,6 @@ class LoginView:
         self.form_handler.password_entry.grid(row=4, column=0, columnspan=2, pady=5)
 
     def _initialize(self):
-        """Initializes the login page's ui"""
         self.form_handler.frame = tk.Frame(self._root, bg="#D0F1FF", padx=20, pady=20)
         self.form_handler.frame.place(relx=0.7, rely=0.4, anchor="center")
 

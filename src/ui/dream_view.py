@@ -42,21 +42,12 @@ class DiaryListView:
         return self.form_handler.frame
 
     def _initialize_diary_note(self, content, created_at, row):
-        """Initializes the diary note that will be shown on the Dream-page
-        
-        Args:
-            content: string that describes the content of the note
-            created_at: timestamp of the time the note was created at
-            row: row number of the note where it will be placed
-        """
-
         date = datetime.strptime(created_at, "%Y-%m-%d %H:%M:%S")
         date_format = date.strftime("%d.%m.%Y")
         Label(self.form_handler.frame, text=f"{date_format}: {content}", font=("Bookman", 12),
               fg="#220066", bg="#D0F1FF").grid(row=row, column=0, padx=5, pady=5, sticky="w")
 
     def _initialize(self):
-        """Initializes the view for the diary list"""
         self.form_handler.frame = tk.Frame(self._root, bg="#D0F1FF", padx=10, pady=10)
         self.form_handler.frame.grid(row=0, column=1, sticky="w", padx=50, pady=50)
 
@@ -104,11 +95,9 @@ class DreamView:
         self.form_handler.frame.destroy()
 
     def _homepage_handler(self):
-        """Returns user back to homepage"""
         self._handle_show_homepage_view()
 
     def _initialize_diary_list(self):
-        """Initializes the view to show the diary list"""
         if self._diary_list_view:
             self._diary_list_view.destroy()
 
@@ -128,7 +117,6 @@ class DreamView:
                                             padx=20, pady=20)
 
     def _handle_add_note(self):
-        """Adds a new note to the diary"""
         content = self.add_note_entry.get().strip()
         if content:
             dreamland_logic.new_diary_note(self._dream.id, content)
@@ -137,8 +125,6 @@ class DreamView:
             self._root.update_idletasks()
 
     def _delete_handler(self):
-        """Deletes a dream from the dream list and database,
-        asks for confirmation first with a popup window"""
         popup = tk.Toplevel(self._root, bg="#D0F1FF")
         popup.title("Poista haave")
         popup.geometry("400x150")
@@ -149,26 +135,16 @@ class DreamView:
               bg="#D0F1FF", fg="#00044A", pady=20).pack()
 
         def _yes():
-            """Function that is called when user confirms to delete a dream,
-            moves user back to homepage after"""
             dreamland_logic.delete_dream(self._dream.id)
             self._handle_show_homepage_view()
             popup.destroy()
 
         def _no():
-            """Function that is called when user doesn't confirm to delete a dream,
-            removes the popup window from the view and doesn't delete the dream"""
             popup.destroy()
 
         self.form_handler.set_buttons_for_confirmation(tk, popup, _yes, _no)
 
     def _star_selection(self, value):
-        """Sets the new star value for the chosen dream
-        
-        Args:
-            value: integer that describes the new star value of the dream
-        """
-
         set_star = int(value)
         self._star_value = set_star
         self._star_label.config(text=f"Tärkeys: {'★' * set_star}/5")
@@ -176,7 +152,6 @@ class DreamView:
         dreamland_logic.dream_star(self._dream.id, set_star)
 
     def _initialize(self):
-        """Initializes the dream page's ui"""
         self.form_handler.frame = tk.Frame(self._root, bg="#D0F1FF", padx=20, pady=20)
         self.form_handler.frame.grid(row=0, column=0, sticky="nsew")
 

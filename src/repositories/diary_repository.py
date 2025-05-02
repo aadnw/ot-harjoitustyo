@@ -6,11 +6,7 @@ class DiaryRepository:
     """Takes care of database functions related to the diary markings"""
 
     def __init__(self):
-        """Class constructor
-        
-        Args:
-            connection: Connection-object of the database connection
-        """
+        """Class constructor"""
 
         self.connection = get_database_connection()
 
@@ -19,6 +15,7 @@ class DiaryRepository:
         
         Args:
             dream_id: integer that describes the dream id to which the new note will be connected to 
+            user_id: integer that describes the id of the user that created the new note
             content: string that describes the content of the new note
         """
 
@@ -46,7 +43,7 @@ class DiaryRepository:
         """Deletes a dream's diary when a dream is deleted
         
         Args:
-            dream_id: integer that describes the id of the dream pf which diary will be deleted
+            dream_id: integer that describes the id of the dream of which diary will be deleted
         """
 
         cursor = self.connection.cursor()

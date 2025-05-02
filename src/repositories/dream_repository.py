@@ -18,7 +18,6 @@ class DreamRepository:
         
         Args:
             file_path: Path to the file where all the dreams are stored
-            connection: Connection-object of the database connection
         """
 
         self._file_path = file_path

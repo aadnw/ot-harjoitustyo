@@ -50,13 +50,6 @@ class DreamListView:
         self.form_handler.frame.destroy()
 
     def _initialize_dream_item(self, dream, row):
-        """Initializes the dreams that will be shown on the homepage
-        
-        Args:
-            dream: Dream-object to be initialized
-            row: integer that describes the row where the dream will be placed
-        """
-
         label = tk.Label(self.form_handler.frame, text=dream.content, font=(
             "Bookman", 12), fg="#220066", bg="#D0F1FF")
         label.grid(row=row, column=0, padx=5, pady=5, sticky="w")
@@ -76,12 +69,6 @@ class DreamListView:
         achieved_button.grid(row=row, column=2, padx=10, pady=5, sticky="e")
 
     def _dream_order(self, order):
-        """Function that puts the dreams into the given order
-        
-        Args:
-            order: string that describes the order for the dreams
-        """
-
         if order == "Tärkeimmät ensin":
             self._dreams.sort(key=lambda d: d.star, reverse=True)
         if order == "Tavoiteaika ensin":
@@ -101,7 +88,6 @@ class DreamListView:
 
 
     def _initialize(self):
-        """Initializes the dream list to be shown on the homepage"""
         self.form_handler.frame = tk.Frame(self._root, bg="#D0F1FF", padx=10, pady=10)
         self.form_handler.frame.grid(row=0, column=1, sticky="n", padx=50, pady=20)
 
@@ -161,13 +147,10 @@ class HomepageView:
         self.form_handler.frame.destroy()
 
     def _logout_handler(self):
-        """Logs out the user"""
         dreamland_logic.logout()
         self._handle_logout()
 
     def _delete_user_handler(self):
-        """Deletes the current user from the database,
-        asks for confirmation with a popup window first"""
         popup = tk.Toplevel(self._root, bg="#D0F1FF")
         popup.title("Poista käyttäjätunnukset")
         popup.geometry("400x150")
@@ -178,41 +161,25 @@ class HomepageView:
               bg="#D0F1FF", fg="#00044A", pady=20).pack()
 
         def _yes():
-            """Function that is called when user confirms to delete their user credentials,
-            moves user back to login page after"""
             user = dreamland_logic.get_user()
             dreamland_logic.delete_user(user.user_id)
             self._logout_handler()
             popup.destroy()
 
         def _no():
-            """Function that is called when user doesn't confirm to delete their user credentials,
-            removes the popup window from the view and doesn't delete the user's credentials"""
             popup.destroy()
 
         self.form_handler.set_buttons_for_confirmation(tk, popup, _yes, _no)
 
     def _dream_view_handler(self, dream):
-        """Shows the dream page
-        Args:
-            dream: Dream-object that tells which dream's page should be opened
-        """
-
         self._handle_show_dream_view(dream)
 
     def _handle_set_dream_achieved(self, dream_id):
-        """Marks dream as achieved and removes it from the view
-        
-        Args:
-            dream_id: integer that describes the id of the dream that will be set as achieved
-        """
-
         dreamland_logic.dream_achieved(dream_id)
         self._initialize_dream_list()
         self._root.update_idletasks()
 
     def _initialize_dream_list(self):
-        """Initializes the dream list view to be shown on the homepage"""
         if self.form_handler.dream_list_view:
             self.form_handler.dream_list_view.destroy()
 
@@ -229,7 +196,6 @@ class HomepageView:
             row=1, column=0, columnspan=2, sticky="nsew", padx=20, pady=20)
 
     def _handle_add_dream(self):
-        """Adds a new dream and shows it on the homepage"""
         content = self._add_dream_entry.get().strip()
         due_date = self._add_due_date_entry.get_date().strftime("%d.%m.%Y")
 
@@ -241,7 +207,6 @@ class HomepageView:
             self._root.update_idletasks()
 
     def _initialize(self):
-        "Initializes the homepage's ui"
         self.form_handler.frame = tk.Frame(self._root, bg="#D0F1FF", padx=30, pady=30)
         self.form_handler.frame.place(relx=0.5, rely=0.5, anchor="center")
 
