@@ -1,5 +1,5 @@
 # Sovelluksen käyttöohje
-Lataa projektin viimeisimmän [releasen](https://github.com/aadnw/ot-harjoitustyo/releases/tag/viikko6) lähdekoodi Assets-osion alta kohdasta source code.
+Lataa projektin viimeisimmän [releasen](https://github.com/aadnw/ot-harjoitustyo/releases/tag/loppupalautus) lähdekoodi Assets-osion alta kohdasta source code.
 
 ## Konfigurointi
 Halutessasi voit konfiguroida tallennukseen käytettävät tiedostot haluamallasi tavalla juurihakemiston .env-tiedostossa. Jos näitä tiedostoja ei ole vielä olemassa luodaan ne automaattisesti data-hakemistoon. .env-tiedoston sisältö on seuraava, muuta siis täällä tiedostojen nimet jos haluat:
