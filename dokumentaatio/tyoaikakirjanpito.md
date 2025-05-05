@@ -28,4 +28,5 @@
 | 29.4. | 6h   | Uusien toiminnallisuuksien koodaamista ja testaamista, Ui parannuksia, alustavan käyttöohjeen uusiminen, releasen uusiminen |
 | 30.4. | 4h   | Logon suunnittelu, lisääminen ja asettelu kotisivulle, käyttöohjeen päivitys, vaatimusmäärittelyn päivitys, sekvenssikaavioiden tekemistä.
 | 2.5.  | 3.75h| Sekvenssikaavion laatiminen, dokumentaation päivitystä ja kirjoittamista, järjestelmätason testausta, arvosteluperusteiden ja koodin latuvaatimusten läpikäyntiä |
-| yht.  | 76.75h  |
+| 5.5.  | 0.75h| Viimeisiä tarkistuksia että kaikki niin kuin pitää, loppupalautuksen releasen tekeminen |
+| yht.  | 77.5h  |
