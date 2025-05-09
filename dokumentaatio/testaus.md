@@ -14,6 +14,6 @@ Sovelluksen haaraumakattavuus käyttöliittymää lukuunottamatta on 96%
 Testaamatta jäi konfiguraatiotiedosto __config.py__ sekä __build.py__ ja __initialize_database.py__, jotka olisi voinut jättää myös testikattavuuden ulkopuolelle. 
 
 ## Järjestelmätestaus
-Järjestelmä on testattu manuaalisesti. Sovellus on asennettu ja testattu [käyttöohjeen](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md) mukaan Linux-ympäristössä. Sovellusta on myös testattu eri konfiguraatioilla [.env](https://github.com/aadnw/ot-harjoitustyo/blob/master/.env)-tiedoston kautta sekä tilanteissa, joissa tallennukseen käytettävät tiedostot on luotu etukäteen tai ne luodaan jos niitä ei ole vielä olemassa.
+Järjestelmä on testattu manuaalisesti. Sovellus on asennettu ja testattu [käyttöohjeen](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md) mukaan sekä Linux-, että MacOS-ympäristössä. Sovellusta on myös testattu eri konfiguraatioilla [.env](https://github.com/aadnw/ot-harjoitustyo/blob/master/.env)-tiedoston kautta sekä tilanteissa, joissa tallennukseen käytettävät tiedostot on luotu etukäteen tai ne luodaan jos niitä ei ole vielä olemassa.
 
 Kaikki [määrittelydokumentin](https://github.com/aadnw/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md) ja käyttöohjeen kuvaamat toiminnallisuudet ja tilanteet on käyty läpi, myös virheellisillä syötteillä, jolloin on testattu samalla virheilmoitusten toiminnallisuutta. 
